@@ -1,0 +1,13 @@
+alias ls='eza --icons'
+alias clear="printf '\033[2J\033[3J\033[1;1H'"
+alias cls="printf '\033[2J\033[3J\033[1;1H'"
+alias q='qs -c ii'
+alias mc='mc --nosubshell'
+alias top='btop'
+alias cat='bat'
+alias ping='gping'
+alias n='nvim'
+alias n.='nvim .'
+alias v='nvim'
+alias v.='nvim .'
+alias f='yazi'

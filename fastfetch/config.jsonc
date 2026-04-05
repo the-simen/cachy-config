@@ -1,0 +1,163 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "source": "~/.config/fastfetch/logos/ascii/kanji_monkey",
+    "color": {
+      "1": "red"
+    },
+    "padding": {
+      "top": 1,
+      "left": 2
+    }
+  },
+  "display": {
+    "separator": "  "
+  },
+  "modules": [
+    {
+      "type": "title",
+      "key": "ホスト",
+      "keyColor": "blue"
+    },
+    "break",
+    {
+      "type": "os",
+      "key": "╭─",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "kernel",
+      "key": "├─",
+      "format": "{1} {2}",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "packages",
+      "key": "├─󰮯",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "de",
+      "key": "├─",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "wm",
+      "key": "├─󰧨",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "lm",
+      "key": "├─󰍂",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "theme",
+      "key": "├─󰉼",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "icons",
+      "key": "╰─󰀻",
+      "keyColor": "magenta"
+    },
+    "break",
+    // One entry for every partition
+    // {
+    // 	"type": "disk",
+    // 	"key": "├─",
+    // 	"keyColor": "green"
+    // },
+    // {
+    // 	"type": "brightness",
+    // 	"key": "├─󰃞",
+    // 	"keyColor": "green"
+    // },
+    // {
+    // 	"type": "battery",
+    // 	"key": "├─",
+    // 	"keyColor": "green"
+    // },
+    // {
+    // 	"type": "poweradapter",
+    // 	"key": "├─",
+    // 	"keyColor": "green"
+    // },
+    // {
+    // 	"type": "gamepad",
+    // 	"key": "├─",
+    // 	"keyColor": "green"
+    // },
+    // {
+    // 	"type": "bluetooth",
+    // 	"key": "├─",
+    // 	"keyColor": "green"
+    // },
+    // {
+    // 	"type": "sound",
+    // 	"key": "╰─",
+    // 	"keyColor": "green"
+    // },
+    {
+      "type": "terminal",
+      "key": "╭─",
+      "keyColor": "green"
+    },
+    {
+      "type": "terminalfont",
+      "key": "├─",
+      "keyColor": "green"
+    },
+    {
+      "type": "shell",
+      "key": "╰─󰈺",
+      "keyColor": "green"
+    },
+    "break",
+    {
+      "type": "host",
+      "key": "╭─",
+      "keyColor": "yellow"
+    },
+    {
+      "type": "cpu",
+      "key": "├─󰍛",
+      "keyColor": "yellow"
+    },
+    {
+      "type": "gpu",
+      "key": "├─󰘚",
+      "keyColor": "yellow"
+    },
+    {
+      "type": "display",
+      "key": "├─󰍹",
+      "keyColor": "yellow"
+    },
+    // {
+    // 	"type": "wallpaper",
+    // 	"key": "╰─󰸉",
+    // 	"keyColor": "yellow"
+    // },
+    {
+      "type": "memory",
+      "key": "├─󰑭",
+      "keyColor": "yellow"
+    },
+    // {
+    // 	"type": "swap",
+    // 	"key": "├─󰓡",
+    // 	"keyColor": "yellow"
+    // },
+    {
+      "type": "uptime",
+      "key": "╰─󰅐",
+      "keyColor": "yellow"
+    },
+    "break",
+    {
+      "type": "custom",
+      "format": "\u001b[1m\u001b[31m  \u001b[1m\u001b[32m  \u001b[1m\u001b[33m  \u001b[1m\u001b[34m  \u001b[1m\u001b[35m  \u001b[1m\u001b[36m  \u001b[1m\u001b[37m  \u001b[1m\u001b[30m"
+    }
+  ]
+}

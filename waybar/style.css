@@ -1,0 +1,268 @@
+@import "../omarchy/current/theme/waybar.css";
+@import "./colors.css";
+
+* {
+  border: none;
+  border-radius: 0;
+  min-height: 12px;
+  font-family: "JetBrainsMono Nerd Font Propo", monospace;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+#waybar {
+  color: @foreground;
+  background-color: @background-70;
+  border-bottom: 1px solid @background-80;
+}
+
+.modules-left {
+  margin-left: 5px;
+  padding-right: 8px;
+}
+
+.modules-right {
+  margin-right: 5px;
+  padding: 0 8px;
+}
+
+.modules-center {
+  padding: 0 8px;
+}
+
+#workspaces {
+  padding: 0;
+  min-height: 0;
+  margin: 4px;
+  border-radius: 5px;
+  background-color: @surface0;
+}
+
+#workspaces button {
+  all: initial;
+  padding: 0 8px;
+  border: 1px solid @surface0;
+  border-radius: 5px;
+}
+
+
+#workspaces button.active label {
+  color: @background;
+}
+
+#workspaces button:hover {
+  background-color: @lavender;
+}
+
+#workspaces button:hover label {
+  color: @background;
+}
+
+#workspaces button.active {
+  background-color: @mauve;
+}
+
+#workspaces button.empty {
+  opacity: 0.5;
+}
+
+#language,
+#memory,
+#tray,
+#cpu,
+#battery,
+#network,
+#bluetooth,
+#pulseaudio,
+#custom-omarchy,
+#hyprland-language,
+#custom-update {
+  font-size: 16px;
+  min-width: 12px;
+  padding: 0 6px;
+  margin: 0;
+}
+
+#custom-omarchy {
+  color: @teal;
+  transition: color 0.2s ease-in-out;
+}
+
+#custom-omarchy:hover {
+  color: @lavender;
+}
+
+#language {
+  color: @teal;
+  font-size: 14px;
+  background-color: @surface0;
+  border-radius: 5px;
+  margin: 4px 0;
+}
+
+#right-custom,
+#right-indicators {
+  background-color: @surface0;
+  padding: 0;
+  border-radius: 5px;
+  margin: 4px 0;
+}
+
+#right-custom label,
+#right-indicators label {
+  margin: 0;
+  border-radius: 5px;
+}
+
+#right-custom label:hover,
+#right-indicators label:hover {
+  background-color: @mauve;
+  color: @background;
+}
+
+#custom-system {
+  color: @red;
+  padding: 0 8px;
+  border-radius: 5px;
+  background-color: @crust;
+  margin: 4px 0;
+  font-size: 14px;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+#custom-system:hover {
+  background-color: @red;
+  color: @background;
+}
+
+#cpu {
+  color: @maroon;
+  padding: 0 8px;
+  border-radius: 5px;
+  background-color: @surface0;
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+#memory {
+  color: @peach;
+  padding: 0 8px;
+  border-radius: 5px;
+  background-color: @surface0;
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+#battery {
+  color: @rosewater;
+  padding: 0 8px;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: @surface1;
+  margin: 4px 0;
+}
+
+/* ~/.config/gtk-3.0/gtk.css */
+.menu {
+  background: none;
+  border-radius: 6px;
+  color: #ebdbb2;
+}
+
+#tray {
+  padding: 0 8px;
+  min-height: 0;
+  margin: 4px;
+  border-radius: 5px;
+  background-color: @mantle;
+}
+
+#tray label {
+  padding: 0 8px;
+  margin: 0;
+  border-radius: 5px;
+}
+
+#tray label:hover {
+  background-color: @mauve;
+  color: @background;
+}
+
+tooltip,
+#custom-omarchy tooltip,
+#hyprland-language tooltip,
+#custom-update tooltip,
+#tray tooltip,
+#network tooltip,
+#battery tooltip,
+#pulseaudio tooltip,
+#cpu tooltip,
+#bluetooth tooltip,
+#memory tooltip {
+  background-color: @background-95;
+  border: 1px solid @foreground;
+  color: @foreground;
+  border-radius: 8px;
+  padding: 2px 5px;
+  font-size: 14px;
+  animation: fade-in 0.15s linear;
+}
+
+  /* margin: 0 7px; */
+  /* background: @surface0; */
+  /* padding: 0 8px; */
+  /* border-radius: 5px; */
+  /* margin: 4px 0; */
+  /* color: @rosewater; */
+  /* transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out; */
+
+#custom-screenrecording-indicator:hover {
+  background-color: @mauve;
+  color: @background;
+}
+
+#custom-expand-icon {
+  margin-right: 7px;
+}
+
+tooltip {
+  padding: 2px;
+}
+
+#custom-update {
+  font-size: 10px;
+}
+
+#clock {
+  margin-left: 5px;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    margin-top: -50px;
+  }
+
+  to {
+    opacity: 1;
+    margin-top: 0px;
+  }
+}
+
+#custom-voxtype {
+  min-width: 12px;
+  margin: 0 0 0 7.5px;
+}
+
+#custom-voxtype.recording {
+  color: #a55555;
+}
+
+#custom-idle-indicator.active,
+#custom-notification-silencing-indicator.active {
+  color: #a55555;
+}

@@ -1,0 +1,10 @@
+[flavor]
+dark  = "dracula"
+light = "dracula"
+
+[ui]
+border = { fg = "#bd93f9" }
+
+[manager]
+border_style = "rounded"
+

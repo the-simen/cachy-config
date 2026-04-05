@@ -1,0 +1,29 @@
+general.import = [ "~/.config/omarchy/current/theme/alacritty.toml" ]
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+normal = { family = "JetBrainsMono Nerd Font" }
+bold = { family = "JetBrainsMono Nerd Font" }
+italic = { family = "JetBrainsMono Nerd Font" }
+size = 12
+
+[window]
+padding.x = 0
+padding.y = 0
+decorations = "none"
+opacity = 0.98
+
+[keyboard]
+bindings = [
+{ key = "F11", action = "ToggleFullscreen" },
+{ key = "Insert", mods = "Shift", action = "Paste" },
+{ key = "Insert", mods = "Control", action = "Copy" }
+]
+
+[colors.primary]
+background = "#252433"
+
+[terminal]
+osc52 = "CopyPaste"

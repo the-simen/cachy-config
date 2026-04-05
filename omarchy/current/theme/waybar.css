@@ -1,0 +1,10 @@
+@define-color foreground #cdd6f4;
+@define-color background #1e1e2e;
+@define-color background-35 rgba(30, 30, 46, 0.35);
+@define-color background-40 rgba(30, 30, 46, 0.40);
+@define-color background-50 rgba(30, 30, 46, 0.50);
+@define-color background-60 rgba(30, 30, 46, 0.60);
+@define-color background-70 rgba(30, 30, 46, 0.70);
+@define-color background-80 rgba(30, 30, 46, 0.80);
+@define-color background-90 rgba(30, 30, 46, 0.90);
+@define-color background-95 rgba(30, 30, 46, 0.95);

@@ -1,0 +1,89 @@
+// ~/.config/fastfetch/config.jsonc
+// See https://github.com/fastfetch-cli/fastfetch/wiki/Configuration for more details
+// See *.jsonc in https://github.com/fastfetch-cli/fastfetch/tree/dev/presets/examples for more examples
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "source": "~/.config/fastfetch/logos/ascii/logo_tmux",
+    "type": "auto",
+    "padding": {
+      "top": 0,
+      "left": 3
+    }
+  },
+  "display": {
+    "separator": "    "
+  },
+  "modules": [
+    // {
+    //   "type": "custom",
+    //   "format": "\u001b[38;2;198;162;241m╭────────────────────────────────────╮",
+    // },
+    "break",
+    {
+      "type": "os",
+      "key": "  ",
+      "keyColor": "blue"
+    },
+    {
+      "type": "kernel",
+      "key": "  ",
+      "keyColor": "white"
+    },
+    {
+      "type": "packages",
+      "key": "  󰮯",
+      "keyColor": "yellow"
+    },
+    {
+      "type": "wm",
+      "key": "  󰧨",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "terminal",
+      "key": "  ",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "shell",
+      "key": "  ",
+      "keyColor": "green"
+    },
+    // {
+    //   "type": "custom",
+    //   "format": "\u001b[38;2;198;162;241m╰────────────────────────────────────╯"
+    // }
+    "break",
+    // {
+    //   "type": "host",
+    //   "key": "  ",
+    //   "keyColor": "bright_blue"
+    // },
+    // {
+    //   "type": "cpu",
+    //   "key": "  ",
+    //   "keyColor": "bright_green"
+    // },
+    // {
+    //   "type": "gpu",
+    //   "key": "  󱤓",
+    //   "keyColor": "red"
+    // },
+    // {
+    //   "type": "memory",
+    //   "key": "  󰍛",
+    //   "keyColor": "bright_yellow"
+    // },
+    // {
+    //   "type": "disk",
+    //   "key": "  ",
+    //   "keyColor": "bright_cyan"
+    // },
+    // "break",
+    // {
+    //   "type": "custom",
+    //   "format": "\u001b[38;2;198;162;241m┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"
+    // }
+  ]
+}

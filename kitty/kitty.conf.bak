@@ -1,0 +1,18 @@
+font_family JetBrainsMono Nerd Font
+
+cursor_shape block
+cursor_blink_interval 0
+cursor_text_color background
+cursor none
+# cursor_trail 1
+# cursor_trail_start_threshold 1
+shell_integration no-cursor
+confirm_os_window_close 0
+
+font_size 11.5
+
+adjust_line_height 100%
+window_margin_width 5 0 0 0
+placement_strategy top
+background #1E1E2E
+background_opacity 0.98

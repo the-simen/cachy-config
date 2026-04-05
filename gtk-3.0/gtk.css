@@ -1,0 +1,16 @@
+menu {
+  background-color: #1e1e2e;
+  border: 1px solid #44475a;
+}
+
+menuitem {
+  padding: 6px 12px;
+  color: #cdd6f4;
+}
+
+menuitem:hover {
+  background-color: #b4befe;
+  color: #1e1e2e;
+}
+
+@import url("noctalia.css");

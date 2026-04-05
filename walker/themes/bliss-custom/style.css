@@ -1,0 +1,190 @@
+@import "../../../omarchy/current/theme/walker.css";
+
+* {
+  all: unset;
+}
+
+* {
+  font-family: monospace;
+  font-size: 18px;
+  color: @text;
+}
+
+scrollbar {
+  opacity: 0;
+}
+
+.normal-icons {
+  -gtk-icon-size: 16px;
+}
+
+.large-icons {
+  -gtk-icon-size: 32px;
+}
+
+.box-wrapper {
+  background: alpha(@base, 0.98);
+  padding: 20px;
+  border: 1px solid @border;
+  border-radius: 8px;
+}
+
+.preview-box {
+  background: linear-gradient(90deg, alpha(@border, 0.15), transparent 100%);
+  padding: 20px;
+  border-radius: 8px;
+  min-height: 400px;
+  max-height: 400px;
+}
+
+.box {}
+
+.search-container {
+  background: @base;
+  padding: 10px;
+}
+
+.input placeholder {
+  opacity: 0.5;
+}
+
+.input {}
+
+.input:focus,
+.input:active {
+  box-shadow: none;
+  outline: none;
+}
+
+.content-container {}
+
+.placeholder {}
+
+.scroll {}
+
+.list {}
+
+child,
+child>* {}
+
+child:hover .item-box {}
+
+child:selected .item-box {}
+
+child:selected .item-box * {
+  color: @selected-text;
+}
+
+.item-box {
+  padding-left: 14px;
+}
+
+.item-text-box {
+  all: unset;
+  padding: 14px 0;
+}
+
+.item-text {}
+
+.item-subtext {
+  font-size: 0px;
+  min-height: 0px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.item-image {
+  margin-right: 14px;
+  -gtk-icon-transform: scale(0.9);
+}
+
+.current {
+  font-style: italic;
+}
+
+.keybind-hints {
+  background: @background;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.preview {
+  background: @background;
+}
+
+window .box-wrapper {
+  background: rgba(@background, 0.55);
+  /* same as Waybar and terminal */
+  padding: 8px 2px;
+  color: @text;
+  border: 1px solid @border;
+  margin: 0;
+}
+
+window .search-container,
+window .search {
+  background: @background;
+  color: @foreground;
+  border: 1px solid alpha(@border, 0.5);
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin: 4px 7px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+window .input {
+  color: @accent;
+  padding: 0;
+  font-weight: 300;
+}
+
+child {
+  padding: 0 2px;
+  background: transparent;
+  border-radius: 0;
+  border-left: 2px solid transparent;
+  border-radius: 6px;
+  transition: all 160ms ease-in-out;
+}
+
+child:hover .item-box,
+child:selected .item-box {
+  background: linear-gradient(90deg, alpha(@border, 0.15), transparent 100%);
+  cursor: pointer;
+  border-left: 1px solid alpha(@accent, 1);
+  border-radius: 8px;
+  transform: translateX(4px);
+  transition:
+    background 150ms cubic-bezier(0.25, 0.8, 0.25, 1),
+    transform 150ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+child:hover .item-text,
+child:selected .item-text {
+  text-shadow: 0 0 1px alpha(@accent, 0.1);
+}
+
+child,
+.item-box {
+  border-radius: 8px;
+  transition:
+    background 150ms cubic-bezier(0.25, 0.8, 0.25, 1),
+    transform 150ms ease;
+}
+
+window .list child {
+  animation: slideIn 180ms ease-out forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-15px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
