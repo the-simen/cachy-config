@@ -45,5 +45,8 @@ noctalia.css
 noctalia.conf
 noctalia.kdl
 colors.json
-noctalia/plugins/screen-toolkit/settings.json
+noctalia/plugins/
+noctalia/plugins/**
+noctalia/settings.json
 tmux/plugins/
+

@@ -18,5 +18,9 @@ input {
     }
 
     focus-follows-mouse max-scroll-amount="0%" // Automatically focus windows under the mouse pointer
-    workspace-auto-back-and-forth // Enable workspace back & forth switching
+    // workspace-auto-back-and-forth // Enable workspace back & forth switching
+}
+
+cursor {
+  hide-when-typing
 }
