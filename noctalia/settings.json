@@ -33,7 +33,7 @@
         "preferredPlayer": "",
         "spectrumFrameRate": 30,
         "spectrumMirrored": true,
-        "visualizerType": "linear",
+        "visualizerType": "mirrored",
         "volumeFeedback": false,
         "volumeFeedbackSoundFile": "",
         "volumeOverdrive": false,
@@ -174,12 +174,12 @@
                     "showCpuFreq": false,
                     "showCpuTemp": true,
                     "showCpuUsage": true,
-                    "showDiskAvailable": false,
+                    "showDiskAvailable": true,
                     "showDiskUsage": false,
-                    "showDiskUsageAsPercent": false,
+                    "showDiskUsageAsPercent": true,
                     "showGpuTemp": false,
                     "showLoadAverage": false,
-                    "showMemoryAsPercent": false,
+                    "showMemoryAsPercent": true,
                     "showMemoryUsage": true,
                     "showNetworkStats": false,
                     "showSwapUsage": false,
@@ -210,7 +210,7 @@
                     "showArtistFirst": true,
                     "showProgressRing": true,
                     "showVisualizer": true,
-                    "textColor": "none",
+                    "textColor": "primary",
                     "useFixedWidth": false,
                     "visualizerType": "wave"
                 }
@@ -277,12 +277,12 @@
                 },
                 {
                     "deviceNativePath": "__default__",
-                    "displayMode": "graphic-clean",
+                    "displayMode": "graphic",
                     "hideIfIdle": false,
                     "hideIfNotDetected": true,
                     "id": "Battery",
-                    "showNoctaliaPerformance": false,
-                    "showPowerProfiles": false
+                    "showNoctaliaPerformance": true,
+                    "showPowerProfiles": true
                 },
                 {
                     "colorizeDistroLogo": false,
@@ -347,7 +347,7 @@
         "predefinedScheme": "Catppuccin",
         "schedulingMode": "off",
         "syncGsettings": true,
-        "useWallpaperColors": false
+        "useWallpaperColors": true
     },
     "controlCenter": {
         "cards": [
@@ -645,7 +645,7 @@
     },
     "network": {
         "bluetoothAutoConnect": true,
-        "bluetoothDetailsViewMode": "list",
+        "bluetoothDetailsViewMode": "grid",
         "bluetoothHideUnnamedDevices": false,
         "bluetoothRssiPollIntervalMs": 57000,
         "bluetoothRssiPollingEnabled": false,
