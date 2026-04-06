@@ -23,7 +23,8 @@
 !fish/
 !fish/**
 !starship.toml
-!tmux/*
+!tmux/
+!tmux/**
 !.scripts/
 !.scripts/**
 !discord
@@ -45,3 +46,4 @@ noctalia.conf
 noctalia.kdl
 colors.json
 noctalia/plugins/screen-toolkit/settings.json
+tmux/plugins/
