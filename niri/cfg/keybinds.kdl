@@ -33,6 +33,12 @@ binds {
     XF86MonBrightnessDown               allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call brightness decrease"; }
 
     // ─── Window Movement and Focus ───
+    Mod+SHIFT+H                         { consume-or-expel-window-left; }
+    Mod+SHIFT+L                         { consume-or-expel-window-right; }
+
+    Mod+SHIFT+Left                      { consume-or-expel-window-left; }
+    Mod+SHIFT+Right                     { consume-or-expel-window-right; }
+
     Mod+Q                               { close-window; }
 
     Mod+Left                            { focus-column-left; }
@@ -58,10 +64,10 @@ binds {
     Mod+CTRL+Home                       { move-column-to-first; }
     Mod+CTRL+End                        { move-column-to-last; }
 
-    Mod+Shift+Left                      { focus-monitor-left; }
-    Mod+Shift+Right                     { focus-monitor-right; }
-    Mod+Shift+UP                        { focus-monitor-up; }
-    Mod+Shift+Down                      { focus-monitor-down; }
+    // Mod+Shift+Left                      { focus-monitor-left; }
+    // Mod+Shift+Right                     { focus-monitor-right; }
+    // Mod+Shift+UP                        { focus-monitor-up; }
+    // Mod+Shift+Down                      { focus-monitor-down; }
 
     Mod+Shift+CTRL+Left                 { move-column-to-monitor-left; }
     Mod+Shift+CTRL+Right                { move-column-to-monitor-right; }

@@ -21,5 +21,13 @@
             proportion 1.0
         }
 
+        tab-indicator {
+            width 8
+            gap 4
+            length total-proportion=0.3
+            position "left"
+            place-within-column
+        }
+
         struts {}
     }
