@@ -12,7 +12,7 @@ binds {
     Mod+Return                          hotkey-overlay-title="Open Terminal: Ghostty" { spawn "ghostty"; }
     Mod+CTRL+Return                     hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
     Mod+B                               hotkey-overlay-title="Open Browser: Zen" { spawn "zen-browser"; }
-    Mod+ALT+L                           hotkey-overlay-title="Lock Screen: noctalia lock" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
+    Mod+CTRL+ALT+L                           hotkey-overlay-title="Lock Screen: noctalia lock" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
     Mod+Shift+Q                         hotkey-overlay-title="Session Menu: noctalia sessionMenu" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
     Mod+R { switch-preset-column-width; }
     // Please choose your own file manager.
@@ -33,11 +33,11 @@ binds {
     XF86MonBrightnessDown               allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call brightness decrease"; }
 
     // ─── Window Movement and Focus ───
-    Mod+SHIFT+H                         { consume-or-expel-window-left; }
-    Mod+SHIFT+L                         { consume-or-expel-window-right; }
-
-    Mod+SHIFT+Left                      { consume-or-expel-window-left; }
-    Mod+SHIFT+Right                     { consume-or-expel-window-right; }
+    Mod+ALT+H                         { consume-or-expel-window-left; }
+    Mod+ALT+L                         { consume-or-expel-window-right; }
+        
+    Mod+ALT+Left                      { consume-or-expel-window-left; }
+    Mod+ALT+Right                     { consume-or-expel-window-right; }
 
     Mod+Q                               { close-window; }
 
@@ -64,10 +64,10 @@ binds {
     Mod+CTRL+Home                       { move-column-to-first; }
     Mod+CTRL+End                        { move-column-to-last; }
 
-    // Mod+Shift+Left                      { focus-monitor-left; }
-    // Mod+Shift+Right                     { focus-monitor-right; }
-    // Mod+Shift+UP                        { focus-monitor-up; }
-    // Mod+Shift+Down                      { focus-monitor-down; }
+    Mod+Shift+Left                      { focus-monitor-left; }
+    Mod+Shift+Right                     { focus-monitor-right; }
+    Mod+Shift+UP                        { focus-monitor-up; }
+    Mod+Shift+Down                      { focus-monitor-down; }
 
     Mod+Shift+CTRL+Left                 { move-column-to-monitor-left; }
     Mod+Shift+CTRL+Right                { move-column-to-monitor-right; }
