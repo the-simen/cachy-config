@@ -1,0 +1,15 @@
+[Unit]
+Description=Quickshell (Noctalia)
+After=graphical.target
+
+[Service]
+ExecStart=/usr/bin/qs -c noctalia-shell
+Restart=always
+RestartSec=0.1
+Environment=DISPLAY=:0
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+StandardOutput=null
+StandardError=journal
+
+[Install]
+WantedBy=default.target
