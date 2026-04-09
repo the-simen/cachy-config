@@ -3,3 +3,4 @@
 
     // spawn-sh-at-startup "qs -c noctalia-shell"
     spawn-sh-at-startup "tg-ws-proxy"
+    spawn-sh-at-startup "$HOME/.config/scripts/systemd_autostart.sh"

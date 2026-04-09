@@ -3,14 +3,15 @@
   "enableHardwareAcceleration": true,
   "chromiumSwitches": {},
   "BACKGROUND_COLOR": "#121214",
-  "IS_MAXIMIZED": true,
+  "IS_MAXIMIZED": false,
   "IS_MINIMIZED": false,
   "SKIP_HOST_UPDATE": true,
   "WINDOW_BOUNDS": {
     "x": 0,
     "y": 0,
-    "width": 1920,
-    "height": 1080
+    "width": 1519,
+    "height": 808
   },
-  "asyncVideoInputDeviceInit": false
+  "asyncVideoInputDeviceInit": false,
+  "openH264Enabled": true
 }

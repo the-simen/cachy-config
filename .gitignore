@@ -37,6 +37,8 @@
 !applications/**
 !gtk-3.0/
 !gtk-3.0/**
+!scripts/
+!scripts/**
 
 # excluded files
 # ----------------------------
