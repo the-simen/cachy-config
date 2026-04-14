@@ -3,7 +3,7 @@
 // You will have to remove "/-" and edit it before it takes effect.
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
 
-/- output "eDP-1" {
-    mode "1920x1080@59.999" // Set resolution and refresh rate
-    scale 1.25 // No scaling (use 2 for HiDPI)
+output "DP-3" {
+    mode "1920x1080@144.002" // Set resolution and refresh rate
+    scale 1 // No scaling (use 2 for HiDPI)
 }

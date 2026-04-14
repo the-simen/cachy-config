@@ -7,3 +7,13 @@
       match namespace="^noctalia-wallpaper*"
       place-within-backdrop false
   }
+
+  window-rule {
+      match app-id="discord"
+      open-on-output "DP-3"
+  }
+
+  window-rule {
+      match app-id="org.telegram.desktop"
+      open-on-output "DP-3"
+  }

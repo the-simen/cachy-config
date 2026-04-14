@@ -5,6 +5,7 @@ binds {
 
     // ─── noctalia-shell keybinds ───
     // https://docs.noctalia.dev/getting-started/keybinds/
+    Mod+CTRL+Shift+L                              { spawn-sh "$HOME/.config/scripts/change_layout.sh"; }
 
     Mod+Shift+ESCAPE                     { show-hotkey-overlay; }
 
@@ -12,6 +13,7 @@ binds {
     Mod+Return                          hotkey-overlay-title="Open Terminal: Ghostty" { spawn "ghostty"; }
     Mod+CTRL+Return                     hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
     Mod+B                               hotkey-overlay-title="Open Browser: Zen" { spawn "zen-browser"; }
+    Mod+Shift+B                               hotkey-overlay-title="Open Browser: Zen" { spawn-sh "zen-browser --private-window"; }
     Mod+CTRL+ALT+L                           hotkey-overlay-title="Lock Screen: noctalia lock" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
     Mod+Shift+Q                         hotkey-overlay-title="Session Menu: noctalia sessionMenu" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
     Mod+R { switch-preset-column-width; }
@@ -110,7 +112,7 @@ binds {
     Mod+CTRL+8                          { move-column-to-workspace 8; }
     Mod+CTRL+9                          { move-column-to-workspace 9; }
 
-    Mod+TAB                             { focus-workspace-previous; }
+    // Mod+TAB                             { focus-workspace-previous; }
 
     // ─── Layout Controls ───
     Mod+CTRL+F                          { expand-column-to-available-width; }
@@ -139,5 +141,6 @@ binds {
     // ─── Exit / Power ───
     CTRL+ALT+Delete                     { quit; } // Also quits Niri
     Mod+Shift+P                         { power-off-monitors; } // Turn off screens (useful for OLED or privacy)
-    Mod+O                               repeat=false { toggle-overview; }
+    Mod+O                                repeat=false { toggle-overview; }
+    Mod+TAB                              repeat=false { toggle-overview; }
 }

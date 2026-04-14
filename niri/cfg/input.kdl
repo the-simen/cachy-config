@@ -6,6 +6,7 @@ input {
         xkb {
             layout "us,ru"
             options "ctrl:swapcaps,grp:lctrl_toggle"
+
         }
         repeat-delay 200
         repeat-rate 30
@@ -15,6 +16,20 @@ input {
     touchpad {
         tap // Enable tap-to-click
         natural-scroll // Enable natural (macOS-style) scrolling
+    }
+
+    mouse {
+        // off
+        // natural-scroll
+        accel-speed -0.2
+        accel-profile "flat"
+        // scroll-factor 1.0
+        // scroll-factor vertical=1.0 horizontal=-2.0
+        // scroll-method "no-scroll"
+        // scroll-button 273
+        // scroll-button-lock
+        // left-handed
+        // middle-emulation
     }
 
     focus-follows-mouse max-scroll-amount="0%" // Automatically focus windows under the mouse pointer

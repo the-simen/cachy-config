@@ -2,7 +2,8 @@
 Name=Telegram
 Comment=New era of messaging
 TryExec=Telegram
-Exec=env QT_QPA_PLATFORM=xcb Telegram -- %U
+# Exec=env QT_QPA_PLATFORM=xcb Telegram -- %U
+Exec=Telegram -- %U
 Icon=org.telegram.desktop
 Terminal=false
 StartupWMClass=TelegramDesktop

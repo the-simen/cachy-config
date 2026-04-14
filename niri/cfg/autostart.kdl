@@ -2,5 +2,5 @@
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
 
     // spawn-sh-at-startup "qs -c noctalia-shell"
-    spawn-sh-at-startup "tg-ws-proxy"
+    spawn-sh-at-startup "Telegram"
     spawn-sh-at-startup "$HOME/.config/scripts/systemd_autostart.sh"
