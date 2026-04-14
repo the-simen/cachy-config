@@ -8,6 +8,7 @@ Restart=always
 RestartSec=0.1
 Environment=DISPLAY=:0
 Environment=XDG_RUNTIME_DIR=/run/user/1000
+Environment=QT_QPA_PLATFORMTHEME=gtk3
 StandardOutput=null
 StandardError=journal
 
