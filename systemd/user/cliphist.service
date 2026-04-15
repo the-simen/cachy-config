@@ -1,0 +1,11 @@
+[Unit]
+Description=Cliphist Wayland watcher
+After=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/wl-paste --watch cliphist store
+Restart=always
+RestartSec=1
+
+[Install]
+WantedBy=default.target
