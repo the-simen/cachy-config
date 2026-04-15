@@ -5,3 +5,4 @@
   cm = commit
   lg = log --oneline --graph --decorate --all
   a = add -A
+  save = !git add -A && git commit -m
