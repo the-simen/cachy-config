@@ -1,5 +1,5 @@
 # Dynamic theme colors
-config-file = ?"~/.config/omarchy/current/theme/ghostty.conf"
+# config-file = ?"~/.config/omarchy/current/theme/ghostty.conf"
 
 # Font
 font-family = "JetBrainsMono Nerd Font Propo"
@@ -9,7 +9,7 @@ adjust-cell-height = 3
 
 # Window
 window-theme = ghostty
-window-padding-x = 0
+window-padding-x = 5
 window-padding-y = 5,0
 window-padding-balance = false
 confirm-close-surface=false
@@ -40,3 +40,4 @@ mouse-scroll-multiplier = 0.95
 
 # Fix general slowness on hyprland (https://github.com/ghostty-org/ghostty/discussions/3224)
 async-backend = epoll
+theme = noctalia
