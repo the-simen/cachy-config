@@ -8,17 +8,19 @@ binds {
     Mod+CTRL+Shift+L                              { spawn-sh "$HOME/.config/scripts/change_layout.sh"; }
 
     Mod+Shift+ESCAPE                     { show-hotkey-overlay; }
-
+    Mod+F1 { spawn "qs -c noctalia-shell ipc call plugin:keybind-cheatsheet toggle"; }
     // ─── Applications ───
     Mod+Return                          hotkey-overlay-title="Open Terminal: Ghostty" { spawn "ghostty"; }
     Mod+CTRL+Return                     hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
     Mod+B                               hotkey-overlay-title="Open Browser: Zen" { spawn "zen-browser"; }
-    Mod+Shift+B                               hotkey-overlay-title="Open Browser: Zen" { spawn-sh "zen-browser --private-window"; }
-    Mod+CTRL+ALT+L                           hotkey-overlay-title="Lock Screen: noctalia lock" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
+    Mod+Shift+B                         hotkey-overlay-title="Open Browser: Zen" { spawn-sh "zen-browser --private-window"; }
+    Mod+CTRL+ALT+L                      hotkey-overlay-title="Lock Screen: noctalia lock" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
     Mod+Shift+Q                         hotkey-overlay-title="Session Menu: noctalia sessionMenu" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
     Mod+R { switch-preset-column-width; }
     // Please choose your own file manager.
     Mod+E                               hotkey-overlay-title="File Manager: Nautilus" { spawn "nautilus"; }
+    Mod+V                               hotkey-overlay-title="Proxy client: Happ" { spawn "happ"; } 
+    Mod+M                               hotkey-overlay-title="Spotify" { spawn "spotify"; }
 
     // ─── Media Controls ───
     XF86AudioRaiseVolume                allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume increase"; }
@@ -47,10 +49,15 @@ binds {
     Mod+H                               { focus-column-left; }
     Mod+Right                           { focus-column-right; }
     Mod+L                               { focus-column-right; }
-    Mod+Up                              { focus-window-up; }
-    Mod+K                               { focus-window-up; }
-    Mod+Down                            { focus-window-down; }
-    Mod+J                               { focus-window-down; }
+    Mod+Alt+Up                          { focus-window-up; }
+    Mod+Alt+K                           { focus-window-up; }
+    Mod+Alt+Down                        { focus-window-down; }
+    Mod+Alt+J                           { focus-window-down; }
+
+    Mod+Up                              { focus-workspace-up; }
+    Mod+K                               { focus-workspace-up; }
+    Mod+Down                            { focus-workspace-down; }
+    Mod+J                               { focus-workspace-down; }
 
     Mod+CTRL+Left                       { move-column-left; }
     Mod+CTRL+H                          { move-column-left; }
@@ -67,9 +74,13 @@ binds {
     Mod+CTRL+End                        { move-column-to-last; }
 
     Mod+Shift+Left                      { focus-monitor-left; }
+    Mod+Shift+H                         { focus-monitor-left; }
     Mod+Shift+Right                     { focus-monitor-right; }
+    Mod+Shift+L                         { focus-monitor-right; }
     Mod+Shift+UP                        { focus-monitor-up; }
+    Mod+Shift+K                         { focus-monitor-up; }
     Mod+Shift+Down                      { focus-monitor-down; }
+    Mod+Shift+J                         { focus-monitor-down; }
 
     Mod+Shift+CTRL+Left                 { move-column-to-monitor-left; }
     Mod+Shift+CTRL+Right                { move-column-to-monitor-right; }

@@ -1,6 +1,47 @@
+  // ────────────── Maximized by default ──────────────
+  window-rule {
+      // maximized apps 
+      match app-id="zen"
+      match app-id="firefox"
+      match app-id="chromium"
+
+
+      open-maximized true     
+  }
+
+// ────────────── Floating centered by default ──────────────
+  window-rule {
+      // floating apps
+      match app-id="steam"
+      match app-id="org.gnome.Nautilus"
+      match app-id="Spotify"
+      match app-id="io.github.celluloid_player.Celluloid"
+      match app-id="Happ"
+
+
+      open-floating true
+      default-column-width { proportion 0.6; }
+      default-window-height { fixed 800; }
+  }
+
+  window-rule {
+    match app-id="discord"
+    match app-id="org.telegram.desktop"
+    open-on-output "DP-3"
+  }
+
   window-rule {
       geometry-corner-radius 12
       clip-to-geometry true
+      shadow {
+          on
+          softness 10
+          spread 2
+          offset x=0 y=0
+          draw-behind-window true
+          color "#00000064"
+          // inactive-color "#00000064"
+      }
   }
 
   layer-rule {
@@ -8,12 +49,3 @@
       place-within-backdrop false
   }
 
-  window-rule {
-      match app-id="discord"
-      open-on-output "DP-3"
-  }
-
-  window-rule {
-      match app-id="org.telegram.desktop"
-      open-on-output "DP-3"
-  }

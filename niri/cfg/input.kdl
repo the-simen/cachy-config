@@ -1,5 +1,10 @@
 // ────────────── Input Configuration ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
+gestures {
+  hot-corners {
+    off // disable overview hot corners
+  }
+}
 
 input {
     keyboard {
@@ -16,6 +21,7 @@ input {
     touchpad {
         tap // Enable tap-to-click
         natural-scroll // Enable natural (macOS-style) scrolling
+        dwt
     }
 
     mouse {
