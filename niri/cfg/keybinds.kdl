@@ -7,8 +7,8 @@ binds {
     // https://docs.noctalia.dev/getting-started/keybinds/
     Mod+CTRL+Shift+L                              { spawn-sh "$HOME/.config/scripts/change_layout.sh"; }
 
-    Mod+Shift+ESCAPE                     { show-hotkey-overlay; }
-    Mod+F1 { spawn "qs -c noctalia-shell ipc call plugin:keybind-cheatsheet toggle"; }
+    Mod+Shift+ESCAPE                    { show-hotkey-overlay; }
+    Mod+F1                              { spawn-sh "qs -c noctalia-shell ipc call plugin:show-keys toggle"; }
     // ─── Applications ───
     Mod+Return                          hotkey-overlay-title="Open Terminal: Ghostty" { spawn "ghostty"; }
     Mod+CTRL+Return                     hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
