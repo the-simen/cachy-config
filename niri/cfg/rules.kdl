@@ -15,13 +15,24 @@
       match app-id="steam"
       match app-id="org.gnome.Nautilus"
       match app-id="Spotify"
-      match app-id="io.github.celluloid_player.Celluloid"
       match app-id="Happ"
 
 
       open-floating true
       default-column-width { proportion 0.6; }
       default-window-height { fixed 800; }
+  }
+
+// ────────────── Floating centered media by default ──────────────
+  window-rule {
+      // floating apps
+      match app-id="io.github.celluloid_player.Celluloid"
+      match app-id="org.gnome.Loupe"
+
+
+      open-floating true
+      default-column-width { proportion 0.62; }
+      default-window-height { fixed 650; }
   }
 
   window-rule {
