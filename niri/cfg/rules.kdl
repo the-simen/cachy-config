@@ -25,6 +25,14 @@
   }
 
   window-rule {
+    match title="Picture-in-Picture"
+
+    open-floating true
+    default-column-width { proportion 0.4; }
+    default-window-height { fixed 400; }
+  }
+
+  window-rule {
     match app-id="discord"
     match app-id="org.telegram.desktop"
     open-on-output "DP-3"

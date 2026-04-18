@@ -8,7 +8,7 @@
     ],
     "states": {
         "arch-updater": {
-            "enabled": true,
+            "enabled": false,
             "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
         },
         "clipper": {
