@@ -43,5 +43,8 @@ input {
 }
 
 cursor {
+  xcursor-theme "Dracula-cursors"
+  xcursor-size 24
   hide-when-typing
+
 }
