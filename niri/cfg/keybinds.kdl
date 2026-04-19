@@ -7,7 +7,7 @@ binds {
     // https://docs.noctalia.dev/getting-started/keybinds/
     Mod+CTRL+Shift+L                              { spawn-sh "$HOME/.config/scripts/change_layout.sh"; }
 
-    Mod+Shift+ESCAPE                    { show-hotkey-overlay; }
+    Mod+ESCAPE                          { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
     Mod+F1                              { spawn-sh "qs -c noctalia-shell ipc call plugin:show-keys toggle"; }
     // ─── Applications ───
     Mod+Return                          hotkey-overlay-title="Open Terminal: Ghostty" { spawn "ghostty"; }
@@ -147,7 +147,7 @@ binds {
     // ─── Emergency Escape Key ───
     // Use this when a fullscreen app blocks your keybinds.
     // It disables any active keyboard shortcut inhibitor, restoring control.
-    Mod+ESCAPE                          allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+    // Mod+ESCAPE                          allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
     // ─── Exit / Power ───
     CTRL+ALT+Delete                     { quit; } // Also quits Niri
