@@ -2,5 +2,8 @@
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
 
     // spawn-sh-at-startup "qs -c noctalia-shell"
-    spawn-sh-at-startup "Telegram"
     spawn-sh-at-startup "$HOME/.config/scripts/systemd_autostart.sh"
+    spawn-sh-at-startup "fish -c 'wait-noctalia happ 10'"
+    spawn-sh-at-startup "fish -c 'wait-noctalia openrgb -p everforest-pending 10'"
+    spawn-sh-at-startup "fish -c 'wait-noctalia Telegram 10'"
+    spawn-sh-at-startup "fish -c 'wait-noctalia discord 10'"
