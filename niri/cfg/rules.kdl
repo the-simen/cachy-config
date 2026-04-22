@@ -13,10 +13,12 @@
   window-rule {
       // floating apps
       match app-id="steam"
+      match app-id="heroic"
       match app-id="org.gnome.Nautilus"
       match app-id="Spotify"
       match app-id="Happ"
       match app-id="nwg-look"
+      match app-id="localsend"
 
       open-floating true
       default-column-width { proportion 0.6; }

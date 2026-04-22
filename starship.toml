@@ -23,7 +23,7 @@ $line_break\
 $character\
 """
 
-palette = 'everforest'
+palette = 'kanagawa-paper'
 add_newline = true
 
 [palettes.rosepine]
@@ -73,6 +73,22 @@ pink   = '#86a68f'
 purple = '#7c9f8f'
 red    = '#7a9b7f'
 yellow = '#8aa87a'
+
+[palettes.kanagawa-paper]
+foreground = '#dcd7ba'
+background = '#1f1f28'
+current_line = '#2a2a37'
+primary = '#1f1f28'
+box = '#262634'
+gray = '#8a8980'
+blue   = '#6f8795'
+cyan   = '#7e8faf'
+green  = '#7b958e'
+orange = '#a7956a'
+pink   = '#8b6e86'
+purple = '#938aa9'
+red    = '#c4746e'
+yellow = '#c0a36e'
 
 [os]
 format = '(fg:current_line)[](fg:purple)[$symbol ](fg:primary bg:purple)[](fg:purple)'
