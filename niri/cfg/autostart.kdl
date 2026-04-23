@@ -4,6 +4,6 @@
     // spawn-sh-at-startup "qs -c noctalia-shell"
     spawn-sh-at-startup "$HOME/.config/scripts/systemd_autostart.sh"
     spawn-sh-at-startup "fish -c 'wait-noctalia happ 10'"
-    spawn-sh-at-startup "fish -c 'wait-noctalia openrgb -p everforest-pending 10'"
+    spawn-sh-at-startup "fish -c 'wait-noctalia openrgb -p kanagawa-paper 10'"
     spawn-sh-at-startup "fish -c 'wait-noctalia Telegram 10'"
     spawn-sh-at-startup "fish -c 'wait-noctalia discord 10'"
