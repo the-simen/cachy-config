@@ -4,6 +4,7 @@
       match app-id="zen"
       match app-id="firefox"
       match app-id="chromium"
+      match app-id="TuxGuitar"
 
 
       open-maximized true     
