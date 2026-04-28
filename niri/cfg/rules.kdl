@@ -5,6 +5,11 @@
       match app-id="firefox"
       match app-id="chromium"
       match app-id="TuxGuitar"
+      match app-id="libreoffice-writer"
+      match app-id="libreoffice-calc"
+      match app-id="libreoffice-impress"
+      match app-id="libreoffice-draw"
+      match app-id="libreoffice-base"
 
 
       open-maximized true     
@@ -20,6 +25,7 @@
       match app-id="Happ"
       match app-id="nwg-look"
       match app-id="localsend"
+      match title="Open"
 
       open-floating true
       default-column-width { proportion 0.6; }
