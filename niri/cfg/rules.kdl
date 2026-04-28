@@ -25,8 +25,8 @@
       match app-id="Happ"
       match app-id="nwg-look"
       match app-id="localsend"
+      match app-id="chrome-translate.google.com__-Default"
 
-      match title="Web App Creator"
       match title="Open"
 
       open-floating true
@@ -52,6 +52,14 @@
     open-floating true
     default-column-width { fixed 705; }
     default-window-height { fixed 620; }
+  }
+
+  window-rule {
+    match title="Web App Creator"
+
+    open-floating true
+    default-column-width { fixed 543; }
+    default-window-height { fixed 800; }
   }
 
   window-rule {

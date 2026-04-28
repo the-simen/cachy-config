@@ -43,7 +43,9 @@ FILE_NAME=$(echo "$NAME" | tr ' ' '-' | tr '[:upper:]' '[:lower:]')
 # --- validate URL ---
 if ! curl -s --head --fail "$URL" > /dev/null; then
   echo "Error: URL is not reachable"
-  exit 1
+  read -n 1 -s -r -p "Press any key to close..."
+  echo
+  kill -TERM "$PPID"
 fi
 
 # --- icon handling ---
