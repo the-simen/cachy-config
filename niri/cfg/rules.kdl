@@ -25,6 +25,8 @@
       match app-id="Happ"
       match app-id="nwg-look"
       match app-id="localsend"
+
+      match title="Web App Creator"
       match title="Open"
 
       open-floating true

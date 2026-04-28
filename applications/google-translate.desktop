@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Google Translate
+Exec=chromium --app=https://translate.google.com/
+Icon=/home/thesimen/.local/share/icons/webapps/google-translate.png
+Type=Application
+Categories=Network;
+StartupNotify=true
