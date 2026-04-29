@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Web App Creator
+Version=1.0
+Comment=Create application from web site
+Exec=sh -c '$HOME/.config/scripts/open_wac.sh'
+Categories=Network;Security;
+Terminal=false

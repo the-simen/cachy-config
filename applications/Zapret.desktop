@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Zapret
+Version=1.0
+Comment=discord fix
+Exec=sh -c '$HOME/.config/scripts/custom_title_term.sh --title zapret --cmd /usr/bin/zapret'
+Categories=Network;Security;
+Terminal=false
