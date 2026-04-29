@@ -1,16 +1,12 @@
 [Unit]
 Description=Quickshell (Noctalia)
-After=graphical.target
+After=graphical-session.target
+PartOf=graphical-session.target
 
 [Service]
 ExecStart=/usr/bin/qs -c noctalia-shell
 Restart=always
 RestartSec=0.1
-Environment=DISPLAY=:0
-Environment=XDG_RUNTIME_DIR=/run/user/1000
 Environment=QT_QPA_PLATFORMTHEME=gtk3
 StandardOutput=null
 StandardError=journal
-
-[Install]
-WantedBy=default.target

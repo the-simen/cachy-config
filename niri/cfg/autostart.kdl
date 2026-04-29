@@ -2,6 +2,7 @@
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
 
     // spawn-sh-at-startup "qs -c noctalia-shell"
+    spawn-sh-at-startup "systemctl --user start quickshell.service"
     spawn-sh-at-startup "$HOME/.config/scripts/systemd_autostart.sh"
     spawn-sh-at-startup "fish -c 'wait-noctalia happ 10'"
     spawn-sh-at-startup "fish -c 'wait-noctalia openrgb -p kanagawa-paper 10'"
