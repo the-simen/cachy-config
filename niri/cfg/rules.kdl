@@ -28,6 +28,7 @@
       match app-id="chrome-translate.google.com__-Default"
 
       match title="Open"
+      match title="Bash"
 
       open-floating true
       default-column-width { proportion 0.6; }

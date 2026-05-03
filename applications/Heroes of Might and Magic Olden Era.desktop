@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Heroes of Might and Magic: Olden Era
+Comment=Play this game on Steam
+Exec=steam steam://rungameid/3105440
+Icon=steam_icon_3105440
+Terminal=false
+Type=Application
+Categories=Game;
