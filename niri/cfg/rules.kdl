@@ -69,7 +69,7 @@
     match title="zapret"
 
     open-floating true
-    default-column-width { fixed 675; }
+    default-column-width { fixed 740; }
     default-window-height { fixed 800; }
   }
 

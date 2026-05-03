@@ -3,6 +3,6 @@ Type=Application
 Name=Zapret
 Version=1.0
 Comment=discord fix
-Exec=fish -c 'custom_title_term --title zapret --cmd /usr/bin/zapret'
+Exec=fish -c 'custom_title_term --title zapret --cmd "$HOME/zapret-discord-youtube-linux/service.sh" daemon'
 Categories=Network;Security;
 Terminal=false
