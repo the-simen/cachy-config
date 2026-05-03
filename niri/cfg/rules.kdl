@@ -26,6 +26,9 @@
       match app-id="nwg-look"
       match app-id="localsend"
       match app-id="chrome-translate.google.com__-Default"
+      match app-id="chrome-photos.google.com__-Default"
+      match app-id="chrome-calendar.google.com__-Default"
+      match app-id="chrome-calendar.google.com__calendar_u_0_r_tasks-Default"
 
       match title="Open"
       match title="Bash"
@@ -74,8 +77,8 @@
     match title="Web App Creator"
 
     open-floating true
-    default-column-width { fixed 543; }
-    default-window-height { fixed 800; }
+    default-column-width { fixed 647; }
+    default-window-height { fixed 700; }
   }
 
   window-rule {

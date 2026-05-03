@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Google Tasks
+Exec=chromium --app=https://calendar.google.com/calendar/u/0/r/tasks
+Icon=/home/thesimen/.local/share/icons/webapps/google-tasks.png
+Type=Application
+Categories=Network;
+StartupNotify=true

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Google Chat
+Exec=chromium --app=https://chat.google.com/
+Icon=web-browser
+Type=Application
+Categories=Network;
+StartupNotify=true

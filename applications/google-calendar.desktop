@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Google Calendar
+Exec=chromium --app=https://calendar.google.com/
+Icon=/home/thesimen/.local/share/icons/webapps/google-calendar.png
+Type=Application
+Categories=Network;
+StartupNotify=true
