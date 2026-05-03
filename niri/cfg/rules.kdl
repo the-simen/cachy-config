@@ -29,6 +29,7 @@
 
       match title="Open"
       match title="Bash"
+      match title="btop"
 
       open-floating true
       default-column-width { proportion 0.6; }
