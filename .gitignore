@@ -37,6 +37,8 @@
 !scripts/**
 !git/
 !git/**
+!superfile/
+!superfile/**
 
 # excluded files
 # ----------------------------
