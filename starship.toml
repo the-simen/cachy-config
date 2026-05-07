@@ -23,7 +23,7 @@ $line_break\
 $character\
 """
 
-palette = 'kanagawa-paper'
+palette = 'gruvbox-alt'
 add_newline = true
 
 [palettes.rosepine]
@@ -89,6 +89,54 @@ pink   = '#8b6e86'
 purple = '#938aa9'
 red    = '#c4746e'
 yellow = '#c0a36e'
+
+[palettes.gruvbox]
+foreground = '#e4d4a3'
+background = '#282828'
+current_line = '#32302f'
+primary = '#282828'
+box = '#34302c'
+gray = '#928374'
+blue   = '#7daea3'
+cyan   = '#89b482'
+green  = '#a9b665'
+orange = '#d8a657'
+pink   = '#d3869b'
+purple = '#b4befe'
+red    = '#ea6962'
+yellow = '#d8a657'
+
+[palettes.gruvbox-alt]
+foreground = '#ebdbb2'
+background = '#282828'
+current_line = '#32302f'
+primary = '#3c3836'
+box = '#3a3634'
+gray = '#928374'
+blue   = '#83a598'
+cyan   = '#8faa96'
+green  = '#98a874'
+orange = '#c29a72'
+pink   = '#b48d95'
+purple = '#a79bbf'
+red    = '#c78178'
+yellow = '#c7a96b'
+
+[palettes.gruvbox-mono]
+foreground = '#ebdbb2'
+background = '#282828'
+current_line = '#32302f'
+primary = '#3c3836'
+box = '#3a3634'
+gray = '#928374'
+blue   = '#928374'
+cyan   = '#a89984'
+green  = '#bdae93'
+orange = '#a89984'
+pink   = '#b6a78b'
+purple = '#a89984'
+red    = '#c0b090'
+yellow = '#d5c4a1'
 
 [os]
 format = '(fg:current_line)[](fg:purple)[$symbol ](fg:primary bg:purple)[](fg:purple)'

@@ -33,8 +33,6 @@
 !ghostty/**
 !systemd/
 !systemd/**
-!applications/
-!applications/**
 !scripts/
 !scripts/**
 !git/
@@ -52,3 +50,13 @@ noctalia/plugins/**
 noctalia/settings.json
 tmux/plugins/
 
+# included .desktop files
+!applications/
+!applications/AmneziaVPN.desktop
+!applications/discord.desktop
+!applications/btop.desktop
+!applications/org.openrgb.OpenRGB.desktop
+!applications/org.telegram.desktop.desktop
+!applications/steam.desktop
+!applications/web-app-creator.desktop
+!applications/Zapret.desktop
