@@ -115,13 +115,8 @@
     },
     "break",
     {
-      "type": "host",
-      "key": "╭─",
-      "keyColor": "yellow"
-    },
-    {
       "type": "cpu",
-      "key": "├─󰍛",
+      "key": "╭─󰍛",
       "keyColor": "yellow"
     },
     {
