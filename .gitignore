@@ -51,6 +51,7 @@ noctalia/plugins/
 noctalia/plugins/**
 noctalia/settings.json
 tmux/plugins/
+fish/fish_variables
 
 # included .desktop files
 !applications/
