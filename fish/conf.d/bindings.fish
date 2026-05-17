@@ -3,5 +3,6 @@ function fish_user_key_bindings
 
     bind -M insert \cy 'commandline -f accept-autosuggestion'
     bind -M insert -m default jj backward-char force-repaint
+    bind -M insert \cr history-pager
 end
 
