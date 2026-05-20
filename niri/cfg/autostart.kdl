@@ -3,11 +3,16 @@
 
     // spawn-sh-at-startup "qs -c noctalia-shell"
     // ─── Login sound ───
-    spawn-sh-at-startup "/usr/bin/pw-play /usr/share/sounds/freedesktop/stereo/service-login.oga"
-    // ╭──────────────────────────────────────────────────────────────────────────────────────────╮
-    // │set this command to logout button:                                                        │
-    // │ "/usr/bin/pw-play /usr/share/sounds/freedesktop/stereo/service-logout.oga && pkill niri" │
-    // ╰──────────────────────────────────────────────────────────────────────────────────────────╯
+    spawn-sh-at-startup "fish -c 'wait-noctalia /usr/bin/pw-play /usr/share/sounds/freedesktop/stereo/service-login.oga 2'"
+    // ╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
+    // │ set this commands to logout, Reboot and Shutdown buttons, in noctalia session menu:              │
+    // │  logout:                                                                                         │
+    // │  /usr/bin/pw-play /usr/share/sounds/freedesktop/stereo/service-logout.oga && pkill niri          │
+    // │  reboot:                                                                                         │
+    // │  /usr/bin/pw-play /usr/share/sounds/freedesktop/stereo/service-logout.oga && systemctl reboot    │
+    // │  shutdown:                                                                                       │
+    // │  /usr/bin/pw-play /usr/share/sounds/freedesktop/stereo/service-logout.oga && systemctl poweroff  │
+    // ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
 
     // ─── Systemd ───
     spawn-sh-at-startup "systemctl --user start quickshell.service"
