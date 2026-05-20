@@ -2,8 +2,19 @@
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
 
     // spawn-sh-at-startup "qs -c noctalia-shell"
+    // ─── Login sound ───
+    spawn-sh-at-startup "/usr/bin/pw-play /usr/share/sounds/freedesktop/stereo/service-login.oga"
+    // ╭──────────────────────────────────────────────────────────────────────────────────────────╮
+    // │set this command to logout button:                                                        │
+    // │ "/usr/bin/pw-play /usr/share/sounds/freedesktop/stereo/service-logout.oga && pkill niri" │
+    // ╰──────────────────────────────────────────────────────────────────────────────────────────╯
+
+    // ─── Systemd ───
     spawn-sh-at-startup "systemctl --user start quickshell.service"
+    spawn-sh-at-startup "systemctl --user start device-sounds.service"
     spawn-sh-at-startup "$HOME/.config/scripts/systemd_autostart.sh"
+
+    // ─── Applications ───
     spawn-sh-at-startup "fish -c 'wait-noctalia tg-ws-proxy 10'"
     spawn-sh-at-startup "fish -c 'wait-noctalia openrgb -p kanagawa-paper 10'"
     spawn-sh-at-startup "fish -c 'wait-noctalia env QT_QPA_PLATFORM=xcb /usr/bin/AmneziaVPN 10'"

@@ -1,0 +1,6 @@
+[Unit]
+Description=Device connect/disconnect sounds
+
+[Service]
+ExecStart=%h/.config/scripts/device_sounds.sh
+Restart=always
