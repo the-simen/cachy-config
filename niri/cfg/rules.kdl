@@ -31,7 +31,6 @@
       match app-id="chrome-calendar.google.com__calendar_u_0_r_tasks-Default"
 
       match title="Open"
-      match title="Bash"
       match title="btop"
 
       open-floating true
@@ -59,9 +58,11 @@
     default-window-height { fixed 620; }
   }
 
+  // ────────────── Steam notifications fix ──────────────
   window-rule {
     match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
     default-floating-position x=10 y=10 relative-to="bottom-right"
+    open-focused false
   }
 
   window-rule {
@@ -100,6 +101,7 @@
     open-on-output "DP-3"
   }
 
+  // ────────────── Windows appearance ──────────────
   window-rule {
       geometry-corner-radius 12
       clip-to-geometry true
@@ -114,8 +116,9 @@
       }
   }
 
+  // ────────────── Overlay wallpaper ──────────────
   layer-rule {
       match namespace="^noctalia-wallpaper*"
-      place-within-backdrop false
+      place-within-backdrop true
   }
 
