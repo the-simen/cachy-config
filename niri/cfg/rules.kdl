@@ -66,6 +66,14 @@
   }
 
   window-rule {
+    match app-id="org.gnome.Decibels"
+
+    open-floating true
+    default-column-width { fixed 675; } 
+    default-window-height { fixed 430; }
+  }
+
+  window-rule {
     match app-id="AmneziaVPN"
 
     open-floating true
