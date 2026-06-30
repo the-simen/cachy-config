@@ -16,8 +16,6 @@
 !mc/**
 !niri/
 !niri/**
-!noctalia/
-!noctalia/**
 !fastfetch/
 !fastfetch/**
 !fish/
@@ -47,9 +45,6 @@ noctalia.css
 noctalia.conf
 noctalia.kdl
 colors.json
-noctalia/plugins/
-noctalia/plugins/**
-noctalia/settings.json
 tmux/plugins/
 fish/fish_variables
 
