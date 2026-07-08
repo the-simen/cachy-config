@@ -121,14 +121,22 @@
   window-rule {
       geometry-corner-radius 12
       clip-to-geometry true
+      draw-border-with-background false
+      opacity 0.9
       shadow {
           on
           softness 10
           spread 2
           offset x=0 y=0
           draw-behind-window true
-          color "#00000064"
+          // color "#00000064"
           // inactive-color "#00000064"
+      }
+      background-effect {
+          xray true
+          blur true
+          noise 0.05
+          saturation 3
       }
   }
 
