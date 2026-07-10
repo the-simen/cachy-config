@@ -1,0 +1,12 @@
+[Unit]
+Description=Noctalia (v5)
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=noctalia
+Restart=always
+RestartSec=0.1
+Environment=QT_QPA_PLATFORMTHEME=gtk3
+StandardOutput=null
+StandardError=journal

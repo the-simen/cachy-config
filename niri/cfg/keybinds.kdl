@@ -11,7 +11,8 @@ binds {
     Mod+F1                              { spawn-sh "qs -c noctalia-shell ipc call plugin:show-keys toggle"; }
     // ─── Applications ───
     Mod+Return                          hotkey-overlay-title="Open Terminal: Ghostty" { spawn "ghostty"; }
-    Mod+CTRL+Return                     hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+    // Mod+CTRL+Return                     hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+    Mod+CTRL+Return                     hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
     Mod+B                               hotkey-overlay-title="Open Browser: Zen" { spawn "zen-browser"; }
     Mod+Shift+B                         hotkey-overlay-title="Open Browser: Zen" { spawn-sh "zen-browser --private-window"; }
     Mod+CTRL+ALT+L                      hotkey-overlay-title="Lock Screen: noctalia lock" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
@@ -22,17 +23,20 @@ binds {
     Mod+M                               hotkey-overlay-title="Spotify" { spawn "spotify"; }
 
     // ─── Media Controls ───
-    XF86AudioRaiseVolume allow-when-locked=true {
-        spawn-sh "qs -c noctalia-shell ipc call volume increase && pw-play /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga >/dev/null 2>&1 &"
-    }
-
-    XF86AudioLowerVolume allow-when-locked=true {
-        spawn-sh "qs -c noctalia-shell ipc call volume decrease && pw-play /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga >/dev/null 2>&1 &"
-    }
-
-    XF86AudioMute allow-when-locked=true {
-        spawn-sh "qs -c noctalia-shell ipc call volume muteOutput && pw-play /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga >/dev/null 2>&1 &"
-    }
+    // XF86AudioRaiseVolume allow-when-locked=true {
+    //     spawn-sh "qs -c noctalia-shell ipc call volume increase && pw-play /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga >/dev/null 2>&1 &"
+    // }
+    //
+    // XF86AudioLowerVolume allow-when-locked=true {
+    //     spawn-sh "qs -c noctalia-shell ipc call volume decrease && pw-play /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga >/dev/null 2>&1 &"
+    // }
+    //
+    // XF86AudioMute allow-when-locked=true {
+    //     spawn-sh "qs -c noctalia-shell ipc call volume muteOutput && pw-play /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga >/dev/null 2>&1 &"
+    // }
+    XF86AudioRaiseVolume { spawn-sh "noctalia msg volume-up"; }
+    XF86AudioLowerVolume { spawn-sh "noctalia msg volume-down"; }
+    XF86AudioMute { spawn-sh "noctalia msg volume-mute"; }
     XF86AudioMicMute                    allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume muteInput"; }
     XF86AudioNext                       allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call media next"; }
     XF86AudioPrev                       allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call media previous"; }
@@ -40,8 +44,8 @@ binds {
     XF86AudioPause                      allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call media playPause"; }
 
     // ─── Brightness Controls ───
-    XF86MonBrightnessUp                 allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call brightness increase"; }
-    XF86MonBrightnessDown               allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call brightness decrease"; }
+    XF86MonBrightnessUp { spawn-sh "noctalia msg brightness-up"; }
+    XF86MonBrightnessDown { spawn-sh "noctalia msg brightness-down"; }
 
     // ─── Window Movement and Focus ───
     Mod+ALT+H                         { consume-or-expel-window-left; }

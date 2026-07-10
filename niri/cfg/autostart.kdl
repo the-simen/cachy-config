@@ -15,7 +15,7 @@
     // ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
 
     // ─── Systemd ───
-    spawn-sh-at-startup "systemctl --user start quickshell.service"
+    spawn-sh-at-startup "systemctl --user start noctalia.service"
     spawn-sh-at-startup "systemctl --user start device-sounds.service"
     spawn-sh-at-startup "$HOME/.config/scripts/systemd_autostart.sh"
 

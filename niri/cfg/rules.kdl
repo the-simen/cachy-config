@@ -38,6 +38,18 @@
       default-window-height { fixed 800; }
   }
 
+  window-rule {
+      match app-id="com.mitchellh.ghostty"
+      
+      opacity 0.9
+      background-effect {
+          xray true
+          blur true
+          noise 0.05
+          saturation 3
+      }
+  }
+
 // ────────────── Floating centered media by default ──────────────
   window-rule {
       // floating apps
@@ -122,7 +134,6 @@
       geometry-corner-radius 12
       clip-to-geometry true
       draw-border-with-background false
-      opacity 0.9
       shadow {
           on
           softness 10
@@ -132,17 +143,11 @@
           // color "#00000064"
           // inactive-color "#00000064"
       }
-      background-effect {
-          xray true
-          blur true
-          noise 0.05
-          saturation 3
-      }
   }
 
   // ────────────── Overlay wallpaper ──────────────
   layer-rule {
-      match namespace="^noctalia-wallpaper*"
+      match namespace="^noctalia-backdrop"
       place-within-backdrop true
   }
 
