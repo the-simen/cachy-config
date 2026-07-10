@@ -41,13 +41,13 @@
   window-rule {
       match app-id="com.mitchellh.ghostty"
       
-      opacity 0.9
-      background-effect {
-          xray true
-          blur true
-          noise 0.05
-          saturation 3
-      }
+      // opacity 0.9
+      // background-effect {
+      //     xray true
+      //     blur true
+      //     noise 0.05
+      //     saturation 3
+      // }
   }
 
 // ────────────── Floating centered media by default ──────────────
