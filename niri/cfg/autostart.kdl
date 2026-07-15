@@ -20,9 +20,10 @@
     spawn-sh-at-startup "$HOME/.config/scripts/systemd_autostart.sh"
 
     // ─── Applications ───
-    spawn-sh-at-startup "fish -c 'wait-noctalia tg-ws-proxy 10'"
-    spawn-sh-at-startup "fish -c 'wait-noctalia openrgb -p kanagawa-paper 10'"
-    spawn-sh-at-startup "fish -c 'wait-noctalia karing 10'"
-    // spawn-sh-at-startup "fish -c 'wait-noctalia happ 10'"
-    spawn-sh-at-startup "fish -c 'wait-noctalia Telegram 10'"
-    spawn-sh-at-startup "fish -c 'wait-noctalia discord 10'"
+    spawn-sh-at-startup "fish -c 'wait-noctalia tg-ws-proxy 3'"
+    spawn-sh-at-startup "fish -c 'wait-noctalia steam -silent 3'"
+    spawn-sh-at-startup "fish -c 'wait-noctalia openrgb -p kanagawa-paper 3'"
+    spawn-sh-at-startup "fish -c 'wait-noctalia karing 3'"
+    // spawn-sh-at-startup "fish -c 'wait-noctalia happ 3'"
+    spawn-sh-at-startup "fish -c 'wait-noctalia Telegram 3'"
+    spawn-sh-at-startup "fish -c 'wait-noctalia discord 3'"
