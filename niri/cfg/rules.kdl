@@ -29,6 +29,7 @@
       match app-id="chrome-photos.google.com__-Default"
       match app-id="chrome-calendar.google.com__-Default"
       match app-id="chrome-calendar.google.com__calendar_u_0_r_tasks-Default"
+      match app-id="org.manjaro.pamac.manager"
 
       match title="Open"
       match title="btop"
@@ -142,6 +143,14 @@
           draw-behind-window true
           // color "#00000064"
           // inactive-color "#00000064"
+      }
+
+      opacity 0.9
+      background-effect {
+          xray true
+          blur true
+          noise 0.05
+          saturation 3
       }
   }
 
