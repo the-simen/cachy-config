@@ -3,7 +3,12 @@
 // You will have to remove "/-" and edit it before it takes effect.
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
 
+output "DP-2" {
+    mode "1920x1080@239.760"
+    variable-refresh-rate
+}
+
 output "DP-3" {
-    mode "1920x1080@144.002" // Set resolution and refresh rate
-    scale 1 // No scaling (use 2 for HiDPI)
+    mode "1920x1080@144.002"
+    variable-refresh-rate
 }
