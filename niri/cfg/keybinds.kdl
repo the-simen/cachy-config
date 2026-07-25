@@ -5,7 +5,7 @@ binds {
 
     // ─── noctalia-shell keybinds ───
     // https://docs.noctalia.dev/getting-started/keybinds/
-    Mod+CTRL+Shift+L                              { spawn-sh "$HOME/.config/scripts/change_layout.sh"; }
+    Mod+CTRL+Shift+L                    hotkey-overlay-title="Change caps-ctrl layout" { spawn-sh "$HOME/.config/scripts/change_layout.sh"; }
 
     Mod+ESCAPE                          { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
     Mod+F1                              { spawn-sh "qs -c noctalia-shell ipc call plugin:show-keys toggle"; }
