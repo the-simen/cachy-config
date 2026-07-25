@@ -5,7 +5,7 @@
 
 output "DP-2" {
     mode "1920x1080@239.760"
-    variable-refresh-rate
+    variable-refresh-rate on-demand=true
 }
 
 output "DP-3" {
