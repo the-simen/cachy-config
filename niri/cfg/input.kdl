@@ -11,11 +11,9 @@ input {
         xkb {
             layout "us,ru"
             options "ctrl:swapcaps,grp:lctrl_toggle"
-
         }
         repeat-delay 200
         repeat-rate 30
-        numlock // Enable numlock on startup
     }
 
     touchpad {
