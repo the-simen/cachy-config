@@ -4,9 +4,10 @@ set -euo pipefail
 
 SETTINGS="$HOME/.config/discord/settings.json"
 
+mkdir -p "$(dirname "$SETTINGS")"
+
 if [[ ! -f "$SETTINGS" ]]; then
-    echo "Файл не найден: $SETTINGS"
-    exit 1
+    echo '{}' > "$SETTINGS"
 fi
 
 tmp="$(mktemp)"
