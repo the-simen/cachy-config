@@ -1,5 +1,5 @@
     prefer-no-csd
-    screenshot-path null
+    screenshot-path "~/Pictures/Screenshots/screenshot-%Y-%m-%d_%H-%M-%S.png"
 
     environment {
         ELECTRON_OZONE_PLATFORM_HINT "auto"
