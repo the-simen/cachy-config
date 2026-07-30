@@ -7,12 +7,12 @@
 
         focus-ring {
           off
-          width 1.5
+          width 1
         }
 
         border {
           on
-          width 1.5
+          width 1
         }
 
         preset-column-widths {
