@@ -140,17 +140,17 @@
           softness 10
           spread 2
           offset x=0 y=0
-          draw-behind-window true
+          draw-behind-window false
           // color "#00000064"
           // inactive-color "#00000064"
       }
 
-      opacity 0.9
+      opacity 0.95
       background-effect {
           xray true
           blur true
           noise 0.05
-          saturation 3
+          saturation 2
       }
   }
 
@@ -158,5 +158,13 @@
   layer-rule {
       match namespace="^noctalia-backdrop"
       place-within-backdrop true
+  }
+
+  layer-rule {
+    match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
+    background-effect {
+      xray false
+      // blur false
+    }
   }
 

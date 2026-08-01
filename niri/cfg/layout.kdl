@@ -3,7 +3,7 @@
         center-focused-column "never" // Don’t auto-center focused column
         always-center-single-column
 
-        background-color "transparent" // <- needed for noctalia-shell to set wallpaper
+        background-color "transparent" // <- needed for noctalia to set wallpaper
 
         focus-ring {
           off
@@ -12,7 +12,7 @@
 
         border {
           on
-          width 1
+          width 1.5
         }
 
         preset-column-widths {
@@ -23,7 +23,7 @@
         }
 
         tab-indicator {
-            width 8
+            width 4
             gap 4
             length total-proportion=0.3
             position "left"
