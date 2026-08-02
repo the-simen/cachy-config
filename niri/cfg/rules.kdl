@@ -160,11 +160,24 @@
       place-within-backdrop true
   }
 
+  // ────────────── Disable xray for all noctalia overlays ──────────────
+  // layer-rule {
+  //   match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
+  //   background-effect {
+  //     xray false
+  //     // blur false
+  //   }
+  // }
+
+  // ────────────── Disable xray for notifications, docks, panels and osd ──────────────
+  // This is required for having a clean rounded corners
+  // for elements which are opening against other windows.
+  // if you want to set up auto-hide for bars without reserving space,
+  // you should use the block commented above.
   layer-rule {
-    match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
+    match namespace="^noctalia-(notification|dock|panel|osd)$"
     background-effect {
       xray false
       // blur false
     }
   }
-
