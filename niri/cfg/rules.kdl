@@ -56,6 +56,7 @@
       // floating apps
       match app-id="io.github.celluloid_player.Celluloid"
       match app-id="org.gnome.Loupe"
+      match app-id="vlc"
 
 
       open-floating true
