@@ -3,12 +3,11 @@ binds {
     // ────────────── Keybindings ──────────────
     // https://github.com/YaLTeR/niri/wiki/Configuration:-Key-Bindings
 
-    // ─── noctalia-shell keybinds ───
+    // ─── noctalia keybinds ───
     // https://docs.noctalia.dev/getting-started/keybinds/
     Mod+CTRL+Shift+L                    hotkey-overlay-title="Change caps-ctrl layout" { spawn-sh "$HOME/.config/scripts/change_layout.sh"; }
 
-    Mod+ESCAPE                          { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
-    Mod+F1                              { spawn-sh "qs -c noctalia-shell ipc call plugin:show-keys toggle"; }
+    Mod+ESCAPE                          { spawn-sh "noctalia msg panel-toggle session"; }
     // ─── Applications ───
     Mod+Return                          hotkey-overlay-title="Open Terminal: Ghostty" { spawn "ghostty"; }
     // Mod+CTRL+Return                     hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
@@ -22,28 +21,14 @@ binds {
     Mod+E                               hotkey-overlay-title="File Manager: Nautilus" { spawn "nautilus"; }
     Mod+M                               hotkey-overlay-title="Spotify" { spawn "spotify"; }
 
-    // ─── Media Controls ───
-    // XF86AudioRaiseVolume allow-when-locked=true {
-    //     spawn-sh "qs -c noctalia-shell ipc call volume increase && pw-play /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga >/dev/null 2>&1 &"
-    // }
-    //
-    // XF86AudioLowerVolume allow-when-locked=true {
-    //     spawn-sh "qs -c noctalia-shell ipc call volume decrease && pw-play /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga >/dev/null 2>&1 &"
-    // }
-    //
-    // XF86AudioMute allow-when-locked=true {
-    //     spawn-sh "qs -c noctalia-shell ipc call volume muteOutput && pw-play /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga >/dev/null 2>&1 &"
-    // }
+    // ─── Core Noctralia keybinds ───
+    // Alt+Tab { spawn-sh "noctalia msg window-switcher"; }
+    // Niri has a built-in window switcher you might want to try it to see which one you prefer.
+
+    // Audio & Brightness
     XF86AudioRaiseVolume { spawn-sh "noctalia msg volume-up"; }
     XF86AudioLowerVolume { spawn-sh "noctalia msg volume-down"; }
     XF86AudioMute { spawn-sh "noctalia msg volume-mute"; }
-    XF86AudioMicMute                    allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume muteInput"; }
-    XF86AudioNext                       allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call media next"; }
-    XF86AudioPrev                       allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call media previous"; }
-    XF86AudioPlay                       allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call media playPause"; }
-    XF86AudioPause                      allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call media playPause"; }
-
-    // ─── Brightness Controls ───
     XF86MonBrightnessUp { spawn-sh "noctalia msg brightness-up"; }
     XF86MonBrightnessDown { spawn-sh "noctalia msg brightness-down"; }
 
