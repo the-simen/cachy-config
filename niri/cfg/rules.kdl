@@ -20,7 +20,6 @@
       // floating apps
       match app-id="steam"
       match app-id="heroic"
-      match app-id="org.gnome.Nautilus"
       match app-id="spotify"
       match app-id="Happ"
       match app-id="nwg-look"
@@ -39,12 +38,25 @@
       default-window-height { fixed 800; }
   }
 
+  // ────────────── Floating on another monitor ──────────────
+  window-rule {
+    match app-id="org.gnome.Nautilus"
+
+    open-floating true
+    default-column-width { proportion 0.6; }
+    default-window-height { fixed 800; }
+
+    open-on-output "DP-3"
+  }
+
   // ────────────── Floating centered with auto size ──────────────
   window-rule {
       match app-id="com.gabm.satty"
       match app-id="org.gnome.Loupe"
 
       open-floating true
+
+      open-on-output "DP-2"
   }
 
 // ────────────── Floating centered media by default ──────────────
@@ -56,6 +68,8 @@
       open-floating true
       default-column-width { proportion 0.62; }
       default-window-height { fixed 650; }
+
+      open-on-output "DP-2"
   }
 
   window-rule {
