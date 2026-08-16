@@ -39,25 +39,19 @@
       default-window-height { fixed 800; }
   }
 
+  // ────────────── Floating centered with auto size ──────────────
   window-rule {
-      match app-id="com.mitchellh.ghostty"
-      
-      // opacity 0.9
-      // background-effect {
-      //     xray true
-      //     blur true
-      //     noise 0.05
-      //     saturation 3
-      // }
+      match app-id="com.gabm.satty"
+      match app-id="org.gnome.Loupe"
+
+      open-floating true
   }
 
 // ────────────── Floating centered media by default ──────────────
   window-rule {
       // floating apps
       match app-id="io.github.celluloid_player.Celluloid"
-      match app-id="org.gnome.Loupe"
       match app-id="vlc"
-
 
       open-floating true
       default-column-width { proportion 0.62; }
