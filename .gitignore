@@ -27,6 +27,9 @@
 !.scripts/**
 !ghostty/
 !ghostty/**
+!kitty/
+!kitty/kitty.conf
+!kitty/copy_notify
 !systemd/
 !systemd/**
 !scripts/
