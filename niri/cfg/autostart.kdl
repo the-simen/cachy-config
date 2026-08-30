@@ -29,4 +29,4 @@
     spawn-sh-at-startup "fish -c 'wait-noctalia discord 10'"
 
     // ─── Copy to clipboard notification ───
-    spawn-at-startup "wl-paste" "--watch" "sh" "-c" "noctalia msg notification-show '{\"summary\":\"Clipboard\",\"body\":\"Selected text has been copied\",\"icon\":\"clipboard\"}'"
+    spawn-sh-at-startup "$HOME/.config/scripts/copy-notify.sh"
