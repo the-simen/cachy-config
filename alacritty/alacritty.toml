@@ -1,5 +1,4 @@
 [general]
-import = ["~/.config/alacritty/themes/noctalia.toml"]
 
 [env]
 TERM = "xterm-256color"
