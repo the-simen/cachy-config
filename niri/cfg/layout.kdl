@@ -1,5 +1,5 @@
     layout {
-        gaps 6 // Gap between windows
+        gaps 8 // Gap between windows
         center-focused-column "never" // Don’t auto-center focused column
         always-center-single-column
 
