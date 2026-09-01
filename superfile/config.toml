@@ -11,6 +11,9 @@
 #                                   Defaults                                  #
 ###############################################################################
 
+sidebar_sections = ['home', 'pinned', 'disks']
+split_file_panel = false
+
 #-- File Editor
 # Default: $EDITOR
 editor = ""
@@ -94,7 +97,7 @@ file_panel_name_percent = 50
 
 #-- Theme
 # Put your theme's name here!
-theme = "gruvbox-alt"
+theme = "rose-pine"
 
 #-- Code Previewer
 # Whether to use the builtin syntax highlighting with chroma or use bat. Values: "" for builtin chroma, "bat" for bat
