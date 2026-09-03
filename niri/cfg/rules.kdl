@@ -10,7 +10,7 @@
       match app-id="libreoffice-impress"
       match app-id="libreoffice-draw"
       match app-id="libreoffice-base"
-
+      match app-id="ONLYOFFICE"
 
       open-maximized true     
   }
