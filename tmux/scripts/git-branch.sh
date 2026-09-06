@@ -4,5 +4,5 @@ branch=$(git -C "$1" branch --show-current 2>/dev/null)
 
 if [ -n "$branch" ]; then
     printf '%s' \
-        '#[fg=#{E:@t-green},bg=#{E:@surf}]#[fg=#{E:@t-white},bg=#{E:@t-green}] 󰘬 '"$branch"' #[fg=#{E:@t-green},bg=#{E:@surf}] '
+        '#[fg=#{E:@surf-br},bg=#{E:@t-green}]#[fg=black,bg=#{E:@t-green}] 󰘬 '"$branch"' #[fg=#{E:@surf-br},bg=#{E:@t-green}]#{E:@segment-separator}'
 fi
