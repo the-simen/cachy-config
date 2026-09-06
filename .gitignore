@@ -38,6 +38,10 @@
 !git/**
 !superfile/
 !superfile/**
+!noctalia/
+!noctalia/templates/
+!noctalia/templates/**
+!noctalia/templates.toml
 
 # excluded files
 # ----------------------------
