@@ -1,3 +1,6 @@
 [theme.templates.user.tmux_palette]
 input_path = "$XDG_CONFIG_HOME/noctalia/templates/tmux-palette.conf"
 output_path = "$XDG_CONFIG_HOME/tmux/themes/noctalia-palette.conf"
+[theme.templates.user.superfile_palette]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/superfile-palette.conf"
+output_path = "$XDG_CONFIG_HOME/superfile/theme/noctalia.toml"

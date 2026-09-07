@@ -29,6 +29,7 @@
       match app-id="chrome-calendar.google.com__-Default"
       match app-id="chrome-calendar.google.com__calendar_u_0_r_tasks-Default"
       match app-id="org.manjaro.pamac.manager"
+      match app-id="dev.noctalia.Noctalia"
 
       match title="Open"
       match title="btop"
@@ -42,11 +43,8 @@
   window-rule {
     match app-id="org.gnome.Nautilus"
 
-    open-floating true
     default-column-width { proportion 0.6; }
     default-window-height { fixed 800; }
-
-    open-on-output "DP-3"
   }
 
   // ────────────── Floating centered with auto size ──────────────
@@ -55,8 +53,6 @@
       match app-id="org.gnome.Loupe"
 
       open-floating true
-
-      open-on-output "DP-2"
   }
 
 // ────────────── Floating centered media by default ──────────────
