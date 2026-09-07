@@ -51,7 +51,7 @@ noctalia.conf
 noctalia.kdl
 colors.json
 tmux/plugins/
-fish/fish_variables
+fish/fish_variables*
 
 # included .desktop files
 !applications/
