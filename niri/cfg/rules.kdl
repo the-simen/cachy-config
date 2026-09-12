@@ -34,6 +34,8 @@
   // ────────────── Tiling with custom height ──────────────
   window-rule {
       match app-id="org.gnome.Nautilus"
+      match app-id="Thunar"
+      match app-id="nemo"
       match app-id="steam"
       match app-id="heroic"
       match app-id="localsend"
