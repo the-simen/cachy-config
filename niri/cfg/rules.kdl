@@ -89,6 +89,13 @@
     default-window-height { fixed 620; }
   }
 
+  // ────────────── TMUX ──────────────
+  window-rule {
+    match title="TMUX"
+
+    default-column-width { proportion 1.0; }
+  }
+
   // ────────────── Steam notifications fix ──────────────
   window-rule {
     match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
