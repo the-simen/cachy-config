@@ -18,17 +18,9 @@
 // ────────────── Floating centered by default ──────────────
   window-rule {
       // floating apps
-      match app-id="steam"
-      match app-id="heroic"
       match app-id="spotify"
       match app-id="Happ"
       match app-id="nwg-look"
-      match app-id="localsend"
-      match app-id="chrome-translate.google.com__-Default"
-      match app-id="chrome-photos.google.com__-Default"
-      match app-id="chrome-calendar.google.com__-Default"
-      match app-id="chrome-calendar.google.com__calendar_u_0_r_tasks-Default"
-      match app-id="org.manjaro.pamac.manager"
       match app-id="dev.noctalia.Noctalia"
 
       match title="Open"
@@ -39,12 +31,33 @@
       default-window-height { fixed 800; }
   }
 
-  // ────────────── Floating on another monitor ──────────────
+  // ────────────── Tiling with custom height ──────────────
   window-rule {
-    match app-id="org.gnome.Nautilus"
+      match app-id="org.gnome.Nautilus"
+      match app-id="steam"
+      match app-id="heroic"
+      match app-id="localsend"
+      match app-id="org.manjaro.pamac.manager"
 
-    default-column-width { proportion 0.6; }
-    default-window-height { fixed 800; }
+      default-column-width { proportion 0.6; }
+      default-window-height { fixed 800; }
+  }
+
+  // ────────────── Google Apps ──────────────
+  window-rule {
+      match app-id="chrome-translate.google.com__-Default"
+      match app-id="chrome-photos.google.com__-Default"
+      match app-id="chrome-keep.google.com__-Default"
+
+      default-column-width { proportion 0.6; }
+      default-window-height { fixed 800; }
+  }
+  window-rule {
+      match app-id="chrome-calendar.google.com__calendar_u_0_r_tasks-Default"
+      match app-id="chrome-calendar.google.com__-Default"
+
+      default-column-width { fixed 1240; }
+      default-window-height { fixed 800; }
   }
 
   // ────────────── Floating centered with auto size ──────────────
