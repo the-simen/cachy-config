@@ -10,6 +10,7 @@ binds {
     Mod+ESCAPE                          { spawn-sh "noctalia msg panel-toggle session"; }
     // ─── Applications ───
     Mod+Return                          hotkey-overlay-title="Open Terminal: Kitty" { spawn "kitty"; }
+    Mod+ALT+Return hotkey-overlay-title="Open Terminal Multiplexer: TMUX" { spawn-sh "kitty fish -c 'tm'"; }
     // Mod+CTRL+Return                     hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
     Mod+CTRL+Return                     hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
     Mod+B                               hotkey-overlay-title="Open Browser: Zen" { spawn "zen-browser"; }
