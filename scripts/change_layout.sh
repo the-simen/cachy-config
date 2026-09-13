@@ -11,12 +11,12 @@ if [[ "$current" == "$A" ]]; then
     new="$B"
     notify-send -u low -t 1500 \
       "Layout" \
-      "<b>Layout switched:</b> <span foreground='#FF9800'>SWAPCAPS</span>"
+      "Layout switched to SWAPCAPS"
 else
     new="$A"
     notify-send -u low -t 1500 \
       "Layout" \
-      "<b>Layout switched:</b> <span foreground='#4CAF50'>DEFAULT</span>"
+      "Layout switched to DEFAULT"
 fi
 
 sed -i "s/options \".*\"/options \"$new\"/" "$FILE"
