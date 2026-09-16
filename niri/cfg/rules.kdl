@@ -155,6 +155,8 @@
     match app-id="discord"
     match app-id="org.telegram.desktop"
     open-on-output "DP-3"
+
+    default-column-width { proportion 0.5; }
   }
 
   // ────────────── Windows appearance ──────────────
