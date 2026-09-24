@@ -23,48 +23,48 @@
     {
       "type": "custom",
       "key": "╭─System─────╮",
-      "keyColor": "magenta"
+      "keyColor": "green"
     },
     {
       "type": "os",
       "key": "│  OS       │",
       "format": "{pretty-name}",
-      "keyColor": "magenta"
+      "keyColor": "green"
     },
     {
       "type": "kernel",
       "key": "│  Kernel   │",
       "format": "{2}",
-      "keyColor": "magenta"
+      "keyColor": "green"
     },
     {
       "type": "packages",
       "key": "│ 󰮯 Pacman   │",
       "format": "{pacman} packages",
-      "keyColor": "magenta"
+      "keyColor": "green"
     },
     {
       "type": "packages",
       "key": "│ 󰏗 Flatpak  │",
       "format": "{flatpak-all} packages",
-      "keyColor": "magenta"
+      "keyColor": "green"
     },
     {
       "type": "de",
       "key": "│  DE       │",
       "format": "{pretty-name} {version}",
-      "keyColor": "magenta"
+      "keyColor": "green"
     },
     {
       "type": "wm",
       "key": "│ 󰧨 WM       │",
       "format": "{pretty-name} {version}",
-      "keyColor": "magenta"
+      "keyColor": "green"
     },
     {
       "type": "lm",
       "key": "│ 󰍂 LM       │",
-      "keyColor": "magenta"
+      "keyColor": "green"
     },
     {
       "type": "custom",
@@ -95,39 +95,39 @@
     {
       "type": "custom",
       "key": "╭─Hardware",
-      "keyColor": "yellow"
+      "keyColor": "cyan"
     },
     {
       "type": "cpu",
       "key": "├─󰍛",
       "format": "{name}",
-      "keyColor": "yellow"
+      "keyColor": "cyan"
     },
     {
       "type": "gpu",
       "key": "├─󰘚",
       "format": "{name}",
-      "keyColor": "yellow"
+      "keyColor": "cyan"
     },
     {
       "type": "display",
       "key": "├─󰍹",
       "format": "{inch}\" {width}x{height}, {refresh-rate}Hz",
-      "keyColor": "yellow"
+      "keyColor": "cyan"
     },
     {
       "type": "memory",
       "key": "├─󰑭",
-      "keyColor": "yellow"
+      "keyColor": "cyan"
     },
     {
       "type": "uptime",
       "key": "╰─󰅐",
-      "keyColor": "yellow"
+      "keyColor": "cyan"
     },
     {
       "type": "custom",
-      "key": "╭─\u001b[90mColors\u001b[1m\u001b[30m──────────────────╮",
+      "key": "╭─────────────────────────╮",
       "keyColor": "\u001b[30m"
     },
     {
@@ -140,20 +140,5 @@
       "key": "╰─────────────────────────╯",
       "keyColor": "\u001b[30m"
     }
-    // {
-    //   "type": "custom",
-    //   "key": "╭─Colors──────────────────╮",
-    //   "keyColor": "\u001b[90m"
-    // },
-    // {
-    //   "type": "custom",
-    //   "keyColor": "blue",
-    //   "format": "\u001b[90m│ \u001b[1m\u001b[31m  \u001b[1m\u001b[32m  \u001b[1m\u001b[33m  \u001b[1m\u001b[34m  \u001b[1m\u001b[35m  \u001b[1m\u001b[36m  \u001b[1m\u001b[37m  \u001b[1m\u001b[30m  \u001b[90m│"
-    // },
-    // {
-    //   "type": "custom",
-    //   "key": "╰─────────────────────────╯",
-    //   "keyColor": "\u001b[90m"
-    // }
   ]
 }
