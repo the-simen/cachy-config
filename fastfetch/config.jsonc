@@ -40,13 +40,13 @@
     {
       "type": "packages",
       "key": "│ 󰮯 Pacman   │",
-      "format": "{pacman}",
+      "format": "{pacman} packages",
       "keyColor": "magenta"
     },
     {
       "type": "packages",
       "key": "│ 󰏗 Flatpak  │",
-      "format": "{flatpak-all}",
+      "format": "{flatpak-all} packages",
       "keyColor": "magenta"
     },
     {
