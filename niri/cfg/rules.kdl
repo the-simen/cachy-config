@@ -40,6 +40,7 @@
       match app-id="heroic"
       match app-id="localsend"
       match app-id="org.manjaro.pamac.manager"
+      match app-id="com.shellyorg.shelly"
 
       default-column-width { proportion 0.6; }
       default-window-height { fixed 800; }
