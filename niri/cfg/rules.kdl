@@ -155,8 +155,9 @@
   window-rule {
     match app-id="discord"
     match app-id="org.telegram.desktop"
-    open-on-output "DP-3"
 
+    open-on-output "DP-3"
+    open-focused false
     default-column-width { proportion 0.5; }
   }
 
