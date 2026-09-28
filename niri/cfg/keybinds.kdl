@@ -11,7 +11,6 @@ binds {
     // ─── Applications ───
     Mod+Return                          hotkey-overlay-title="Open Terminal: Kitty" { spawn "kitty"; }
     Mod+ALT+Return                      hotkey-overlay-title="Open Terminal Multiplexer: TMUX" { spawn-sh "kitty --title 'TMUX' fish -c 'tm'"; }
-    // Mod+CTRL+Return                     hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
     Mod+CTRL+Return                     hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
     Mod+B                               hotkey-overlay-title="Open Browser: Zen" { spawn "zen-browser"; }
     Mod+Shift+B                         hotkey-overlay-title="Open Browser: Zen" { spawn-sh "zen-browser --private-window"; }
@@ -34,11 +33,11 @@ binds {
     XF86MonBrightnessDown { spawn-sh "noctalia msg brightness-down"; }
 
     // ─── Window Movement and Focus ───
-    Mod+ALT+H                         { consume-or-expel-window-left; }
-    Mod+ALT+L                         { consume-or-expel-window-right; }
-        
-    Mod+ALT+Left                      { consume-or-expel-window-left; }
-    Mod+ALT+Right                     { consume-or-expel-window-right; }
+    Mod+ALT+H                           { consume-or-expel-window-left; }
+    Mod+ALT+L                           { consume-or-expel-window-right; }
+                                       
+    Mod+ALT+Left                        { consume-or-expel-window-left; }
+    Mod+ALT+Right                       { consume-or-expel-window-right; }
 
     Mod+Q                               { close-window; }
 
