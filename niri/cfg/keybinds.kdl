@@ -16,7 +16,7 @@ binds {
     Mod+Shift+B                         hotkey-overlay-title="Open Browser: Zen" { spawn-sh "zen-browser --private-window"; }
     Mod+CTRL+ALT+L                      hotkey-overlay-title="Lock Screen: noctalia lock" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
     Mod+Shift+Q                         hotkey-overlay-title="Session Menu: noctalia sessionMenu" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
-    Mod+R { switch-preset-column-width; }
+    Mod+R                               { switch-preset-column-width; }
     // Please choose your own file manager.
     Mod+E                               hotkey-overlay-title="File Manager: Nemo" { spawn "nemo"; }
     Mod+M                               hotkey-overlay-title="Spotify" { spawn "spotify"; }
@@ -26,11 +26,11 @@ binds {
     // Niri has a built-in window switcher you might want to try it to see which one you prefer.
 
     // Audio & Brightness
-    XF86AudioRaiseVolume { spawn-sh "noctalia msg volume-up"; }
-    XF86AudioLowerVolume { spawn-sh "noctalia msg volume-down"; }
-    XF86AudioMute { spawn-sh "noctalia msg volume-mute"; }
-    XF86MonBrightnessUp { spawn-sh "noctalia msg brightness-up"; }
-    XF86MonBrightnessDown { spawn-sh "noctalia msg brightness-down"; }
+    XF86AudioRaiseVolume                { spawn-sh "noctalia msg volume-up"; }
+    XF86AudioLowerVolume                { spawn-sh "noctalia msg volume-down"; }
+    XF86AudioMute                       { spawn-sh "noctalia msg volume-mute"; }
+    XF86MonBrightnessUp                 { spawn-sh "noctalia msg brightness-up"; }
+    XF86MonBrightnessDown               { spawn-sh "noctalia msg brightness-down"; }
 
     // ─── Window Movement and Focus ───
     Mod+ALT+H                           { consume-or-expel-window-left; }
