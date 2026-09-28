@@ -14,7 +14,7 @@ binds {
     Mod+CTRL+Return                     hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
     Mod+B                               hotkey-overlay-title="Open Browser: Zen" { spawn "zen-browser"; }
     Mod+Shift+B                         hotkey-overlay-title="Open Browser: Zen" { spawn-sh "zen-browser --private-window"; }
-    Mod+CTRL+ALT+L                      hotkey-overlay-title="Lock Screen: noctalia lock" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
+    Mod+CTRL+ALT+L                      hotkey-overlay-title="Lock Screen: noctalia lock" { spawn-sh "noctalia msg session lock"; }
     Mod+Shift+Q                         hotkey-overlay-title="Session Menu: noctalia sessionMenu" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
     Mod+R                               { switch-preset-column-width; }
     // Please choose your own file manager.
@@ -136,9 +136,9 @@ binds {
     Mod+W                               { toggle-column-tabbed-display; }
 
     // ─── Screenshots ───
-    CTRL+Shift+1                        { screenshot; }
-    CTRL+Shift+2                        { screenshot-screen; }
-    CTRL+Shift+3                        { screenshot-window; }
+    CTRL+Shift+1                        hotkey-overlay-title="Screenshot region" { spawn-sh "noctalia msg screenshot-region"; }
+    CTRL+Shift+2                        hotkey-overlay-title="Screenshot fullscreen" { spawn-sh "noctalia msg screenshot-fullscreen"; }
+    CTRL+Shift+3                        hotkey-overlay-title="Screenshot annotate" { spawn-sh "noctalia msg screenshot-annotate"; }
 
     // ─── Emergency Escape Key ───
     // Use this when a fullscreen app blocks your keybinds.
