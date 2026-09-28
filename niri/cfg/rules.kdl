@@ -162,18 +162,9 @@
 
   // ────────────── Windows appearance ──────────────
   window-rule {
-      geometry-corner-radius 12
+      geometry-corner-radius 13
       clip-to-geometry true
       draw-border-with-background false
-      shadow {
-          on
-          softness 10
-          spread 2
-          offset x=0 y=0
-          draw-behind-window false
-          // color "#00000064"
-          // inactive-color "#00000064"
-      }
 
       opacity 0.95
       background-effect {

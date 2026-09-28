@@ -12,7 +12,7 @@ input {
             layout "us,ru"
             options "ctrl:swapcaps,grp:lctrl_toggle"
         }
-        repeat-delay 200
+        repeat-delay 250
         repeat-rate 30
     }
 

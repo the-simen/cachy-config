@@ -16,6 +16,8 @@
 !mc/**
 !niri/
 !niri/**
+!hypr/
+!hypr/**
 !fastfetch/
 !fastfetch/**
 !fish/
