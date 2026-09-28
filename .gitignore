@@ -44,7 +44,7 @@
 !noctalia/templates/
 !noctalia/templates/**
 !noctalia/templates.toml
-!noctalia/config.kdl
+!noctalia/config.toml
 !noctalia/gamemode.toml.disabled
 
 # excluded files
