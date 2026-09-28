@@ -196,7 +196,7 @@
   // if you want to set up auto-hide for bars without reserving space,
   // you should use the block commented above.
   layer-rule {
-    match namespace="^noctalia-(notification|dock|panel|osd)$"
+    match namespace="^noctalia-(notification|dock|panel|osd|window-switcher)$"
     background-effect {
       xray false
       // blur false
