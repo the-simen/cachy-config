@@ -1,0 +1,8 @@
+[shell.animation]
+enabled = false
+
+[bar.top]
+background_opacity = 1.0
+
+[dock]
+background_opacity = 1.0
