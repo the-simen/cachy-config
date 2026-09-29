@@ -46,6 +46,8 @@
 !noctalia/templates.toml
 !noctalia/config.toml
 !noctalia/gamemode.toml.disabled
+!xremap/
+!xremap/**
 
 # excluded files
 # ----------------------------

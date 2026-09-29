@@ -1,0 +1,10 @@
+[Unit]
+Description=xremap ONLYOFFICE Vim navigation
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/xremap /home/thesimen/.config/xremap/onlyoffice.yml
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
