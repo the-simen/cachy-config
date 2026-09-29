@@ -3,6 +3,20 @@ enabled = false
 
 [bar.top]
 background_opacity = 1.0
+shadow = false
 
 [dock]
 background_opacity = 1.0
+shadow = false
+
+[osd]
+background_opacity = 1.0
+shadow = false
+
+[notification]
+background_opacity = 1.0
+shadow = false
+
+[shell.panel]
+transparency_mode = "solid"
+shadow = false
