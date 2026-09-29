@@ -1,7 +1,8 @@
 // ────────────── Startup Applications ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
 
-    // spawn-sh-at-startup "qs -c noctalia-shell"
+    // ─── Noctalia toggles ───
+    spawn-sh-at-startup "fish -c 'wait-noctalia noctalia msg caffeine-enable 10'"
 
     // ─── Systemd ───
     spawn-sh-at-startup "systemctl --user start noctalia.service"
