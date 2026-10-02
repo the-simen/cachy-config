@@ -35,6 +35,7 @@
   window-rule {
       match app-id="org.gnome.Nautilus"
       match app-id="Thunar"
+      match app-id="dolphin"
       match app-id="nemo"
       match app-id="steam"
       match app-id="heroic"
@@ -73,15 +74,12 @@
 
 // ────────────── Floating centered media by default ──────────────
   window-rule {
-      // floating apps
       match app-id="io.github.celluloid_player.Celluloid"
       match app-id="vlc"
 
       open-floating true
       default-column-width { proportion 0.62; }
       default-window-height { fixed 650; }
-
-      open-on-output "DP-2"
   }
 
   window-rule {
