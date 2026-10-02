@@ -17,11 +17,5 @@
     spawn-sh-at-startup "fish -c 'wait-noctalia Telegram 10'"
     spawn-sh-at-startup "fish -c 'wait-noctalia discord 10'"
 
-    // ─── Baloo file indexer (Dolphin content search) ───
-    spawn-sh-at-startup "/usr/lib/kf6/baloo_file"
-
-    // ─── Nautilus keepalive window (keeps daemon warm for instant launches) ───
-    spawn-sh-at-startup "$HOME/.local/bin/nautilus-keepalive.sh"
-
     // ─── Copy to clipboard notification ───
     spawn-sh-at-startup "$HOME/.config/scripts/copy-notify.sh"
