@@ -1,34 +1,34 @@
-    layout {
-        gaps 12 // Gap between windows
-        center-focused-column "never" // Don’t auto-center focused column
-        always-center-single-column
+layout {
+    gaps 12 // Gap between windows
+    center-focused-column "never" // Don’t auto-center focused column
+    always-center-single-column
 
-        background-color "transparent" // <- needed for noctalia to set wallpaper
+    background-color "transparent" // <- needed for noctalia to set wallpaper
 
-        focus-ring {
-          off
-          width 2
-        }
-
-        border {
-          on
-          width 2
-        }
-
-        preset-column-widths {
-            proportion 0.5
-            proportion 0.66667
-            proportion 0.86667
-            proportion 1.0
-        }
-
-        tab-indicator {
-            width 4
-            gap 4
-            length total-proportion=0.3
-            position "left"
-            place-within-column
-        }
-
-        struts {}
+    focus-ring {
+      off
+      width 2
     }
+
+    border {
+      on
+      width 2
+    }
+
+    preset-column-widths {
+        proportion 0.5
+        proportion 0.66667
+        proportion 0.86667
+        proportion 1.0
+    }
+
+    tab-indicator {
+        width 4
+        gap 4
+        length total-proportion=0.3
+        position "left"
+        place-within-column
+    }
+
+    struts {}
+}

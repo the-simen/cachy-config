@@ -1,21 +1,10 @@
-// ────────────── Startup Applications ──────────────
-// https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
+// ─── Systemd ───
+spawn-sh-at-startup "systemctl --user start noctalia.service"
+spawn-sh-at-startup "systemctl --user start device-sounds.service"
+spawn-sh-at-startup "$HOME/.config/scripts/systemd_autostart.sh"
 
-    // ─── Systemd ───
-    spawn-sh-at-startup "systemctl --user start noctalia.service"
-    spawn-sh-at-startup "systemctl --user start device-sounds.service"
-    spawn-sh-at-startup "$HOME/.config/scripts/systemd_autostart.sh"
+// ─── Noctalia toggles ───
+spawn-sh-at-startup "fish -c 'wait-noctalia noctalia msg caffeine-enable 10'"
 
-    // ─── Noctalia toggles ───
-    spawn-sh-at-startup "fish -c 'wait-noctalia noctalia msg caffeine-enable 10'"
-
-    // ─── Applications ───
-    spawn-sh-at-startup "fish -c 'wait-noctalia tg-ws-proxy 10'"
-    spawn-sh-at-startup "fish -c 'wait-noctalia steam -silent 10'"
-    spawn-sh-at-startup "fish -c 'wait-noctalia openrgb -p kanagawa-paper 10'"
-    spawn-sh-at-startup "fish -c 'wait-noctalia karing 10'"
-    spawn-sh-at-startup "fish -c 'wait-noctalia Telegram 10'"
-    spawn-sh-at-startup "fish -c 'wait-noctalia discord 10'"
-
-    // ─── Copy to clipboard notification ───
-    spawn-sh-at-startup "$HOME/.config/scripts/copy-notify.sh"
+// ─── Copy to clipboard notification ───
+spawn-sh-at-startup "$HOME/.config/scripts/copy-notify.sh"

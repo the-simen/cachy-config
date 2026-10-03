@@ -1,22 +1,22 @@
-    prefer-no-csd
-    screenshot-path "~/Pictures/Screenshots/screenshot-%Y-%m-%d_%H-%M-%S.png"
+prefer-no-csd
+screenshot-path "~/Pictures/Screenshots/screenshot-%Y-%m-%d_%H-%M-%S.png"
 
-    environment {
-        ELECTRON_OZONE_PLATFORM_HINT "auto"
-        QT_QPA_PLATFORM "wayland"
-        QT_QPA_PLATFORMTHEME "gtk3"
-        QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
-        XCURSOR_THEME "sweet-cursors"
-        XCURSOR_SIZE "24"
-        XDG_CURRENT_DESKTOP "niri"
-        XDG_SESSION_TYPE "wayland"
-    }
+environment {
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+    QT_QPA_PLATFORM "wayland"
+    QT_QPA_PLATFORMTHEME "gtk3"
+    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+    XCURSOR_THEME "sweet-cursors"
+    XCURSOR_SIZE "24"
+    XDG_CURRENT_DESKTOP "niri"
+    XDG_SESSION_TYPE "wayland"
+}
 
-    debug {
-        // Allows notification actions and window activation from Noctalia.
-        honor-xdg-activation-with-invalid-serial
-    }
+debug {
+    // Allows notification actions and window activation from Noctalia.
+    honor-xdg-activation-with-invalid-serial
+}
 
-    hotkey-overlay {
-       skip-at-startup
-    }
+hotkey-overlay {
+   skip-at-startup
+}

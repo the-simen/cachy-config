@@ -58,6 +58,8 @@ noctalia.kdl
 colors.json
 tmux/plugins/
 fish/fish_variables*
+niri/overrides/
+niri/overrides/**
 
 # included .desktop files
 !applications/

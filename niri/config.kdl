@@ -1,5 +1,6 @@
-include "./cfg/animation.kdl"
+include "./cfg/animations.kdl"
 include "./cfg/autostart.kdl"
+include "./cfg/autostart-apps.kdl"
 include "./cfg/keybinds.kdl"
 include "./cfg/input.kdl"
 include "./cfg/display.kdl"
@@ -8,3 +9,5 @@ include "./cfg/rules.kdl"
 include "./cfg/misc.kdl"
 include "./game-mode.kdl"
 include "./noctalia.kdl"
+
+include "./animations.kdl"
