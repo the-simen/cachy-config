@@ -48,6 +48,8 @@
 !noctalia/gamemode.toml.disabled
 !xremap/
 !xremap/**
+!mpv/
+!mpv/**
 
 # excluded files
 # ----------------------------
