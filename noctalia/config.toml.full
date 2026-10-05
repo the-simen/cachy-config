@@ -237,13 +237,13 @@ width = 800
     type = "bluetooth"
 
     [[control_center.shortcuts]]
-    type = "caffeine"
-
-    [[control_center.shortcuts]]
     type = "nightlight"
 
     [[control_center.shortcuts]]
     type = "notification"
+
+    [[control_center.shortcuts]]
+    type = "imjustdoingmypart/niri-animations:toggle"
 
 [desktop_widgets]
 enabled = true
@@ -969,6 +969,10 @@ selected-ocr-lang = "eng+rus"
 [plugin_settings."aristides/udiskie"]
 manager_open_near_click = true
 
+[plugin_settings."imjustdoingmypart/niri-animations"]
+docked_open_near_click = true
+docked_placement = "floating"
+
 [plugin_settings."noctalia/mpvpaper"]
 picker_open_near_click = true
 run_as_systemd = true
@@ -1003,7 +1007,8 @@ enabled = [
     "yugaaank/better-clock",
     "oldirtty/color_picker",
     "fel/ocr",
-    "noctalia/screen_recorder"
+    "noctalia/screen_recorder",
+    "imjustdoingmypart/niri-animations"
 ]
 
     [[plugins.source]]
