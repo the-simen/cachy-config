@@ -8,14 +8,14 @@ binds {
     Mod+CTRL+Shift+L                    hotkey-overlay-title="Change caps-ctrl layout" { spawn-sh "$HOME/.config/scripts/change_layout.sh"; }
 
     // ─── Applications ───
-    Mod+Return                          hotkey-overlay-title="Open Terminal: Kitty" { spawn "kitty"; }
-    Mod+ALT+Return                      hotkey-overlay-title="Open Terminal Multiplexer: TMUX" { spawn-sh "kitty --title 'TMUX' fish -c 'tm'"; }
-    Mod+B                               hotkey-overlay-title="Open Browser: Zen" { spawn "zen-browser"; }
-    Mod+Shift+B                         hotkey-overlay-title="Open Browser: Zen" { spawn-sh "zen-browser --private-window"; }
+    Mod+Return                          hotkey-overlay-title="Terminal" { spawn ".config/niri/applications/terminal.sh"; }
+    Mod+ALT+Return                      hotkey-overlay-title="Terminal Multiplexer" { spawn ".config/niri/applications/tmux.sh"; }
+    Mod+B                               hotkey-overlay-title="Browser" { spawn ".config/niri/applications/browser.sh"; }
+    Mod+Shift+B                         hotkey-overlay-title="Browser" { spawn-sh ".config/niri/applications/browser.sh --private-window"; }
+    Mod+E                               hotkey-overlay-title="File Manager" { spawn ".config/niri/applications/files.sh"; }
+    Mod+M                               hotkey-overlay-title="Music" { spawn ".config/niri/applications/music.sh"; }
+
     Mod+R                               hotkey-overlay-title="Switch column width preset" { switch-preset-column-width; }
-    // Please choose your own file manager.
-    Mod+E                               hotkey-overlay-title="File Manager: Dolphin" { spawn "nautilus"; }
-    Mod+M                               hotkey-overlay-title="Spotify" { spawn "spotify"; }
 
     // ─── Core Noctralia keybinds ───
     // Alt+Tab                             { spawn-sh "noctalia msg window-switcher"; }
