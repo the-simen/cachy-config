@@ -20,3 +20,4 @@ shadow = true
 [shell.panel]
 transparency_mode = "glass"
 shadow = true
+floating_offset = 48
