@@ -13,6 +13,7 @@ EOF
 
     noctalia msg desktop-widgets-show
     rm -f "$STATE"
+    systemctl --user start nautilus-keepalive.service
     notify-send "Game Mode" "OFF"
 else
     cat > "$CONFIG" <<'EOF'
@@ -28,6 +29,7 @@ EOF
 
     noctalia msg desktop-widgets-hide
     touch "$STATE"
+    systemctl --user stop nautilus-keepalive.service
     notify-send "Game Mode" "ON"
 fi
 
