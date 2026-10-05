@@ -394,8 +394,10 @@ margin_edge = 8
 margin_ends = 0
 monitors = []
 pinned = [
-    "nemo",
+    "org.kde.dolphin",
     "com.shellyorg.shelly",
+    "karing",
+    "com.zapret.gui",
     "com.github.wwmm.easyeffects",
     "localsend",
     "kitty",
@@ -428,12 +430,12 @@ battery_plugged = []
 bluetooth_disabled = []
 bluetooth_enabled = []
 colors_changed = []
-logging_out = [ "fish -c 'system_sound desktop-logout'" ]
+logging_out = [ "fish -c 'system_sound desktop-logout --wait'" ]
 power_profile_changed = []
-rebooting = [ "fish -c 'system_sound desktop-logout'" ]
+rebooting = [ "fish -c 'system_sound desktop-logout --wait'" ]
 session_locked = [ "fish -c 'system_sound service-logout'" ]
 session_unlocked = [ "fish -c 'system_sound service-login'" ]
-shutting_down = [ "fish -c 'system_sound desktop-logout'" ]
+shutting_down = [ "fish -c 'system_sound desktop-logout --wait'" ]
 started = [ "fish -c 'system_sound desktop-login'" ]
 theme_mode_changed = []
 wallpaper_changed = []
