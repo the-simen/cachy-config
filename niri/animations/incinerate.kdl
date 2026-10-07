@@ -17,7 +17,7 @@ animations {
     }
 
     window-open {
-        duration-ms 280
+        duration-ms 400
         curve "linear"
 
         custom-shader r"
@@ -167,7 +167,7 @@ vec4 open_color(vec3 coords_geo, vec3 size_geo) {
     }
 
     window-close {
-        duration-ms 280
+        duration-ms 400
         curve "linear"
 
         custom-shader r"
