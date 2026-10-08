@@ -10,3 +10,9 @@ output_path = "$XDG_CONFIG_HOME/niri/noctalia.kdl"
 [theme.templates.user.mpv_modernz]
 input_path = "$XDG_CONFIG_HOME/noctalia/templates/mpv-modernz.conf"
 output_path = "$XDG_CONFIG_HOME/mpv/script-opts/modernz.conf"
+[theme.templates.user.vesktop_colors_only]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/vesktop-colors-only.css"
+output_path = "$XDG_CONFIG_HOME/vesktop/themes/noctalia-colors-only.theme.css"
+[theme.templates.user.vencord_colors_only]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/vesktop-colors-only.css"
+output_path = "$XDG_CONFIG_HOME/Vencord/themes/noctalia-colors-only.theme.css"

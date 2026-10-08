@@ -1,0 +1,318 @@
+/**
+ * @name Noctalia Colors Only
+ * @description System colors from Noctalia. No layout changes, no imports, no selectors.
+ * @author Noctalia
+ * @version 1.1.0
+ *
+ * GENERATED FILE — do not edit directly.
+ * Edit the template instead: ~/.config/noctalia/templates/vesktop-colors-only.css
+ * Noctalia regenerates this file on colorscheme / mode change.
+ *
+ * Colors-only: overrides stock Discord CSS variables. No @import,
+ * no body vars (--gap, --top-bar-*, --custom-dms-*), no class selectors,
+ * so the Discord/Vesktop layout stays 100% stock.
+ */
+
+:root,
+.theme-dark,
+.theme-light {
+  /* --- main surfaces (current Discord tokens) --- */
+  --background-primary: {{colors.surface_container.default.hex}} !important;
+  --background-secondary: {{colors.surface_container_low.default.hex}} !important;
+  --background-secondary-alt: {{colors.surface_container.default.hex}} !important;
+  --background-tertiary: {{colors.surface_container_lowest.default.hex}} !important;
+  --background-floating: {{colors.surface_container.default.hex}} !important;
+  --background-nested-floating: {{colors.surface_container_high.default.hex}} !important;
+  --background-accent: {{colors.surface_container_low.default.hex}} !important;
+  --background-base-lowest: {{colors.surface_container_lowest.default.hex}} !important;
+  --background-base-lower: {{colors.surface_container_low.default.hex}} !important;
+  --background-base-low: {{colors.surface.default.hex}} !important;
+  --background-surface-high: {{colors.surface_container.default.hex}} !important;
+  --background-surface-higher: {{colors.surface_container_high.default.hex}} !important;
+  --background-surface-highest: {{colors.surface_container_highest.default.hex}} !important;
+  --background-mod-subtle: {{colors.on_surface.default.hex}}14 !important;
+  --background-mod-muted: {{colors.on_surface.default.hex}}1f !important;
+  --background-mod-normal: {{colors.surface_container_low.default.hex}} !important;
+  --background-mod-strong: {{colors.surface_container_lowest.default.hex}} !important;
+  --background-code: {{colors.surface_container_lowest.default.hex}} !important;
+  --background-brand: {{colors.primary.default.hex}} !important;
+  --background-mentioned: {{colors.primary.default.hex}}1a !important;
+  --background-mentioned-hover: {{colors.primary.default.hex}}26 !important;
+  --background-message-hover: {{colors.on_surface.default.hex}}0a !important;
+  --background-feedback-notification: {{colors.error.default.hex}} !important;
+  --bg-base-primary: {{colors.surface_container.default.hex}} !important;
+  --bg-base-secondary: {{colors.surface_container_low.default.hex}} !important;
+  --bg-base-tertiary: {{colors.surface_container_lowest.default.hex}} !important;
+  --bg-surface-raised: {{colors.surface_container.default.hex}} !important;
+  --bg-surface-overlay-tmp: {{colors.surface_container.default.hex}} !important;
+  --bg-brand: {{colors.primary.default.hex}} !important;
+  --app-frame-background: {{colors.surface_container.default.hex}} !important;
+  --chat-background-default: {{colors.surface_container.default.hex}} !important;
+  --home-background: {{colors.surface.default.hex}} !important;
+  --card-background-default: {{colors.surface_container.default.hex}} !important;
+  --modal-background: {{colors.surface.default.hex}} !important;
+  --modal-footer-background: {{colors.surface.default.hex}} !important;
+  --channeltextarea-background: {{colors.surface_container_low.default.hex}} !important;
+  --input-background: {{colors.surface_container_lowest.default.hex}} !important;
+  --input-background-default: {{colors.surface_container.default.hex}} !important;
+  --mention-background: {{colors.primary.default.hex}}26 !important;
+
+  /* --- background modifiers (legacy, still used) --- */
+  --background-modifier-hover: {{colors.on_surface.default.hex}}14 !important;
+  --background-modifier-active: {{colors.on_surface.default.hex}}1f !important;
+  --background-modifier-selected: {{colors.on_surface.default.hex}}26 !important;
+  --background-modifier-accent: {{colors.outline.default.hex}}66 !important;
+  --message-background-hover: {{colors.on_surface.default.hex}}0a !important;
+  --message-mentioned-background-default: {{colors.primary.default.hex}}1a !important;
+  --message-mentioned-background-hover: {{colors.primary.default.hex}}26 !important;
+  --message-highlight-background-default: {{colors.tertiary_container.default.hex}}33 !important;
+  --message-highlight-background-hover: {{colors.tertiary_container.default.hex}}4d !important;
+  --message-reacted-text-default: {{colors.on_surface.default.hex}} !important;
+  --chat-background: {{colors.surface_container.default.hex}} !important;
+
+  /* --- text --- */
+  --text-normal: {{colors.on_surface.default.hex}} !important;
+  --text-default: {{colors.on_surface.default.hex}} !important;
+  --text-strong: {{colors.on_surface.default.hex}} !important;
+  --text-subtle: {{colors.on_surface_variant.default.hex}} !important;
+  --text-muted: {{colors.outline.default.hex}} !important;
+  --text-brand: {{colors.primary.default.hex}} !important;
+  --header-primary: {{colors.on_surface.default.hex}} !important;
+  --header-secondary: {{colors.on_surface_variant.default.hex}} !important;
+  --channels-default: {{colors.on_surface_variant.default.hex}} !important;
+  --channel-icon: {{colors.on_surface_variant.default.hex}} !important;
+  --channel-text-area-placeholder: {{colors.outline.default.hex}} !important;
+  --channel-textarea-placeholder: {{colors.outline.default.hex}} !important;
+  --chat-text-muted: {{colors.outline.default.hex}} !important;
+  --textbox-markdown-syntax: {{colors.on_surface_variant.default.hex}} !important;
+  --text-link: {{colors.primary.default.hex}} !important;
+  --mention-foreground: {{colors.primary.default.hex}} !important;
+  --text-feedback-positive: {{colors.terminal_normal_green.default.hex}} !important;
+  --text-feedback-warning: {{colors.terminal_normal_yellow.default.hex}} !important;
+  --text-feedback-critical: {{colors.error.default.hex}} !important;
+  --text-feedback-info: {{colors.primary.default.hex}} !important;
+  --text-status-online: {{colors.terminal_normal_green.default.hex}} !important;
+  --text-status-idle: {{colors.terminal_normal_yellow.default.hex}} !important;
+  --text-status-dnd: {{colors.error.default.hex}} !important;
+  --text-status-offline: {{colors.outline.default.hex}} !important;
+  --white: {{colors.on_surface.default.hex}} !important;
+  --white-500: {{colors.on_surface.default.hex}} !important;
+
+  /* --- interactive / icons --- */
+  --interactive-normal: {{colors.on_surface.default.hex}} !important;
+  --interactive-hover: {{colors.on_background.default.hex}} !important;
+  --interactive-active: {{colors.on_background.default.hex}} !important;
+  --interactive-muted: {{colors.outline.default.hex}} !important;
+  --interactive-text-default: {{colors.on_surface_variant.default.hex}} !important;
+  --interactive-text-hover: {{colors.on_surface.default.hex}} !important;
+  --interactive-text-active: {{colors.on_surface.default.hex}} !important;
+  --interactive-icon-default: {{colors.on_surface_variant.default.hex}} !important;
+  --interactive-icon-hover: {{colors.on_surface.default.hex}} !important;
+  --interactive-icon-active: {{colors.on_surface.default.hex}} !important;
+  --interactive-background-hover: {{colors.on_surface.default.hex}}14 !important;
+  --interactive-background-active: {{colors.on_surface.default.hex}}1f !important;
+  --interactive-background-selected: {{colors.on_surface.default.hex}}1f !important;
+  --icon-default: {{colors.on_surface_variant.default.hex}} !important;
+  --icon-subtle: {{colors.on_surface_variant.default.hex}} !important;
+  --icon-strong: {{colors.on_surface.default.hex}} !important;
+  --icon-muted: {{colors.outline.default.hex}} !important;
+  --icon-link: {{colors.on_surface_variant.default.hex}} !important;
+  --icon-feedback-positive: {{colors.terminal_normal_green.default.hex}} !important;
+  --icon-feedback-warning: {{colors.terminal_normal_yellow.default.hex}} !important;
+  --icon-feedback-critical: {{colors.error.default.hex}} !important;
+  --icon-feedback-info: {{colors.primary.default.hex}} !important;
+  --icon-status-online: {{colors.terminal_normal_green.default.hex}} !important;
+  --icon-status-idle: {{colors.terminal_normal_yellow.default.hex}} !important;
+  --icon-status-dnd: {{colors.error.default.hex}} !important;
+  --icon-status-offline: {{colors.outline.default.hex}} !important;
+  --icon-voice-muted: {{colors.error.default.hex}} !important;
+  --spine-default: {{colors.outline.default.hex}} !important;
+  --divider-color: {{colors.error.default.hex}} !important;
+
+  /* --- borders --- */
+  --border: {{colors.outline.default.hex}}55 !important;
+  --border-subtle: {{colors.outline.default.hex}}33 !important;
+  --border-normal: {{colors.outline.default.hex}}55 !important;
+  --border-strong: {{colors.outline.default.hex}}88 !important;
+  --border-light: {{colors.on_surface.default.hex}}14 !important;
+  --border-muted: {{colors.on_surface.default.hex}}14 !important;
+  --border-hover: {{colors.on_surface.default.hex}}1f !important;
+  --border-focus: {{colors.outline.default.hex}}55 !important;
+  --app-frame-border: {{colors.outline.default.hex}}55 !important;
+
+  /* --- brand / accent --- */
+  --brand-260: {{colors.primary.default.hex}} !important;
+  --brand-360: {{colors.primary.default.hex}} !important;
+  --brand-500: {{colors.primary.default.hex}} !important;
+  --brand-560: color-mix(in srgb, {{colors.primary.default.hex}} 88%, white) !important;
+  --brand-600: color-mix(in srgb, {{colors.primary.default.hex}} 88%, black) !important;
+  --brand-experiment: {{colors.primary.default.hex}} !important;
+  --brand-experiment-560: color-mix(in srgb, {{colors.primary.default.hex}} 88%, white) !important;
+  --brand-experiment-600: color-mix(in srgb, {{colors.primary.default.hex}} 88%, black) !important;
+  --blurple-50: {{colors.primary.default.hex}} !important;
+  --control-brand-foreground: {{colors.on_primary.default.hex}} !important;
+  --control-brand-background: {{colors.primary.default.hex}} !important;
+  --control-primary-background-default: {{colors.secondary.default.hex}} !important;
+  --control-primary-background-hover: color-mix(in srgb, {{colors.secondary.default.hex}} 88%, white) !important;
+  --control-primary-background-active: color-mix(in srgb, {{colors.secondary.default.hex}} 88%, black) !important;
+  --control-primary-text-default: {{colors.on_primary.default.hex}} !important;
+  --control-primary-text-hover: {{colors.on_primary.default.hex}} !important;
+  --control-primary-text-active: {{colors.on_primary.default.hex}} !important;
+  --control-primary-icon-default: {{colors.on_primary.default.hex}} !important;
+  --control-primary-icon-hover: {{colors.on_primary.default.hex}} !important;
+  --control-primary-icon-active: {{colors.on_primary.default.hex}} !important;
+  --control-secondary-background-default: {{colors.surface_container_low.default.hex}} !important;
+  --control-secondary-background-hover: {{colors.surface_container_lowest.default.hex}} !important;
+  --control-secondary-background-active: {{colors.outline.default.hex}}55 !important;
+  --control-secondary-text-default: {{colors.on_surface.default.hex}} !important;
+  --control-secondary-text-hover: {{colors.on_surface.default.hex}} !important;
+  --control-secondary-text-active: {{colors.on_surface.default.hex}} !important;
+  --control-secondary-icon-default: {{colors.on_surface.default.hex}} !important;
+  --control-secondary-icon-hover: {{colors.on_surface.default.hex}} !important;
+  --control-secondary-icon-active: {{colors.on_surface.default.hex}} !important;
+  --control-icon-only-background-hover: {{colors.on_surface.default.hex}}14 !important;
+  --control-icon-only-background-active: {{colors.on_surface.default.hex}}1f !important;
+  --control-icon-only-icon-default: {{colors.on_surface_variant.default.hex}} !important;
+  --control-icon-only-icon-hover: {{colors.on_surface.default.hex}} !important;
+  --control-icon-only-icon-active: {{colors.on_surface.default.hex}} !important;
+  --control-overlay-primary-background-default: {{colors.on_surface.default.hex}} !important;
+  --control-overlay-primary-background-hover: {{colors.on_background.default.hex}} !important;
+  --control-overlay-primary-background-active: {{colors.on_surface.default.hex}} !important;
+  --control-overlay-primary-text-default: {{colors.surface.default.hex}} !important;
+  --control-overlay-primary-text-hover: {{colors.surface.default.hex}} !important;
+  --control-overlay-primary-text-active: {{colors.surface.default.hex}} !important;
+  --control-overlay-primary-icon-default: {{colors.surface.default.hex}} !important;
+  --control-overlay-primary-icon-hover: {{colors.surface.default.hex}} !important;
+  --control-overlay-primary-icon-active: {{colors.surface.default.hex}} !important;
+  --badge-background-default: {{colors.primary.default.hex}} !important;
+  --badge-text-default: {{colors.on_primary.default.hex}} !important;
+  --badge-notification-background: {{colors.error.default.hex}} !important;
+
+  /* --- inputs --- */
+  --input-text-default: {{colors.on_surface.default.hex}} !important;
+  --input-text-error-default: {{colors.on_surface.default.hex}} !important;
+  --input-placeholder-text-default: {{colors.outline.default.hex}} !important;
+  --input-border-default: {{colors.on_surface.default.hex}}14 !important;
+  --input-border-hover: {{colors.outline.default.hex}}55 !important;
+  --input-border-active: {{colors.primary.default.hex}} !important;
+  --input-border-error-default: {{colors.error.default.hex}} !important;
+
+  /* --- status indicators --- */
+  --online: {{colors.terminal_normal_green.default.hex}} !important;
+  --idle: {{colors.terminal_normal_yellow.default.hex}} !important;
+  --dnd: {{colors.error.default.hex}} !important;
+  --streaming: {{colors.tertiary.default.hex}} !important;
+  --offline: {{colors.outline.default.hex}} !important;
+  --status-positive: {{colors.terminal_normal_green.default.hex}} !important;
+  --status-positive-background: {{colors.terminal_normal_green.default.hex}} !important;
+  --status-warning: {{colors.terminal_normal_yellow.default.hex}} !important;
+  --status-danger: {{colors.error.default.hex}} !important;
+  --status-online: {{colors.terminal_normal_green.default.hex}} !important;
+  --status-speaking: {{colors.terminal_normal_green.default.hex}} !important;
+  --green-330: {{colors.terminal_normal_green.default.hex}} !important;
+  --green-360: {{colors.terminal_normal_green.default.hex}} !important;
+  --green-430: {{colors.terminal_normal_green.default.hex}} !important;
+  --yellow-300: {{colors.terminal_normal_yellow.default.hex}} !important;
+  --yellow-360: {{colors.terminal_normal_yellow.default.hex}} !important;
+  --red-400: {{colors.error.default.hex}} !important;
+  --red-430: {{colors.error.default.hex}} !important;
+  --red-500: {{colors.error.default.hex}} !important;
+  --info-positive-background: color-mix(in srgb, {{colors.terminal_normal_green.default.hex}} 18%, {{colors.surface.default.hex}}) !important;
+  --info-positive-foreground: {{colors.terminal_normal_green.default.hex}} !important;
+  --info-positive-text: {{colors.on_surface.default.hex}} !important;
+  --info-warning-background: color-mix(in srgb, {{colors.terminal_normal_yellow.default.hex}} 18%, {{colors.surface.default.hex}}) !important;
+  --info-warning-foreground: {{colors.terminal_normal_yellow.default.hex}} !important;
+  --info-warning-text: {{colors.on_surface.default.hex}} !important;
+  --info-danger-background: color-mix(in srgb, {{colors.error.default.hex}} 18%, {{colors.surface.default.hex}}) !important;
+  --info-danger-foreground: {{colors.error.default.hex}} !important;
+  --info-danger-text: {{colors.on_surface.default.hex}} !important;
+  --notice-background-positive: {{colors.terminal_normal_green.default.hex}} !important;
+  --notice-background-warning: {{colors.terminal_normal_yellow.default.hex}} !important;
+  --notice-background-critical: {{colors.error.default.hex}} !important;
+  --notice-background-info: {{colors.secondary.default.hex}} !important;
+  --notice-text-positive: {{colors.on_primary.default.hex}} !important;
+  --notice-text-warning: {{colors.on_primary.default.hex}} !important;
+  --notice-text-critical: {{colors.on_primary.default.hex}} !important;
+  --notice-text-info: {{colors.on_primary.default.hex}} !important;
+  --radio-bar-accent-color: {{colors.terminal_normal_green.default.hex}} !important;
+
+  /* --- danger buttons --- */
+  --button-danger-background: {{colors.error.default.hex}} !important;
+  --button-danger-background-hover: color-mix(in srgb, {{colors.error.default.hex}} 85%, white) !important;
+  --button-danger-background-active: color-mix(in srgb, {{colors.error.default.hex}} 85%, black) !important;
+  --control-critical-primary-background-default: {{colors.error.default.hex}} !important;
+  --control-critical-primary-background-hover: color-mix(in srgb, {{colors.error.default.hex}} 85%, white) !important;
+  --control-critical-primary-background-active: color-mix(in srgb, {{colors.error.default.hex}} 85%, black) !important;
+  --control-critical-primary-text-default: {{colors.on_primary.default.hex}} !important;
+  --control-critical-primary-text-hover: {{colors.on_primary.default.hex}} !important;
+  --control-critical-primary-text-active: {{colors.on_primary.default.hex}} !important;
+  --control-critical-secondary-background-default: {{colors.surface_container_low.default.hex}} !important;
+  --control-critical-secondary-background-hover: {{colors.surface_container_lowest.default.hex}} !important;
+  --control-critical-secondary-background-active: {{colors.outline.default.hex}}55 !important;
+  --control-critical-secondary-text-default: {{colors.error.default.hex}} !important;
+  --control-critical-secondary-text-hover: {{colors.error.default.hex}} !important;
+  --control-critical-secondary-text-active: {{colors.error.default.hex}} !important;
+  --control-critical-secondary-icon-default: {{colors.error.default.hex}} !important;
+  --control-critical-secondary-icon-hover: {{colors.error.default.hex}} !important;
+  --control-critical-secondary-icon-active: {{colors.error.default.hex}} !important;
+
+  /* --- toggles / radios / checkboxes / sliders --- */
+  --switch-background-default: {{colors.surface_container_low.default.hex}} !important;
+  --switch-background-hover: {{colors.surface_container_low.default.hex}} !important;
+  --switch-background-selected-default: {{colors.primary.default.hex}} !important;
+  --switch-background-selected-hover: {{colors.primary.default.hex}} !important;
+  --switch-border-default: {{colors.outline.default.hex}}55 !important;
+  --switch-border-hover: {{colors.on_surface.default.hex}}1f !important;
+  --checkbox-background-default: {{colors.surface_container_low.default.hex}} !important;
+  --checkbox-background-hover: {{colors.surface_container_lowest.default.hex}} !important;
+  --checkbox-background-selected-default: {{colors.primary.default.hex}} !important;
+  --checkbox-background-selected-hover: {{colors.secondary.default.hex}} !important;
+  --checkbox-border-default: {{colors.outline.default.hex}}55 !important;
+  --checkbox-border-hover: {{colors.outline.default.hex}}55 !important;
+  --checkbox-icon-active: {{colors.on_primary.default.hex}} !important;
+  --radio-background-default: {{colors.surface_container_low.default.hex}} !important;
+  --radio-background-hover: {{colors.surface_container_lowest.default.hex}} !important;
+  --radio-background-active: {{colors.surface_container_lowest.default.hex}} !important;
+  --radio-background-selected-default: {{colors.primary.default.hex}} !important;
+  --radio-background-selected-hover: {{colors.secondary.default.hex}} !important;
+  --radio-border-default: {{colors.outline.default.hex}}55 !important;
+  --radio-border-hover: {{colors.outline.default.hex}}55 !important;
+  --radio-border-active: {{colors.outline.default.hex}}55 !important;
+  --slider-track-background: {{colors.surface_container_low.default.hex}} !important;
+  --progressbar-track-background: {{colors.surface_container_low.default.hex}} !important;
+  --progressbar-indicator-background: {{colors.primary.default.hex}} !important;
+
+  /* --- reactions --- */
+  --reaction-background-default: {{colors.on_surface.default.hex}}14 !important;
+  --reaction-background-hover: {{colors.on_surface.default.hex}}1f !important;
+  --reaction-background-active: {{colors.on_surface.default.hex}}1f !important;
+  --reaction-border-default: {{colors.on_surface.default.hex}}14 !important;
+  --reaction-border-hover: {{colors.on_surface.default.hex}}14 !important;
+  --reaction-border-active: {{colors.outline.default.hex}}55 !important;
+  --reaction-border-reacted-default: {{colors.primary.default.hex}} !important;
+  --reaction-text-default: {{colors.on_surface.default.hex}} !important;
+  --reaction-text-hover: {{colors.on_surface.default.hex}} !important;
+  --reaction-text-active: {{colors.on_surface.default.hex}} !important;
+  --reaction-text-reacted-default: {{colors.on_surface.default.hex}} !important;
+
+  /* --- profiles --- */
+  --user-profile-overlay-background: {{colors.surface_container.default.hex}} !important;
+  --user-profile-overlay-background-hover: {{colors.on_surface.default.hex}}14 !important;
+  --user-profile-background-hover: {{colors.on_surface.default.hex}}14 !important;
+  --user-profile-toolbar-background: {{colors.surface_container.default.hex}} !important;
+  --user-profile-toolbar-border: {{colors.outline.default.hex}}55 !important;
+  --user-profile-border: {{colors.outline.default.hex}}55 !important;
+  --user-profile-note-background-focus: {{colors.surface.default.hex}} !important;
+  --profile-gradient-secondary-color: {{colors.surface.default.hex}} !important;
+
+  /* --- secondary buttons (settings etc.) --- */
+  --redesign-button-secondary-background: {{colors.surface_container_low.default.hex}} !important;
+  --redesign-button-secondary-pressed-background: {{colors.surface_container_lowest.default.hex}} !important;
+  --redesign-button-secondary-text: {{colors.on_surface.default.hex}} !important;
+
+  /* --- scrollbars --- */
+  --scrollbar-thin-thumb: {{colors.outline.default.hex}} !important;
+  --scrollbar-thin-track: transparent !important;
+  --scrollbar-auto-thumb: {{colors.outline.default.hex}} !important;
+  --scrollbar-auto-track: transparent !important;
+}
