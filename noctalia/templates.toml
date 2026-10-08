@@ -7,3 +7,6 @@ output_path = "$XDG_CONFIG_HOME/superfile/theme/noctalia.toml"
 [theme.templates.user.niri_palette]
 input_path = "$XDG_CONFIG_HOME/noctalia/templates/niri-palette.conf"
 output_path = "$XDG_CONFIG_HOME/niri/noctalia.kdl"
+[theme.templates.user.mpv_modernz]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/mpv-modernz.conf"
+output_path = "$XDG_CONFIG_HOME/mpv/script-opts/modernz.conf"
