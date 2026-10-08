@@ -151,6 +151,7 @@ window-rule {
 
 window-rule {
   match app-id="discord"
+  match app-id="vesktop"
   match app-id="org.telegram.desktop"
 
   open-on-output "DP-3"
