@@ -1,0 +1,9 @@
+keymap:
+  - name: ONLYOFFICE Vim navigation
+    application:
+      only: ONLYOFFICE
+    remap:
+      Alt-h: left
+      Alt-j: down
+      Alt-k: up
+      Alt-l: right

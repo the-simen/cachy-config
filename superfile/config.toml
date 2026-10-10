@@ -11,13 +11,16 @@
 #                                   Defaults                                  #
 ###############################################################################
 
+sidebar_sections = ['home', 'pinned', 'disks']
+split_file_panel = false
+
 #-- File Editor
 # Default: $EDITOR
-editor = ""
+editor = "nvim"
 
 #-- Directory Editor
 # 
-dir_editor = ""
+dir_editor = "nvim"
 
 #-- Auto check for update
 auto_check_update = true
@@ -94,11 +97,11 @@ file_panel_name_percent = 50
 
 #-- Theme
 # Put your theme's name here!
-theme = "gruvbox-alt"
+theme = "noctalia"
 
 #-- Code Previewer
 # Whether to use the builtin syntax highlighting with chroma or use bat. Values: "" for builtin chroma, "bat" for bat
-code_previewer = ""
+code_previewer = "bat"
 
 #-- Nerd Fonts Support
 # Whether to enable support for Nerd Fonts symbols.

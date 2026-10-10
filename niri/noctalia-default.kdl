@@ -1,0 +1,44 @@
+// Default fallback palette (tracked in git).
+// Generated niri/noctalia.kdl is git-ignored; to refresh: render theme, then copy it over this file.
+layout {
+    focus-ring {
+        active-color   "#a9b665"
+        inactive-color "#32302f"
+        urgent-color   "#ea6962"
+    }
+
+    border {
+        active-color   "#a9b665"
+        inactive-color "#32302f"
+        urgent-color   "#ea6962"
+    }
+
+    tab-indicator {
+        active-color   "#a9b665"
+        inactive-color "#444c1d"
+        urgent-color   "#ea6962"
+    }
+
+    insert-hint {
+        color "#a9b66580"
+    }
+}
+
+recent-windows {
+    highlight {
+        active-color "#a9b665"
+        urgent-color "#ea6962"
+    }
+}
+
+window-rule {
+    shadow {
+        on
+        softness 10
+        spread 2
+        offset x=0 y=0
+        draw-behind-window false
+        color "#a9b66510"
+        inactive-color "#32302f60"
+    }
+}

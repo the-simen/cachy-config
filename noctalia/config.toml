@@ -1,0 +1,23 @@
+[shell.animation]
+enabled = true
+
+[bar.top]
+background_opacity = 0.85
+shadow = true
+
+[dock]
+background_opacity = 0.7
+shadow = true
+
+[osd]
+background_opacity = 0.7
+shadow = true
+
+[notification]
+background_opacity = 0.7
+shadow = true
+
+[shell.panel]
+transparency_mode = "glass"
+shadow = true
+floating_offset = 48

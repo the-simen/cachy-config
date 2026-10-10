@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-CONNECT_SOUND="/usr/share/sounds/freedesktop/stereo/device-added.oga"
-DISCONNECT_SOUND="/usr/share/sounds/freedesktop/stereo/device-removed.oga"
+CONNECT_SOUND="device-added"
+DISCONNECT_SOUND="device-removed"
 
 LOCK="/tmp/device-sound.lock"
 COOLDOWN=2
 
 play() {
-    pw-play "$1" >/dev/null 2>&1 &
+    $HOME/.config/scripts/system-sound.sh "$1"
 }
 
 trigger() {

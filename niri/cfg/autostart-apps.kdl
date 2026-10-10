@@ -1,0 +1,7 @@
+spawn-sh-at-startup "fish -c 'wait-noctalia tg-ws-proxy 10'"
+spawn-sh-at-startup "fish -c 'wait-noctalia steam -silent 10'"
+spawn-sh-at-startup "fish -c 'wait-noctalia openrgb -p kanagawa-paper 10'"
+spawn-sh-at-startup "fish -c 'wait-noctalia karing 10'"
+spawn-sh-at-startup "fish -c 'wait-noctalia Telegram 10'"
+spawn-sh-at-startup "fish -c 'wait-noctalia vesktop 10'"
+

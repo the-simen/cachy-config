@@ -21,138 +21,124 @@
     },
     "break",
     {
-      "type": "os",
-      "key": "╭─",
-      "keyColor": "magenta"
-    },
-    {
-      "type": "kernel",
-      "key": "├─",
-      "format": "{1} {2}",
-      "keyColor": "magenta"
-    },
-    {
-      "type": "packages",
-      "key": "├─󰮯",
-      "keyColor": "magenta"
-    },
-    {
-      "type": "de",
-      "key": "├─",
-      "keyColor": "magenta"
-    },
-    {
-      "type": "wm",
-      "key": "├─󰧨",
-      "keyColor": "magenta"
-    },
-    {
-      "type": "lm",
-      "key": "├─󰍂",
-      "keyColor": "magenta"
-    },
-    {
-      "type": "theme",
-      "key": "├─󰉼",
-      "keyColor": "magenta"
-    },
-    {
-      "type": "icons",
-      "key": "╰─󰀻",
-      "keyColor": "magenta"
-    },
-    "break",
-    // One entry for every partition
-    // {
-    // 	"type": "disk",
-    // 	"key": "├─",
-    // 	"keyColor": "green"
-    // },
-    // {
-    // 	"type": "brightness",
-    // 	"key": "├─󰃞",
-    // 	"keyColor": "green"
-    // },
-    // {
-    // 	"type": "battery",
-    // 	"key": "├─",
-    // 	"keyColor": "green"
-    // },
-    // {
-    // 	"type": "poweradapter",
-    // 	"key": "├─",
-    // 	"keyColor": "green"
-    // },
-    // {
-    // 	"type": "gamepad",
-    // 	"key": "├─",
-    // 	"keyColor": "green"
-    // },
-    // {
-    // 	"type": "bluetooth",
-    // 	"key": "├─",
-    // 	"keyColor": "green"
-    // },
-    // {
-    // 	"type": "sound",
-    // 	"key": "╰─",
-    // 	"keyColor": "green"
-    // },
-    {
-      "type": "terminal",
-      "key": "╭─",
+      "type": "custom",
+      "key": "╭─System─────╮",
       "keyColor": "green"
     },
     {
-      "type": "terminalfont",
-      "key": "├─",
+      "type": "os",
+      "key": "│  OS       │",
+      "format": "{pretty-name}",
+      "keyColor": "green"
+    },
+    {
+      "type": "kernel",
+      "key": "│  Kernel   │",
+      "format": "{2}",
+      "keyColor": "green"
+    },
+    {
+      "type": "packages",
+      "key": "│ 󰮯 Pacman   │",
+      "format": "{pacman} packages",
+      "keyColor": "green"
+    },
+    {
+      "type": "packages",
+      "key": "│ 󰏗 Flatpak  │",
+      "format": "{flatpak-all} packages",
+      "keyColor": "green"
+    },
+    {
+      "type": "de",
+      "key": "│  DE       │",
+      "format": "{pretty-name} {version}",
+      "keyColor": "green"
+    },
+    {
+      "type": "wm",
+      "key": "│ 󰧨 WM       │",
+      "format": "{pretty-name} {version}",
+      "keyColor": "green"
+    },
+    {
+      "type": "lm",
+      "key": "│ 󰍂 LM       │",
+      "keyColor": "green"
+    },
+    {
+      "type": "custom",
+      "key": "├─Terminal───┤",
+      "keyColor": "green"
+    },
+    {
+      "type": "terminal",
+      "key": "│  Emulator │",
       "keyColor": "green"
     },
     {
       "type": "shell",
-      "key": "╰─󰈺",
+      "key": "│ 󰈺 Shell    │",
       "keyColor": "green"
     },
-    "break",
+    {
+      "type": "terminalfont",
+      "key": "│  Font     │",
+      "format": "{name}",
+      "keyColor": "green"
+    },
+    {
+      "type": "custom",
+      "key": "╰────────────╯",
+      "keyColor": "green"
+    },
+    {
+      "type": "custom",
+      "key": "╭─Hardware",
+      "keyColor": "cyan"
+    },
     {
       "type": "cpu",
-      "key": "╭─󰍛",
-      "keyColor": "yellow"
+      "key": "├─󰍛",
+      "format": "{name}",
+      "keyColor": "cyan"
     },
     {
       "type": "gpu",
       "key": "├─󰘚",
-      "keyColor": "yellow"
+      "format": "{name}",
+      "keyColor": "cyan"
     },
     {
       "type": "display",
       "key": "├─󰍹",
-      "keyColor": "yellow"
+      "format": "{inch}\" {width}x{height}, {refresh-rate}Hz",
+      "keyColor": "cyan"
     },
-    // {
-    // 	"type": "wallpaper",
-    // 	"key": "╰─󰸉",
-    // 	"keyColor": "yellow"
-    // },
     {
       "type": "memory",
       "key": "├─󰑭",
-      "keyColor": "yellow"
+      "keyColor": "cyan"
     },
-    // {
-    // 	"type": "swap",
-    // 	"key": "├─󰓡",
-    // 	"keyColor": "yellow"
-    // },
     {
       "type": "uptime",
       "key": "╰─󰅐",
-      "keyColor": "yellow"
+      "keyColor": "cyan"
     },
-    "break",
     {
       "type": "custom",
-      "format": "\u001b[1m\u001b[31m  \u001b[1m\u001b[32m  \u001b[1m\u001b[33m  \u001b[1m\u001b[34m  \u001b[1m\u001b[35m  \u001b[1m\u001b[36m  \u001b[1m\u001b[37m  \u001b[1m\u001b[30m"
+      "key": "╭─────────────────────────╮",
+      "keyColor": "\u001b[30m"
+    },
+    {
+      "type": "custom",
+      "keyColor": "blue",
+      "format": "\u001b[30m│ \u001b[1m\u001b[31m  \u001b[1m\u001b[32m  \u001b[1m\u001b[33m  \u001b[1m\u001b[34m  \u001b[1m\u001b[35m  \u001b[1m\u001b[36m  \u001b[1m\u001b[37m  \u001b[1m\u001b[30m  \u001b[30m│"
+    },
+    {
+      "type": "custom",
+      "key": "╰─────────────────────────╯",
+      "keyColor": "\u001b[30m"
     }
   ]
 }

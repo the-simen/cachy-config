@@ -1,0 +1,25 @@
+[theme.templates.user.tmux_palette]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/tmux-palette.conf"
+output_path = "$XDG_CONFIG_HOME/tmux/themes/noctalia-palette.conf"
+[theme.templates.user.superfile_palette]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/superfile-palette.conf"
+output_path = "$XDG_CONFIG_HOME/superfile/theme/noctalia.toml"
+[theme.templates.user.niri_palette]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/niri-palette.conf"
+output_path = "$XDG_CONFIG_HOME/niri/noctalia.kdl"
+[theme.templates.user.mpv_modernz]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/mpv-modernz.conf"
+output_path = "$XDG_CONFIG_HOME/mpv/script-opts/modernz.conf"
+[theme.templates.user.vesktop_colors_only]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/vesktop-colors-only.css"
+output_path = "$XDG_CONFIG_HOME/vesktop/themes/noctalia-colors-only.theme.css"
+[theme.templates.user.vencord_colors_only]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/vesktop-colors-only.css"
+output_path = "$XDG_CONFIG_HOME/Vencord/themes/noctalia-colors-only.theme.css"
+[theme.templates.user.telegram_contrast]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/telegram-contrast.tdesktop-theme"
+output_path = "/home/thesimen/.cache/noctalia/telegram-contrast.rendered.tdesktop-theme"
+post_hook = "python3 /home/thesimen/.config/noctalia/templates/telegram-pack.py"
+[theme.templates.user.nvim_noctalia]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/nvim-noctalia.lua"
+output_path = "$XDG_CONFIG_HOME/nvim/lua/themes/noctalia.lua"

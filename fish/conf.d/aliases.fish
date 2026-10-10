@@ -1,4 +1,4 @@
-alias ls='eza --icons'
+alias ls='eza --color=always --group-directories-first --icons=auto'
 alias clear="printf '\033[2J\033[3J\033[1;1H'"
 alias cls="printf '\033[2J\033[3J\033[1;1H'"
 alias q='qs -c ii'
@@ -12,3 +12,5 @@ alias v='nvim'
 alias v.='nvim .'
 alias f='yazi'
 alias tm='tmux new-session -A -s main \; detach-client -a'
+alias config='cd ~/.config && nvim .'
+alias vconfig='cd ~/.config/nvim && nvim .'

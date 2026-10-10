@@ -1,28 +1,10 @@
-// ────────────── Startup Applications ──────────────
-// https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
+// ─── Systemd ───
+spawn-sh-at-startup "systemctl --user start noctalia.service"
+spawn-sh-at-startup "systemctl --user start device-sounds.service"
+spawn-sh-at-startup "$HOME/.config/scripts/systemd_autostart.sh"
 
-    // spawn-sh-at-startup "qs -c noctalia-shell"
-    // ─── Login sound ───
-    spawn-sh-at-startup "fish -c 'wait-noctalia /usr/bin/pw-play /usr/share/sounds/freedesktop/stereo/service-login.oga 2'"
-    // ╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
-    // │ set this commands to logout, Reboot and Shutdown buttons, in noctalia session menu:              │
-    // │  logout:                                                                                         │
-    // │  /usr/bin/pw-play /usr/share/sounds/freedesktop/stereo/service-logout.oga && pkill niri          │
-    // │  reboot:                                                                                         │
-    // │  /usr/bin/pw-play /usr/share/sounds/freedesktop/stereo/service-logout.oga && systemctl reboot    │
-    // │  shutdown:                                                                                       │
-    // │  /usr/bin/pw-play /usr/share/sounds/freedesktop/stereo/service-logout.oga && systemctl poweroff  │
-    // ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+// ─── Noctalia toggles ───
+spawn-sh-at-startup "fish -c 'wait-noctalia noctalia msg caffeine-enable 10'"
 
-    // ─── Systemd ───
-    spawn-sh-at-startup "systemctl --user start quickshell.service"
-    spawn-sh-at-startup "systemctl --user start device-sounds.service"
-    spawn-sh-at-startup "$HOME/.config/scripts/systemd_autostart.sh"
-
-    // ─── Applications ───
-    spawn-sh-at-startup "fish -c 'wait-noctalia tg-ws-proxy 10'"
-    spawn-sh-at-startup "fish -c 'wait-noctalia openrgb -p kanagawa-paper 10'"
-    spawn-sh-at-startup "fish -c 'wait-noctalia karing 10'"
-    // spawn-sh-at-startup "fish -c 'wait-noctalia happ 10'"
-    spawn-sh-at-startup "fish -c 'wait-noctalia Telegram 10'"
-    spawn-sh-at-startup "fish -c 'wait-noctalia discord 10'"
+// ─── Copy to clipboard notification ───
+spawn-sh-at-startup "$HOME/.config/scripts/copy-notify.sh"

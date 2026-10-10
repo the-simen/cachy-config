@@ -16,6 +16,8 @@
 !mc/**
 !niri/
 !niri/**
+!hypr/
+!hypr/**
 !fastfetch/
 !fastfetch/**
 !fish/
@@ -25,10 +27,13 @@
 !tmux/**
 !.scripts/
 !.scripts/**
-!discord
-!discord/settings.json
 !ghostty/
 !ghostty/**
+!kitty/
+!kitty/kitty.conf
+!kitty/themes/
+!kitty/themes/noctalia-default.conf
+!kitty/copy_notify
 !systemd/
 !systemd/**
 !scripts/
@@ -37,16 +42,38 @@
 !git/**
 !superfile/
 !superfile/**
+!umbriel/
+!umbriel/noctalia-default.toml
+!noctalia/
+!noctalia/templates/
+!noctalia/templates/**
+!noctalia/templates.toml
+!noctalia/config.toml
+!noctalia/config.toml.full
+!noctalia/gamemode.toml.disabled
+!xremap/
+!xremap/**
+!mpv/
+!mpv/**
+!README.md
 
 # excluded files
 # ----------------------------
+# Noctalia-generated palettes (per-machine render; tracked *-default fallbacks exist)
+ghostty/themes/noctalia
+hypr/noctalia.lua
+mpv/script-opts/modernz.conf
+superfile/theme/noctalia.toml
+tmux/themes/noctalia-palette.conf
 noctalia.theme
 noctalia.css
 noctalia.conf
 noctalia.kdl
 colors.json
 tmux/plugins/
-fish/fish_variables
+fish/fish_variables*
+niri/overrides/
+niri/overrides/**
 
 # included .desktop files
 !applications/

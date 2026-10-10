@@ -1,5 +1,5 @@
 function wait-noctalia
-    set service quickshell.service
+    set service noctalia.service
     set delay 0
 
     # если последний аргумент число — считаем его delay

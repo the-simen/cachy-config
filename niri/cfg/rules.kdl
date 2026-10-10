@@ -1,148 +1,202 @@
-  // ────────────── Maximized by default ──────────────
-  window-rule {
-      // maximized apps 
-      match app-id="zen"
-      match app-id="firefox"
-      match app-id="chromium"
-      match app-id="TuxGuitar"
-      match app-id="libreoffice-writer"
-      match app-id="libreoffice-calc"
-      match app-id="libreoffice-impress"
-      match app-id="libreoffice-draw"
-      match app-id="libreoffice-base"
+// ────────────── Maximized by default ──────────────
+window-rule {
+    // maximized apps 
+    match app-id="zen"
+    match app-id="firefox"
+    match app-id="chromium"
+    match app-id="TuxGuitar"
+    match app-id="libreoffice-writer"
+    match app-id="libreoffice-calc"
+    match app-id="libreoffice-impress"
+    match app-id="libreoffice-draw"
+    match app-id="libreoffice-base"
+    match app-id="ONLYOFFICE"
 
-
-      open-maximized true     
-  }
+    open-maximized true     
+}
 
 // ────────────── Floating centered by default ──────────────
-  window-rule {
-      // floating apps
-      match app-id="steam"
-      match app-id="heroic"
-      match app-id="org.gnome.Nautilus"
-      match app-id="Spotify"
-      match app-id="Happ"
-      match app-id="nwg-look"
-      match app-id="localsend"
-      match app-id="chrome-translate.google.com__-Default"
-      match app-id="chrome-photos.google.com__-Default"
-      match app-id="chrome-calendar.google.com__-Default"
-      match app-id="chrome-calendar.google.com__calendar_u_0_r_tasks-Default"
+window-rule {
+    // floating apps
+    match app-id="spotify"
+    match app-id="Happ"
+    match app-id="nwg-look"
+    match app-id="dev.noctalia.Noctalia"
 
-      match title="Open"
-      match title="btop"
+    match title="Open"
+    match title="btop"
 
-      open-floating true
-      default-column-width { proportion 0.6; }
-      default-window-height { fixed 800; }
-  }
+    open-floating true
+    default-column-width { proportion 0.6; }
+    default-window-height { fixed 800; }
+}
+
+// ────────────── Tiling with custom height ──────────────
+window-rule {
+    match app-id="org.gnome.Nautilus"
+    match app-id="Thunar"
+    match app-id="dolphin"
+    match app-id="nemo"
+    match app-id="steam"
+    match app-id="heroic"
+    match app-id="localsend"
+    match app-id="org.manjaro.pamac.manager"
+    match app-id="com.shellyorg.shelly"
+
+    default-column-width { proportion 0.6; }
+    default-window-height { fixed 800; }
+}
+
+// ────────────── Google Apps ──────────────
+window-rule {
+    match app-id="chrome-translate.google.com__-Default"
+    match app-id="chrome-photos.google.com__-Default"
+    match app-id="chrome-keep.google.com__-Default"
+
+    default-column-width { proportion 0.6; }
+    default-window-height { fixed 800; }
+}
+window-rule {
+    match app-id="chrome-calendar.google.com__calendar_u_0_r_tasks-Default"
+    match app-id="chrome-calendar.google.com__-Default"
+
+    default-column-width { fixed 1240; }
+    default-window-height { fixed 800; }
+}
+
+// ────────────── Floating centered with auto size ──────────────
+window-rule {
+    match app-id="com.gabm.satty"
+    match app-id="org.gnome.Loupe"
+
+    open-floating true
+}
 
 // ────────────── Floating centered media by default ──────────────
-  window-rule {
-      // floating apps
-      match app-id="io.github.celluloid_player.Celluloid"
-      match app-id="org.gnome.Loupe"
-
-
-      open-floating true
-      default-column-width { proportion 0.62; }
-      default-window-height { fixed 650; }
-  }
-
-  window-rule {
-    match app-id="org.gnome.Calculator"
+window-rule {
+    match app-id="mpv"
 
     open-floating true
-    default-column-width { fixed 705; }
-    default-window-height { fixed 620; }
+    default-column-width { proportion 0.62; }
+    default-window-height { fixed 650; }
+}
+
+window-rule {
+  match app-id="org.gnome.Calculator"
+
+  open-floating true
+  default-column-width { fixed 705; }
+  default-window-height { fixed 620; }
+}
+
+// ────────────── TMUX ──────────────
+window-rule {
+  match title="TMUX"
+
+  default-column-width { proportion 1.0; }
+}
+
+// ────────────── Steam notifications fix ──────────────
+window-rule {
+  match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+  default-floating-position x=10 y=10 relative-to="bottom-right"
+  open-focused false
+}
+
+window-rule {
+  match app-id="org.gnome.Decibels"
+
+  open-floating true
+  default-column-width { fixed 675; } 
+  default-window-height { fixed 430; }
+}
+
+window-rule {
+  match app-id="AmneziaVPN"
+
+  open-floating true
+}
+
+window-rule {
+  match app-id="karing"
+
+  open-floating true
+  default-column-width { fixed 740; }
+  default-window-height { fixed 700; }
+}
+
+window-rule {
+  match title="zapret"
+
+  open-floating true
+  default-column-width { fixed 740; }
+  default-window-height { fixed 800; }
+}
+
+window-rule {
+  match title="Web App Creator"
+
+  open-floating true
+  default-column-width { fixed 647; }
+  default-window-height { fixed 700; }
+}
+
+window-rule {
+  match title="Picture-in-Picture"
+
+  open-floating true
+  default-column-width { proportion 0.4; }
+  default-window-height { fixed 400; }
+}
+
+window-rule {
+  match app-id="discord"
+  match app-id="vesktop"
+  match app-id="org.telegram.desktop"
+
+  open-on-output "DP-3"
+  default-column-width { proportion 0.5; }
+}
+
+// ────────────── Windows appearance ──────────────
+window-rule {
+    geometry-corner-radius 13
+    clip-to-geometry true
+    draw-border-with-background false
+
+    opacity 0.95
+    background-effect {
+        xray true
+        blur true
+        noise 0.05
+        saturation 2
+    }
+}
+
+// ────────────── Overlay wallpaper ──────────────
+layer-rule {
+    match namespace="^noctalia-backdrop"
+    place-within-backdrop true
+}
+
+// ────────────── Disable xray for all noctalia overlays ──────────────
+// layer-rule {
+//   match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
+//   background-effect {
+//     xray false
+//     // blur false
+//   }
+// }
+
+// ────────────── Disable xray for notifications, docks, panels and osd ──────────────
+// This is required for having a clean rounded corners
+// for elements which are opening against other windows.
+// if you want to set up auto-hide for bars without reserving space,
+// you should use the block commented above.
+layer-rule {
+  match namespace="^noctalia-(notification|dock|panel|osd|window-switcher)$"
+  background-effect {
+    xray false
+    // blur false
   }
-
-  // ────────────── Steam notifications fix ──────────────
-  window-rule {
-    match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
-    default-floating-position x=10 y=10 relative-to="bottom-right"
-    open-focused false
-  }
-
-  window-rule {
-    match app-id="org.gnome.Decibels"
-
-    open-floating true
-    default-column-width { fixed 675; } 
-    default-window-height { fixed 430; }
-  }
-
-  window-rule {
-    match app-id="AmneziaVPN"
-
-    open-floating true
-  }
-
-  window-rule {
-    match app-id="karing"
-
-    open-floating true
-    default-column-width { fixed 740; }
-    default-window-height { fixed 700; }
-  }
-
-  window-rule {
-    match title="zapret"
-
-    open-floating true
-    default-column-width { fixed 740; }
-    default-window-height { fixed 800; }
-  }
-
-  window-rule {
-    match title="Web App Creator"
-
-    open-floating true
-    default-column-width { fixed 647; }
-    default-window-height { fixed 700; }
-  }
-
-  window-rule {
-    match title="Picture-in-Picture"
-
-    open-floating true
-    default-column-width { proportion 0.4; }
-    default-window-height { fixed 400; }
-  }
-
-  window-rule {
-    match app-id="discord"
-    match app-id="org.telegram.desktop"
-    open-on-output "DP-3"
-  }
-
-  // ────────────── Windows appearance ──────────────
-  window-rule {
-      geometry-corner-radius 12
-      clip-to-geometry true
-      draw-border-with-background false
-      opacity 0.9
-      shadow {
-          on
-          softness 10
-          spread 2
-          offset x=0 y=0
-          draw-behind-window true
-          // color "#00000064"
-          // inactive-color "#00000064"
-      }
-      background-effect {
-          xray true
-          blur true
-          noise 0.05
-          saturation 3
-      }
-  }
-
-  // ────────────── Overlay wallpaper ──────────────
-  layer-rule {
-      match namespace="^noctalia-wallpaper*"
-      place-within-backdrop true
-  }
-
+}
