@@ -35,7 +35,7 @@
   --background-mod-normal: {{colors.surface_container_low.default.hex}} !important;
   --background-mod-strong: {{colors.surface_container_lowest.default.hex}} !important;
   --background-code: {{colors.surface_container_lowest.default.hex}} !important;
-  --background-brand: {{colors.primary.default.hex}} !important;
+  --background-brand: {{colors.surface_container_highest.default.hex}} !important;
   --background-mentioned: {{colors.primary.default.hex}}1a !important;
   --background-mentioned-hover: {{colors.primary.default.hex}}26 !important;
   --background-message-hover: {{colors.on_surface.default.hex}}0a !important;
@@ -45,7 +45,7 @@
   --bg-base-tertiary: {{colors.surface_container_lowest.default.hex}} !important;
   --bg-surface-raised: {{colors.surface_container.default.hex}} !important;
   --bg-surface-overlay-tmp: {{colors.surface_container.default.hex}} !important;
-  --bg-brand: {{colors.primary.default.hex}} !important;
+  --bg-brand: {{colors.surface_container_highest.default.hex}} !important;
   --app-frame-background: {{colors.surface_container.default.hex}} !important;
   --chat-background-default: {{colors.surface_container.default.hex}} !important;
   --home-background: {{colors.surface.default.hex}} !important;
@@ -140,18 +140,20 @@
   --border-focus: {{colors.outline.default.hex}}55 !important;
   --app-frame-border: {{colors.outline.default.hex}}55 !important;
 
-  /* --- brand / accent --- */
-  --brand-260: {{colors.primary.default.hex}} !important;
-  --brand-360: {{colors.primary.default.hex}} !important;
-  --brand-500: {{colors.primary.default.hex}} !important;
-  --brand-560: color-mix(in srgb, {{colors.primary.default.hex}} 88%, white) !important;
-  --brand-600: color-mix(in srgb, {{colors.primary.default.hex}} 88%, black) !important;
-  --brand-experiment: {{colors.primary.default.hex}} !important;
-  --brand-experiment-560: color-mix(in srgb, {{colors.primary.default.hex}} 88%, white) !important;
-  --brand-experiment-600: color-mix(in srgb, {{colors.primary.default.hex}} 88%, black) !important;
-  --blurple-50: {{colors.primary.default.hex}} !important;
-  --control-brand-foreground: {{colors.on_primary.default.hex}} !important;
-  --control-brand-background: {{colors.primary.default.hex}} !important;
+  /* --- brand / accent (dark surfaces so stock white text stays readable) --- */
+  --brand-260: {{colors.surface_container_high.default.hex}} !important;
+  --brand-360: {{colors.surface_container_highest.default.hex}} !important;
+  --brand-500: {{colors.surface_container_highest.default.hex}} !important;
+  --brand-560: color-mix(in srgb, {{colors.surface_container_highest.default.hex}} 88%, white) !important;
+  --brand-600: color-mix(in srgb, {{colors.surface_container_highest.default.hex}} 88%, black) !important;
+  --brand-experiment: {{colors.surface_container_highest.default.hex}} !important;
+  --brand-experiment-560: color-mix(in srgb, {{colors.surface_container_highest.default.hex}} 88%, white) !important;
+  --brand-experiment-600: color-mix(in srgb, {{colors.surface_container_highest.default.hex}} 88%, black) !important;
+  --blurple-50: {{colors.surface_container_highest.default.hex}} !important;
+  --control-brand-foreground: {{colors.on_surface.default.hex}} !important;
+  --control-brand-background: {{colors.surface_container_highest.default.hex}} !important;
+  --control-brand-background-hover: color-mix(in srgb, {{colors.surface_container_highest.default.hex}} 88%, white) !important;
+  --control-brand-background-active: color-mix(in srgb, {{colors.surface_container_highest.default.hex}} 88%, black) !important;
   --control-primary-background-default: {{colors.secondary.default.hex}} !important;
   --control-primary-background-hover: color-mix(in srgb, {{colors.secondary.default.hex}} 88%, white) !important;
   --control-primary-background-active: color-mix(in srgb, {{colors.secondary.default.hex}} 88%, black) !important;
@@ -184,8 +186,8 @@
   --control-overlay-primary-icon-default: {{colors.surface.default.hex}} !important;
   --control-overlay-primary-icon-hover: {{colors.surface.default.hex}} !important;
   --control-overlay-primary-icon-active: {{colors.surface.default.hex}} !important;
-  --badge-background-default: {{colors.primary.default.hex}} !important;
-  --badge-text-default: {{colors.on_primary.default.hex}} !important;
+  --badge-background-default: {{colors.surface_container_highest.default.hex}} !important;
+  --badge-text-default: {{colors.on_surface.default.hex}} !important;
   --badge-notification-background: {{colors.error.default.hex}} !important;
 
   /* --- inputs --- */
@@ -315,4 +317,18 @@
   --scrollbar-thin-track: transparent !important;
   --scrollbar-auto-thumb: {{colors.outline.default.hex}} !important;
   --scrollbar-auto-track: transparent !important;
+}
+
+/* --- Shared-variable conflicts ---
+ * Brand surfaces above are dark, so stock white text reads fine on them.
+ * Two spots reuse a variable with opposite-ink consumers and need a nudge
+ * (M3 pairs, safe in dark and light mode). Class hashes change per build,
+ * but the module names are stable. No layout changes, color only. */
+[class*="tabBar-"] [class*="addFriend-"]:not([aria-selected="true"]),
+[class*="tabBar_"] [class*="addFriend_"]:not([aria-selected="true"]) {
+  color: {{colors.on_secondary.default.hex}} !important;
+}
+[class*="lookFilled-"][class*="colorRed-"],
+[class*="lookFilled_"][class*="colorRed_"] {
+  color: {{colors.on_error.default.hex}} !important;
 }

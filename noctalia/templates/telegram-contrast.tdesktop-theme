@@ -10,7 +10,7 @@
 //     primary + on_primary (~10:1).
 //  2. Removed hard-coded #313244 tint, red primary_container hover flash,
 //     and primary-on-teal pairs (~2.5:1).
-//  3. Outgoing text: on_surface (3.29:1 on teal) -> on_secondary_container;
+//  3. Outgoing bubble: muted tertiary_container + on_tertiary_container (11.4:1);
 //     active chat row -> primary + on_primary.
 
 windowBg: {{colors.background.default.hex}}; // Main background
@@ -27,46 +27,46 @@ windowFgActive: {{colors.on_primary.default.hex}}; // Active items text
 windowActiveTextFg: {{colors.primary.default.hex}}; // Accent text (links, online status)
 windowShadowFg: {{colors.shadow.default.hex}}; // Window shadow
 windowShadowFgFallback: {{colors.shadow.default.hex}}; // Fallback for shadow
-historyOutIconFg: {{colors.on_secondary_container.default.hex}}; // Ticks in outbox bubble (readable on teal)
+historyOutIconFg: {{colors.on_tertiary_container.default.hex}}; // Ticks in outbox bubble
 historyOutIconFgSelected: {{colors.on_primary.default.hex}}; // Ticks in selected message
 historyIconFgInverted: {{colors.on_surface.default.hex}}; // Ticks on media
 
 // --- Message bubbles: in = neutral lift, out = secondary hue, selection = solid primary ---
 msgInBg: {{colors.surface_container_high.default.hex}}; // Inbox bubble (distinct from chat bg)
 msgInBgSelected: {{colors.primary.default.hex}}; // Selected inbox bubble AND selected-text bg
-msgOutBg: {{colors.secondary_container.default.hex}}; // Outbox bubble
+msgOutBg: {{colors.tertiary_container.default.hex}}; // Outbox bubble
 msgOutBgSelected: {{colors.primary.default.hex}}; // Selected outbox bubble AND selected-text bg
-msgInShadow: {{colors.shadow.default.hex}};
-msgInShadowSelected: {{colors.shadow.default.hex}};
-msgOutShadow: {{colors.shadow.default.hex}};
-msgOutShadowSelected: {{colors.shadow.default.hex}};
+msgInShadow: {{colors.shadow.default.hex}}00; // Flat bubbles, no shadow line
+msgInShadowSelected: {{colors.shadow.default.hex}}00;
+msgOutShadow: {{colors.shadow.default.hex}}00;
+msgOutShadowSelected: {{colors.shadow.default.hex}}00;
 historyTextInFg: {{colors.on_surface.default.hex}}; // Inbox text
-historyTextOutFg: {{colors.on_secondary_container.default.hex}}; // Outbox text (M3 pair, not on_surface)
+historyTextOutFg: {{colors.on_tertiary_container.default.hex}}; // Outbox text (M3 pair)
 historyTextInFgSelected: {{colors.on_primary.default.hex}}; // Selected inbox text
 historyTextOutFgSelected: {{colors.on_primary.default.hex}}; // Selected outbox text
 historyLinkInFg: {{colors.primary.default.hex}}; // Inbox link
-historyLinkOutFg: {{colors.on_secondary_container.default.hex}}; // Outbox link (readable over accent)
+historyLinkOutFg: {{colors.on_tertiary_container.default.hex}}; // Outbox link
 historyLinkInFgSelected: {{colors.on_primary.default.hex}};
 historyLinkOutFgSelected: {{colors.on_primary.default.hex}};
 historyCaptionInFg: {{colors.on_surface.default.hex}};
-historyCaptionOutFg: {{colors.on_secondary_container.default.hex}};
+historyCaptionOutFg: {{colors.on_tertiary_container.default.hex}};
 historyFileNameInFg: {{colors.on_surface.default.hex}};
-historyFileNameOutFg: {{colors.on_secondary_container.default.hex}};
+historyFileNameOutFg: {{colors.on_tertiary_container.default.hex}};
 msgInMonoFg: {{colors.primary.default.hex}};
 msgInMonoFgSelected: {{colors.on_primary.default.hex}};
-msgOutMonoFg: {{colors.on_secondary_container.default.hex}};
+msgOutMonoFg: {{colors.on_tertiary_container.default.hex}};
 msgOutMonoFgSelected: {{colors.on_primary.default.hex}};
 msgInDateFg: {{colors.on_surface_variant.default.hex}};
 msgInDateFgSelected: {{colors.on_primary.default.hex}};
-msgOutDateFg: {{colors.on_secondary_container.default.hex}};
+msgOutDateFg: {{colors.on_tertiary_container.default.hex}};
 msgOutDateFgSelected: {{colors.on_primary.default.hex}};
 msgInServiceFg: {{colors.primary.default.hex}}; // Forward/reply names in inbox
 msgInServiceFgSelected: {{colors.on_primary.default.hex}};
-msgOutServiceFg: {{colors.on_secondary_container.default.hex}}; // Forward/reply names in outbox
+msgOutServiceFg: {{colors.on_tertiary_container.default.hex}}; // Forward/reply names in outbox
 msgOutServiceFgSelected: {{colors.on_primary.default.hex}};
 msgInReplyBarColor: {{colors.primary.default.hex}};
 msgInReplyBarSelColor: {{colors.on_primary.default.hex}};
-msgOutReplyBarColor: {{colors.on_secondary_container.default.hex}};
+msgOutReplyBarColor: {{colors.on_tertiary_container.default.hex}};
 msgOutReplyBarSelColor: {{colors.on_primary.default.hex}};
 msgImgReplyBarColor: {{colors.primary.default.hex}};
 msgSelectOverlay: {{colors.primary.default.hex}}59; // Tint over media in selected messages
@@ -79,15 +79,15 @@ msgWaveformInActive: {{colors.primary.default.hex}};
 msgWaveformInActiveSelected: {{colors.on_primary.default.hex}};
 msgWaveformInInactive: {{colors.primary.default.hex}}99;
 msgWaveformInInactiveSelected: {{colors.on_primary.default.hex}}99;
-msgWaveformOutActive: {{colors.on_secondary_container.default.hex}};
+msgWaveformOutActive: {{colors.on_tertiary_container.default.hex}};
 msgWaveformOutActiveSelected: {{colors.on_primary.default.hex}};
-msgWaveformOutInactive: {{colors.on_secondary_container.default.hex}}99;
+msgWaveformOutInactive: {{colors.on_tertiary_container.default.hex}}99;
 msgWaveformOutInactiveSelected: {{colors.on_primary.default.hex}}99;
 
 // --- Media / files ---
 mediaInFg: {{colors.on_surface_variant.default.hex}};
 mediaInFgSelected: {{colors.on_primary.default.hex}};
-mediaOutFg: {{colors.on_secondary_container.default.hex}};
+mediaOutFg: {{colors.on_tertiary_container.default.hex}};
 mediaOutFgSelected: {{colors.on_primary.default.hex}};
 msgDateImgBg: {{colors.surface.default.hex}}cc; // Time bubble on photos (translucent neutral)
 msgDateImgBgOver: {{colors.surface_container_highest.default.hex}}cc; // Hover: subtle lift, no flash
@@ -113,7 +113,7 @@ historyFileThumbRadialFg: {{colors.primary.default.hex}};
 historyFileThumbRadialFgSelected: {{colors.on_primary.default.hex}};
 msgFileThumbLinkInFg: {{colors.primary.default.hex}};
 msgFileThumbLinkInFgSelected: {{colors.on_primary.default.hex}};
-msgFileThumbLinkOutFg: {{colors.on_secondary_container.default.hex}};
+msgFileThumbLinkOutFg: {{colors.on_tertiary_container.default.hex}};
 msgFileThumbLinkOutFgSelected: {{colors.on_primary.default.hex}};
 
 // --- Service messages / date dividers: selection = subtle lift (same fg kept) ---
@@ -129,7 +129,7 @@ msgBotKbIconFg: {{colors.on_surface.default.hex}};
 msgBotKbOverBgAdd: {{colors.primary.default.hex}}33;
 msgBotKbRippleBg: {{colors.primary.default.hex}}66;
 historySendingInIconFg: {{colors.on_surface_variant.default.hex}};
-historySendingOutIconFg: {{colors.on_secondary_container.default.hex}};
+historySendingOutIconFg: {{colors.on_tertiary_container.default.hex}};
 historySendingInvertedIconFg: {{colors.on_surface.default.hex}};
 
 // --- Chat list: active row = primary + on_primary (guaranteed pair) ---
@@ -163,8 +163,8 @@ dialogsChatIconFgActive: {{colors.on_primary.default.hex}};
 dialogsUnreadBg: {{colors.primary.default.hex}};
 dialogsUnreadBgOver: {{colors.primary.default.hex}};
 dialogsUnreadBgActive: {{colors.on_primary.default.hex}};
-dialogsUnreadBgMuted: {{colors.surface_variant.default.hex}};
-dialogsUnreadBgMutedOver: {{colors.surface_container_high.default.hex}};
+dialogsUnreadBgMuted: {{colors.on_surface_variant.default.hex}}; // Muted badge: gray pill + dark text (readable)
+dialogsUnreadBgMutedOver: {{colors.on_surface.default.hex}}; // Muted badge hover: brighten, text stays readable
 dialogsUnreadBgMutedActive: {{colors.on_primary.default.hex}};
 dialogsUnreadFg: {{colors.on_primary.default.hex}};
 dialogsUnreadFgOver: {{colors.on_primary.default.hex}};
