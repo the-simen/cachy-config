@@ -394,7 +394,7 @@ margin_edge = 8
 margin_ends = 0
 monitors = []
 pinned = [
-    "org.kde.dolphin",
+    "org.gnome.Nautilus",
     "com.shellyorg.shelly",
     "karing",
     "com.zapret.gui",
@@ -406,6 +406,7 @@ pinned = [
     "com.spotify.Client",
     "org.telegram.desktop",
     "discord",
+    "vesktop",
     "chromium",
     "zen"
 ]
@@ -975,6 +976,16 @@ manager_open_near_click = true
 docked_open_near_click = true
 docked_placement = "floating"
 
+[plugin_settings."me/app-launch-animation"]
+background_size = "compact"
+bounce_c_position = "bottom_right"
+bounce_height = 40
+bounce_l_position = "bottom_right"
+bounce_position = "bottom_right"
+icon_size = 32
+springiness = 0.80000000000000004
+squash = 150
+
 [plugin_settings."noctalia/mpvpaper"]
 picker_open_near_click = true
 run_as_systemd = true
@@ -1094,7 +1105,8 @@ umbriel_overview_type_to_launch_enabled = false
         "google-photos",
         "onlyoffice-desktopeditors",
         "com.zapret.gui",
-        "com.heroicgameslauncher.hgl"
+        "com.heroicgameslauncher.hgl",
+        "com.obsproject.Studio"
     ]
     provider_prefix = "/"
     show_app_actions = true
@@ -1280,20 +1292,32 @@ swap_pct_activity_threshold = 20.0
 swap_pct_critical_threshold = 80.0
 
 [theme]
-builtin = "Gruvbox"
-community_palette = "Kanagawa Paper"
+builtin = "Rosé Pine"
+community_palette = "Everforest Material"
 custom_palette = ""
 mode = "dark"
 pure_black_dark = false
-shell_mode = "follow"
-source = "community"
+shell_mode = "dark"
+source = "builtin"
 wallpaper_scheme = "m3-content"
 
     [theme.templates]
-    builtin_ids = [ "btop", "gtk3", "gtk4", "ghostty", "hyprland", "kitty", "qt", "umbriel" ]
-    community_ids = [ "prismlauncher", "papirus-icons" ]
+    builtin_ids = [ "btop", "gtk3", "gtk4", "ghostty", "hyprland", "kcolorscheme", "kitty", "qt", "umbriel" ]
+    community_ids = [ "discord", "prismlauncher" ]
     enable_builtin_templates = true
     enable_community_templates = true
+
+        [theme.templates.user.mpv_modernz]
+        compare_to = ""
+        enabled = true
+        hook_async = true
+        index = 0
+        input_path = "$XDG_CONFIG_HOME/noctalia/templates/mpv-modernz.conf"
+        output_path = [ "$XDG_CONFIG_HOME/mpv/script-opts/modernz.conf" ]
+        output_path_dynamic = ""
+        post_action = ""
+        post_hook = ""
+        pre_hook = ""
 
         [theme.templates.user.niri_palette]
         compare_to = ""
@@ -1319,6 +1343,18 @@ wallpaper_scheme = "m3-content"
         post_hook = ""
         pre_hook = ""
 
+        [theme.templates.user.telegram_contrast]
+        compare_to = ""
+        enabled = true
+        hook_async = true
+        index = 0
+        input_path = "$XDG_CONFIG_HOME/noctalia/templates/telegram-contrast.tdesktop-theme"
+        output_path = [ "$XDG_CONFIG_HOME/telegram-desktop/themes/noctalia-contrast.tdesktop-theme" ]
+        output_path_dynamic = ""
+        post_action = ""
+        post_hook = ""
+        pre_hook = ""
+
         [theme.templates.user.tmux_palette]
         compare_to = ""
         enabled = true
@@ -1326,6 +1362,30 @@ wallpaper_scheme = "m3-content"
         index = 0
         input_path = "$XDG_CONFIG_HOME/noctalia/templates/tmux-palette.conf"
         output_path = [ "$XDG_CONFIG_HOME/tmux/themes/noctalia-palette.conf" ]
+        output_path_dynamic = ""
+        post_action = ""
+        post_hook = ""
+        pre_hook = ""
+
+        [theme.templates.user.vencord_colors_only]
+        compare_to = ""
+        enabled = true
+        hook_async = true
+        index = 0
+        input_path = "$XDG_CONFIG_HOME/noctalia/templates/vesktop-colors-only.css"
+        output_path = [ "$XDG_CONFIG_HOME/Vencord/themes/noctalia-colors-only.theme.css" ]
+        output_path_dynamic = ""
+        post_action = ""
+        post_hook = ""
+        pre_hook = ""
+
+        [theme.templates.user.vesktop_colors_only]
+        compare_to = ""
+        enabled = true
+        hook_async = true
+        index = 0
+        input_path = "$XDG_CONFIG_HOME/noctalia/templates/vesktop-colors-only.css"
+        output_path = [ "$XDG_CONFIG_HOME/vesktop/themes/noctalia-colors-only.theme.css" ]
         output_path_dynamic = ""
         post_action = ""
         post_hook = ""

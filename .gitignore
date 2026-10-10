@@ -51,6 +51,7 @@
 !xremap/**
 !mpv/
 !mpv/**
+!README.md
 
 # excluded files
 # ----------------------------
