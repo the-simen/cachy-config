@@ -68,3 +68,6 @@ if not (ok and noctalia and noctalia.apply_theme) then
 	noctalia = require("noctalia-default")
 end
 noctalia.apply_theme()
+
+-- For Noctalia Color templates
+require("noctalia").apply_theme()
