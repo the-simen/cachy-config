@@ -31,6 +31,8 @@
 !ghostty/**
 !kitty/
 !kitty/kitty.conf
+!kitty/themes/
+!kitty/themes/noctalia-default.conf
 !kitty/copy_notify
 !systemd/
 !systemd/**
@@ -40,6 +42,8 @@
 !git/**
 !superfile/
 !superfile/**
+!umbriel/
+!umbriel/noctalia-default.toml
 !noctalia/
 !noctalia/templates/
 !noctalia/templates/**
@@ -55,6 +59,12 @@
 
 # excluded files
 # ----------------------------
+# Noctalia-generated palettes (per-machine render; tracked *-default fallbacks exist)
+ghostty/themes/noctalia
+hypr/noctalia.lua
+mpv/script-opts/modernz.conf
+superfile/theme/noctalia.toml
+tmux/themes/noctalia-palette.conf
 noctalia.theme
 noctalia.css
 noctalia.conf

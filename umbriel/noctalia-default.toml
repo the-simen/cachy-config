@@ -1,0 +1,27 @@
+# Default fallback palette (tracked in git).
+# Generated counterpart is git-ignored; to refresh: render theme, then copy generated file over this one.
+[colors]
+background = "#3c3836FF"
+text_primary = "#ddc7a1FF"
+text_muted = "#d4be98FF"
+accent_primary = "#a9b665FF"
+accent_secondary = "#e78a4eFF"
+warning = "#89b482FF"
+error = "#ea6962FF"
+insert_hint = "#89b48280"
+backdrop = "#3c3836FF"
+
+[colors.border]
+focused = "#a9b665FF"
+unfocused = "#3c3836FF"
+outer = "#32302fFF"
+
+[colors.overview]
+background_tint = "#32302f88"
+badge = "#a9b665FF"
+workspace_background = "#32302fFF"
+
+[[window_rule]]
+match.is_scratchpad = true
+border_color_focused = "#89b482FF"
+border_color_unfocused = "#315a2aFF"

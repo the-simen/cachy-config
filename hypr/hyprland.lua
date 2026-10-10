@@ -61,5 +61,10 @@ require("hyprland.rules")
 require("hyprland.gestures")
 require("hyprland.keybinds")
 
--- For Noctalia Color templates
-require("noctalia").apply_theme()
+-- For Noctalia Color templates (hypr/noctalia.lua is generated and git-ignored)
+local ok, noctalia = pcall(require, "noctalia")
+if not (ok and noctalia and noctalia.apply_theme) then
+	-- Fallback to tracked default palette (fresh clone / before first render)
+	noctalia = require("noctalia-default")
+end
+noctalia.apply_theme()

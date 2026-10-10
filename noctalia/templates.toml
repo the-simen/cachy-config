@@ -20,3 +20,6 @@ output_path = "$XDG_CONFIG_HOME/Vencord/themes/noctalia-colors-only.theme.css"
 input_path = "$XDG_CONFIG_HOME/noctalia/templates/telegram-contrast.tdesktop-theme"
 output_path = "/home/thesimen/.cache/noctalia/telegram-contrast.rendered.tdesktop-theme"
 post_hook = "python3 /home/thesimen/.config/noctalia/templates/telegram-pack.py"
+[theme.templates.user.nvim_noctalia]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/nvim-noctalia.lua"
+output_path = "$XDG_CONFIG_HOME/nvim/lua/themes/noctalia.lua"
