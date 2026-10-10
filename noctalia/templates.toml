@@ -16,3 +16,6 @@ output_path = "$XDG_CONFIG_HOME/vesktop/themes/noctalia-colors-only.theme.css"
 [theme.templates.user.vencord_colors_only]
 input_path = "$XDG_CONFIG_HOME/noctalia/templates/vesktop-colors-only.css"
 output_path = "$XDG_CONFIG_HOME/Vencord/themes/noctalia-colors-only.theme.css"
+[theme.templates.user.telegram_contrast]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/telegram-contrast.tdesktop-theme"
+output_path = "$XDG_CONFIG_HOME/telegram-desktop/themes/noctalia-contrast.tdesktop-theme"
