@@ -11,6 +11,7 @@ window-rule {
     match app-id="libreoffice-draw"
     match app-id="libreoffice-base"
     match app-id="ONLYOFFICE"
+    match app-id="steam"
 
     open-maximized true     
 }
@@ -37,7 +38,6 @@ window-rule {
     match app-id="Thunar"
     match app-id="dolphin"
     match app-id="nemo"
-    match app-id="steam"
     match app-id="heroic"
     match app-id="localsend"
     match app-id="org.manjaro.pamac.manager"
