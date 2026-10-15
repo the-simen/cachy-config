@@ -41,7 +41,6 @@ local float_media_tag = "float_media"
 local float_705_620_tag = "float_705_620"
 local float_675_430_tag = "float_675_430"
 local float_740_700_tag = "float_740_700"
-local float_740_800_tag = "float_740_800"
 local float_647_700_tag = "float_647_700"
 
 ----------------------
@@ -180,7 +179,6 @@ tagged_rule(float_media_tag, { "io.github.celluloid_player.Celluloid|vlc" }, "cl
 tagged_rule(float_705_620_tag, { "org.gnome.Calculator" }, "class")
 tagged_rule(float_675_430_tag, { "org.gnome.Decibels" }, "class")
 tagged_rule(float_740_700_tag, { "karing" }, "class")
-tagged_rule(float_740_800_tag, { "zapret" }, "title")
 tagged_rule(float_647_700_tag, { "Web App Creator" }, "title")
 
 -----------------------
@@ -245,7 +243,6 @@ create_tag(float_media_tag, { float = true, size = "(monitor_w*0.62) 650", cente
 create_tag(float_705_620_tag, { float = true, size = "705 620", center = true })
 create_tag(float_675_430_tag, { float = true, size = "675 430", center = true })
 create_tag(float_740_700_tag, { float = true, size = "740 700", center = true })
-create_tag(float_740_800_tag, { float = true, size = "740 800", center = true })
 create_tag(float_647_700_tag, { float = true, size = "647 700", center = true })
 
 -------------------------

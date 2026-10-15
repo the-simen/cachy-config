@@ -8,7 +8,7 @@ stack is the baseline: Niri as the compositor, Noctalia as the shell
 > **Strong recommendation: use the install script.**
 > This repo is not "just copy `~/.config` and done" — several paths
 > outside `~/.config` must be symlinked / installed (see below).
-> The install script does all of it, in the right order, with a backup:
+> The install script does all of it, in the right order:
 >
 > ```sh
 > git clone https://github.com/the-simen/bash-scripts/ ~/bash-scripts/ \
@@ -74,7 +74,7 @@ Copies drift out of sync on the next `git pull`.
 
 | Expected path | Points to | Why |
 |---|---|---|
-| `~/.local/share/applications` | `~/.config/applications` | Custom launchers (browsers as apps, `btop++`, games, `web-app-creator`, fixed `discord`/`telegram`/`steam`/`Zapret` entries) must be visible to the DE/launcher. |
+| `~/.local/share/applications` | `~/.config/applications` | Custom launchers (browsers as apps, `btop++`, games, `web-app-creator`, fixed `discord`/`telegram`/`steam` entries) must be visible to the DE/launcher. |
 | `~/.tmux.conf` | `~/.config/tmux/.tmux.conf` | tmux only reads `~/.tmux.conf`; the versioned config lives in the repo. Same pattern: keep one source of truth, link it in. |
 
 The install script creates them with:
@@ -101,7 +101,7 @@ Notes:
 
 - Only a curated subset of `applications/*.desktop` is tracked
   (see `.gitignore`: `AmneziaVPN`, `btop`, `discord`, `OpenRGB`,
-  `telegram`, `steam`, `web-app-creator`, `Zapret`). Wine/Steam
+  `telegram`, `steam`, `web-app-creator`). Wine/Steam
   auto-generated entries, `mimeinfo.cache` and `userapp-*` files are
   intentionally untracked machine noise.
 - Same symlink philosophy applies to `~/.gitconfig`:

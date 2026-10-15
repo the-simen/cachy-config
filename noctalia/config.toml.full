@@ -397,7 +397,6 @@ pinned = [
     "org.gnome.Nautilus",
     "com.shellyorg.shelly",
     "karing",
-    "com.zapret.gui",
     "com.github.wwmm.easyeffects",
     "localsend",
     "kitty",
@@ -1104,7 +1103,6 @@ umbriel_overview_type_to_launch_enabled = false
         "org.manjaro.pamac.manager",
         "google-photos",
         "onlyoffice-desktopeditors",
-        "com.zapret.gui",
         "com.heroicgameslauncher.hgl",
         "com.obsproject.Studio"
     ]
@@ -1595,7 +1593,7 @@ type = "custom_button"
 capsule = true
 detached_panel = true
 drawer = true
-pinned = [ "Karing", "easyeffects", "spotify-client", "Happ", "AmneziaVPN", "zapret-gui" ]
+pinned = [ "Karing", "easyeffects", "spotify-client", "Happ", "AmneziaVPN" ]
 type = "tray"
 
 [widget.volume]

@@ -126,14 +126,6 @@ window-rule {
 }
 
 window-rule {
-  match title="zapret"
-
-  open-floating true
-  default-column-width { fixed 740; }
-  default-window-height { fixed 800; }
-}
-
-window-rule {
   match title="Web App Creator"
 
   open-floating true
