@@ -43,3 +43,6 @@ form_active_text_color = (BLACK,CYAN,OFF)
 form_text_color = (WHITE,DEFAULT,OFF)
 form_item_readonly_color = (CYAN,DEFAULT,OFF)
 gauge_color = (BLACK,CYAN,OFF)
+# Vim-style menu navigation (^J confirms via built-in ENTER binding).
+bindkey menubox \152 ITEM_NEXT
+bindkey menubox \153 ITEM_PREV

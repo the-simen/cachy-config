@@ -145,6 +145,12 @@ def main():
         f"form_text_color = {rc('mOnSurface')}",
         f"form_item_readonly_color = {rc('mSecondary')}",
         f"gauge_color = {rc(ONACC, ACC_BG)}",
+        # Vim-style menu navigation (^J already confirms: built-in ENTER binding).
+        # NOTE: single letters are rejected by the rc parser, hence octal
+        # escapes (\152=j, \153=k). This shadows hotkey-jump for tags
+        # starting with j/k; current menu tags use none.
+        "bindkey menubox \\152 ITEM_NEXT",
+        "bindkey menubox \\153 ITEM_PREV",
     ]
     DST.parent.mkdir(parents=True, exist_ok=True)
     DST.write_text("\n".join(lines) + "\n")
