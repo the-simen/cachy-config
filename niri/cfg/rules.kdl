@@ -134,6 +134,14 @@ window-rule {
 }
 
 window-rule {
+  match title="Config Manager"
+
+  open-floating true
+  default-column-width { fixed 647; }
+  default-window-height { fixed 700; }
+}
+
+window-rule {
   match title="Picture-in-Picture"
 
   open-floating true

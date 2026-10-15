@@ -44,6 +44,11 @@
 !superfile/**
 !umbriel/
 !umbriel/noctalia-default.toml
+!dialog/
+!dialog/**
+!dialog/noctalia-default
+!icons/
+!icons/**
 !noctalia/
 !noctalia/templates/
 !noctalia/templates/**
@@ -65,6 +70,7 @@ hypr/noctalia.lua
 mpv/script-opts/modernz.conf
 superfile/theme/noctalia.toml
 tmux/themes/noctalia-palette.conf
+dialog/noctalia
 noctalia.theme
 noctalia.css
 noctalia.conf
@@ -84,3 +90,4 @@ niri/overrides/**
 !applications/org.telegram.desktop.desktop
 !applications/steam.desktop
 !applications/web-app-creator.desktop
+!applications/config-manager.desktop

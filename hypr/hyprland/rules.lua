@@ -179,7 +179,7 @@ tagged_rule(float_media_tag, { "io.github.celluloid_player.Celluloid|vlc" }, "cl
 tagged_rule(float_705_620_tag, { "org.gnome.Calculator" }, "class")
 tagged_rule(float_675_430_tag, { "org.gnome.Decibels" }, "class")
 tagged_rule(float_740_700_tag, { "karing" }, "class")
-tagged_rule(float_647_700_tag, { "Web App Creator" }, "title")
+tagged_rule(float_647_700_tag, { "Web App Creator|Config Manager" }, "title")
 
 -----------------------
 ---- Per app rules ----

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Config Manager
+Version=1.0
+Comment=Install and update cachy-config (Niri + Noctalia)
+Exec=sh -c ~/.config/scripts/open_config_manager.sh
+Icon=/home/thesimen/.config/icons/config-manager.svg
+Categories=System;
+Terminal=false
