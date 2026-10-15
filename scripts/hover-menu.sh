@@ -75,6 +75,13 @@ holog() { [ -n "${HO_LOG:-}" ] && printf '%s\n' "$*" >>"$HO_LOG"; }
 exec {IN}</dev/tty || exit 2
 OUT=/dev/stderr
 
+# Kill the tty echo for the whole session: between key reads the echo is
+# on, and a mouse-motion flood would print its escape bytes as garbage
+# on screen. Also disable XON/XOFF so Ctrl-S can't freeze output.
+# Restored in cleanup (Ctrl-C still works: ISIG stays on).
+STTY_SAVE=$(stty -g </dev/tty 2>/dev/null) || exit 2
+stty -echo -ixon </dev/tty 2>/dev/null
+
 cols() { tput cols 2>/dev/null || echo 80; }
 rows() { tput lines 2>/dev/null || echo 24; }
 
@@ -87,16 +94,18 @@ FG_RGB=$(hex2rgb "$FG")
 AC_RGB=$(hex2rgb "$ACCENT")
 
 cleanup() {
-    printf '\e[?1003l\e[?1006l\e[?25h' > "$OUT" 2>/dev/null
+    [ -n "${STTY_SAVE:-}" ] && stty "$STTY_SAVE" </dev/tty 2>/dev/null
+    printf '\e[?1000l\e[?1002l\e[?1003l\e[?1006l\e[?25h' > "$OUT" 2>/dev/null
     exec {IN}>&- 2>/dev/null
 }
 trap cleanup EXIT INT TERM
 
 printf '\e[?25l' > "$OUT"
 holog "start term=$TERM lang=${LANG:-} lc_all=${LC_ALL:-} cols=$(cols) rows=$(rows)"
-if [ "$INFO" -eq 0 ]; then
-    printf '\e[?1003h\e[?1006h' > "$OUT"
-fi
+# SGR extended mouse (1006) + full tracking (1000/1002/1003: press, drag,
+# motion, wheel) for every mode: requesting only 1003 leaves terminals
+# that implement a subset silent. Without 1006 they fall back to legacy.
+printf '\e[?1000h\e[?1002h\e[?1003h\e[?1006h' > "$OUT"
 
 LAYOUT_OK=0
 trap 'LAYOUT_OK=0' WINCH
@@ -136,7 +145,7 @@ ITEM_R=0  # row of item 0
 
 # ---------------- layout (slow: python per line) ----------------
 # Computed once per geometry/content; render() below uses only the cache,
-# so Rosa motion floods redraw in pure bash with zero forks of python.
+# so mouse motion floods redraw in pure bash with zero forks of python.
 L_W=0 L_H=0 L_BOXW=0 L_INNER=0 L_TOP=0 L_LEFT=0 L_ITEMR=0
 L_RULE=""
 L_TFILL=0
@@ -144,6 +153,10 @@ L_PPADS=()
 L_LPADS=()
 L_HPAD=0
 L_HIDEHINT=0
+# Batch-measured widths (one python call): prompt lines, label widths, hint.
+_PWL=()
+_LWLABS=()
+_HW=0
 
 layout() {
     local W H
@@ -151,44 +164,105 @@ layout() {
     [ "$W" -lt 30 ] && W=30
     L_W=$W; L_H=$H
 
-    local i maxw=0 l
-    if [ -n "$TITLE" ]; then maxw=$(vlen "$TITLE"); fi
-    while IFS= read -r line; do
-        l=$(vlen "$line")
-        [ "$l" -gt "$maxw" ] && maxw=$l
-    done <<<"$(printf '%s\n' "$PROMPT")"
-    for i in "${!LABELS[@]}"; do
-        l=$(vlen "${LABELS[$i]}")
-        [ "$l" -gt "$maxw" ] && maxw=$l
-    done
-    l=$(vlen "$HINT")
-    [ "$l" -gt "$maxw" ] && maxw=$l
+    # All visible widths in ONE python call (per-line spawns made
+    # the viewer open seconds late). Order: title, prompt lines,
+    # labels, hint. _PWL keeps prompt widths for the info pager.
+    local -a _WL=()
+    if command -v python3 &>/dev/null; then
+        local IFS=$'\n'
+        mapfile -t _WL < <(python3 - "$TITLE" "$PROMPT" "$HINT" "${LABELS[@]}" <<'PYEOF'
+import sys, re, unicodedata as u
+def w(s):
+    s = re.sub(r'\x1b\[[0-9;]*m', '', s)
+    return sum(2 if u.east_asian_width(c) in 'WF' else 1 for c in s)
+t, p, h, labs = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4:]
+print(w(t))
+for line in (p.split('\n') if p else []):
+    print(w(line))
+for a in labs:
+    print(w(a))
+print(w(h))
+PYEOF
+        )
+    fi
+    # Fallback without python: byte/char lengths (no CJK compensation).
+    local _pyok=1
+    [ "${#_WL[@]}" -eq 0 ] && _pyok=0
+
+    local i maxw=0 l ni=0
+    _PWL=()
+    if [ "$_pyok" -eq 1 ]; then
+        maxw=${_WL[0]}; ni=1
+        if [ -n "$PROMPT" ]; then
+            while IFS= read -r line; do
+                _PWL+=("${_WL[$ni]}"); ni=$((ni + 1))
+            done <<<"$(printf '%s\n' "$PROMPT")"
+        fi
+        for i in "${!LABELS[@]}"; do _LWLABS[$i]=${_WL[$ni]}; ni=$((ni + 1)); done
+        _HW=${_WL[$ni]}
+        for l in "${_WL[@]}"; do [ "$l" -gt "$maxw" ] && maxw=$l; done
+    else
+        [ -n "$TITLE" ] && maxw=$(vlen "$TITLE")
+        while IFS= read -r line; do
+            l=$(vlen "$line")
+            _PWL+=("$l")
+            [ "$l" -gt "$maxw" ] && maxw=$l
+        done <<<"$(printf '%s\n' "$PROMPT")"
+        for i in "${!LABELS[@]}"; do
+            l=$(vlen "${LABELS[$i]}")
+            _LWLABS[$i]=$l
+            [ "$l" -gt "$maxw" ] && maxw=$l
+        done
+        _HW=$(vlen "$HINT")
+        [ "$_HW" -gt "$maxw" ] && maxw=$_HW
+    fi
 
     L_BOXW=$((maxw + 8))
     [ "$L_BOXW" -gt "$((W - 4))" ] && L_BOXW=$((W - 4))
     L_INNER=$((L_BOXW - 4))
     L_RULE=$(rule "$L_INNER")
-    L_TFILL=$((L_INNER - maxw - 0))
     if [ -n "$TITLE" ]; then
-        L_TFILL=$((L_INNER - $(vlen "$TITLE") - 4))
+        if [ "$_pyok" -eq 1 ]; then
+            L_TFILL=$((L_INNER - ${_WL[0]} - 4))
+        else
+            L_TFILL=$((L_INNER - $(vlen "$TITLE") - 4))
+        fi
     else
         L_TFILL=$L_INNER
     fi
     [ "$L_TFILL" -lt 0 ] && L_TFILL=0
 
     L_PPADS=()
-    while IFS= read -r line; do
-        l=$((L_INNER - $(vlen "$line") - 2))
-        [ "$l" -lt 0 ] && l=0
-        L_PPADS+=("$l")
-    done <<<"$(printf '%s\n' "$PROMPT")"
+    if [ -n "$PROMPT" ]; then
+        if [ "$_pyok" -eq 1 ]; then
+            for l in "${_PWL[@]}"; do
+                l=$((L_INNER - l - 2))
+                [ "$l" -lt 0 ] && l=0
+                L_PPADS+=("$l")
+            done
+        else
+            while IFS= read -r line; do
+                l=$((L_INNER - $(vlen "$line") - 2))
+                [ "$l" -lt 0 ] && l=0
+                L_PPADS+=("$l")
+            done <<<"$(printf '%s\n' "$PROMPT")"
+        fi
+    fi
     L_LPADS=()
     for i in "${!LABELS[@]}"; do
-        l=$((L_INNER - $(vlen "${LABELS[$i]}") - 4))
+        if [ "$_pyok" -eq 1 ]; then
+            l=$((L_INNER - ${_LWLABS[$i]} - 4))
+        else
+            l=$((L_INNER - $(vlen "${LABELS[$i]}") - 4))
+        fi
         [ "$l" -lt 0 ] && l=0
         L_LPADS+=("$l")
     done
-    L_HPAD=$((L_INNER - $(vlen "$HINT") - 2))
+    if [ "$_pyok" -eq 1 ]; then
+        L_HPAD=$((L_INNER - _HW - 2))
+    else
+        L_HPAD=$((L_INNER - $(vlen "$HINT") - 2))
+    fi
     [ "$L_HPAD" -lt 0 ] && L_HPAD=0
 
     # Content rows: title + prompt + sep + items + hint-sep + hint + bottom.
@@ -212,54 +286,70 @@ layout() {
     BOX_R=$L_TOP
 }
 
-# ---------------- drawing (fast: cache only, no slow calls) ----------------
+# ---------------- drawing ----------------
+# Colors resolved once (globals); rows rendered incrementally:
+# full draw() only on start/resize, move_to() repaints just the two
+# rows that change — no clear, no flicker under motion floods.
+C_B="" C_T="" C_I="" C_SF="30" C_SB="" C_RST="0"
+
+row_str() { # i -> positioned row escape string on stdout
+    local i=$1 esc=$'\e'
+    local r=$((L_ITEMR + i)) left=$L_LEFT
+    if [ "$i" -eq "$SEL" ]; then
+        printf '%s' "${esc}[${r};$((left + 1))H${esc}[${C_B}m│${esc}[${C_SF};${C_SB}m ➤ ${LABELS[$i]}$(spaces "${L_LPADS[$i]}") ${esc}[${C_RST}m${esc}[${C_B}m│${esc}[${C_RST}m"
+    else
+        printf '%s' "${esc}[${r};$((left + 1))H${esc}[${C_B}m│${esc}[${C_I}m   ${LABELS[$i]}$(spaces "${L_LPADS[$i]}") ${esc}[${C_RST}m${esc}[${C_B}m│${esc}[${C_RST}m"
+    fi
+}
+
+# move_to n: switch highlight with two row repaints (no full redraw).
+move_to() {
+    local n=$1 o=$SEL
+    [ "$n" = "$o" ] && return 0
+    SEL=$n
+    printf '%b' "$(row_str "$o")$(row_str "$n")" > "$OUT"
+}
 
 draw() {
     [ "$LAYOUT_OK" = "1" ] || { layout; LAYOUT_OK=1; }
     local esc=$'\e'
-    local B_FG="38;2;$AC_RGB"      # border/accent
-    local T_FG="38;2;$AC_RGB"      # title
-    local I_FG="38;2;$FG_RGB"      # item text
-    local S_FG="30"                # selected text (black)
-    local S_BG="48;2;$AC_RGB"      # selected fill (accent)
-    local RST="0"
+    C_B="38;2;$AC_RGB"      # border/accent
+    C_T="38;2;$AC_RGB"      # title
+    C_I="38;2;$FG_RGB"      # item text
+    C_SB="48;2;$AC_RGB"     # selected fill (accent)
     local left=$L_LEFT r=$L_TOP i
 
     local out=""
     out+="\e[2J\e[H"               # clear + home (stable coords)
-    out+="${esc}[${r};$((left + 1))H${esc}[${B_FG}m╭"
+    out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m╭"
     if [ -n "$TITLE" ]; then
-        out+="─ ${esc}[1;${T_FG}m${TITLE}${esc}[${B_FG}m ─"
+        out+="─ ${esc}[1;${C_T}m${TITLE}${esc}[${C_B}m ─"
     fi
-    out+="$(rule "$L_TFILL")╮${esc}[${RST}m"
+    out+="$(rule "$L_TFILL")╮${esc}[${C_RST}m"
     r=$((r + 1))
 
     if [ -n "$PROMPT" ]; then
         i=0
         while IFS= read -r line; do
-            out+="${esc}[${r};$((left + 1))H${esc}[${B_FG}m│ ${esc}[${RST}m${line}$(spaces "${L_PPADS[$i]}") ${esc}[${B_FG}m│${esc}[${RST}m"
+            out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m│ ${esc}[${C_RST}m${line}$(spaces "${L_PPADS[$i]}") ${esc}[${C_B}m│${esc}[${C_RST}m"
             r=$((r + 1)); i=$((i + 1))
         done <<<"$(printf '%s\n' "$PROMPT")"
-        out+="${esc}[${r};$((left + 1))H${esc}[${B_FG}m├${L_RULE}┤${esc}[${RST}m"
+        out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m├${L_RULE}┤${esc}[${C_RST}m"
         r=$((r + 1))
     fi
 
     for i in "${!LABELS[@]}"; do
-        if [ "$i" -eq "$SEL" ]; then
-            out+="${esc}[${r};$((left + 1))H${esc}[${B_FG}m│${esc}[${S_FG};${S_BG}m ➤ ${LABELS[$i]}$(spaces "${L_LPADS[$i]}") ${esc}[${RST}m${esc}[${B_FG}m│${esc}[${RST}m"
-        else
-            out+="${esc}[${r};$((left + 1))H${esc}[${B_FG}m│${esc}[${I_FG}m   ${LABELS[$i]}$(spaces "${L_LPADS[$i]}") ${esc}[${RST}m${esc}[${B_FG}m│${esc}[${RST}m"
-        fi
+        out+=$(row_str "$i")
         r=$((r + 1))
     done
 
     if [ "$INFO" -eq 0 ] && [ "$L_HIDEHINT" -eq 0 ]; then
-        out+="${esc}[${r};$((left + 1))H${esc}[${B_FG}m├${L_RULE}┤${esc}[${RST}m"
+        out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m├${L_RULE}┤${esc}[${C_RST}m"
         r=$((r + 1))
-        out+="${esc}[${r};$((left + 1))H${esc}[${B_FG}m│ ${esc}[2m${HINT}$(spaces "$L_HPAD") ${esc}[${RST}m${esc}[${B_FG}m│${esc}[${RST}m"
+        out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m│ ${esc}[2m${HINT}$(spaces "$L_HPAD") ${esc}[${C_RST}m${esc}[${C_B}m│${esc}[${C_RST}m"
         r=$((r + 1))
     fi
-    out+="${esc}[${r};$((left + 1))H${esc}[${B_FG}m╰${L_RULE}╯${esc}[${RST}m"
+    out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m╰${L_RULE}╯${esc}[${C_RST}m"
     printf '%b' "$out" > "$OUT"
 }
 
@@ -292,6 +382,10 @@ read_key() {
                 KEY="MOUSE $b $x $y $fin"
             elif [ "$seq" = "A" ]; then KEY=UP
             elif [ "$seq" = "B" ]; then KEY=DOWN
+            elif [ "$seq" = "5~" ]; then KEY=PGUP
+            elif [ "$seq" = "6~" ]; then KEY=PGDN
+            elif [ "$seq" = "H" ]; then KEY=HOME
+            elif [ "$seq" = "F" ]; then KEY=END
             else KEY=IGNORE
             fi
         elif [ "$c2" = "M" ]; then
@@ -320,6 +414,10 @@ read_key() {
     elif [ "$c" = "k" ]; then KEY=UP
     else KEY="CHAR $c"
     fi
+    case "$KEY" in
+        "MOUSE 35 "*) ;; # motion flood: stay silent
+        *) holog "key=[$KEY]" ;;
+    esac
 }
 
 row_to_item() { # y -> index or -1
@@ -331,20 +429,231 @@ row_to_item() { # y -> index or -1
     fi
 }
 
-# ---------------- info mode ----------------
+# Draws the startup banner (title/meta/status) in the same visual language
+# as the rest of the UI: rounded truecolor box, black text on accent fill.
+# Uses the same layout cache (L_*) so there are no extra forks of python.
+banner() {
+    [ "$LAYOUT_OK" = "1" ] || { layout; LAYOUT_OK=1; }
+    local esc=$'\e'
+    local C_B="38;2;$AC_RGB" C_T="38;2;$AC_RGB" C_RST="0"
+    local left=$L_LEFT i
+    # Widths of the ad-hoc banner lines in the same single python call.
+    local -a _BL=()
+    if command -v python3 &>/dev/null; then
+        local IFS=$'\n'
+        mapfile -t _BL < <(python3 "${@}" <<'PYEOF'
+import sys, re, unicodedata as u
+def w(s):
+    s = re.sub(r'\x1b\[[0-9;]*m', '', s)
+    return sum(2 if u.east_asian_width(c) in 'WF' else 1 for c in s)
+for a in sys.argv[1:]:
+    print(w(a))
+PYEOF
+        )
+    fi
+
+    local nlines=$# nrows=$((1 + nlines + 2))
+    L_TOP=$(( (L_H - nrows) / 2 ))
+    [ "$L_TOP" -lt 1 ] && L_TOP=1
+    local r=$L_TOP
+    local out=""
+    out+="\e[2J\e[H"
+    out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m╭"
+    if [ -n "$TITLE" ]; then
+        out+="─ ${esc}[1;${C_T}m${TITLE}${esc}[${C_B}m ─"
+    fi
+    out+="$(rule "$L_TFILL")╮${esc}[${C_RST}m"
+    r=$((r + 1))
+    out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m│${esc}[${C_RST}m"
+    r=$((r + 1))
+    local bi=0
+    for i in "$@"; do
+        local l=$((L_INNER - ${_BL[$bi]} - 2))
+        [ "$l" -lt 0 ] && l=0
+        if [ -z "$i" ]; then
+            out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m│$(spaces "$l") ${esc}[${C_B}m│${esc}[${C_RST}m"
+        else
+            out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m│ ${esc}[${C_RST}m${i}$(spaces "$l") ${esc}[${C_B}m│${esc}[${C_RST}m"
+        fi
+        r=$((r + 1)); bi=$((bi + 1))
+    done
+    out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m│${esc}[${C_RST}m"
+    r=$((r + 1))
+    out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m╰${L_RULE}╯${esc}[${C_RST}m"
+    printf '%b' "$out" > "$OUT"
+}
+
+# ---------------- info mode (scrollable viewer) ----------------
+# Paged viewer: wheel/arrows/PgUp/PgDn/Space/Home/End scroll,
+# click / Enter / Esc / q goes back. No less, mouse everywhere.
 
 if [ "$INFO" -eq 1 ]; then
-    PROMPT="$TITLE
-$PROMPT"
-    TITLE=""
-    LABELS=()
-    HINT="click / any key to continue"
-    draw
+    mapfile -t IL_LINES < <(printf '%s\n' "$PROMPT")
+    [ "${IL_LINES[-1]:-x}" = "" ] && unset 'IL_LINES[-1]'
+    IL_OFF=0
+    IL_HL=-1
+    IL_BTNHL=0
+
+    # Batched width measurement for pager lines (one python call).
+    _ILWL=()
+    if command -v python3 &>/dev/null; then
+        IFS=$'\n'
+        mapfile -t _ILWL < <(python3 - "${IL_LINES[@]}" <<'PYEOF'
+import sys, re, unicodedata as u
+def w(s):
+    s = re.sub(r'\x1b\[[0-9;]*m', '', s)
+    return sum(2 if u.east_asian_width(c) in 'WF' else 1 for c in s)
+for a in sys.argv[1:]:
+    print(w(a))
+PYEOF
+        )
+    fi
+    # Fallback: byte length (no CJK compensation without python).
+    if [ "${#_ILWL[@]}" -ne "${#IL_LINES[@]}" ]; then
+        _ILWL=()
+        for _li in "${IL_LINES[@]}"; do _ILWL+=("${#_li}"); done
+    fi
+
+    info_layout() {
+        layout
+        # Recompute inner width from pager lines too — layout() only sees
+        # the raw PROMPT blob, so maxw must include IL_LINES here.
+        local i maxw=0 l
+        if [ -n "$TITLE" ]; then maxw=$(vlen "$TITLE"); fi
+        l=$(vlen "$HINT")
+        [ "$l" -gt "$maxw" ] && maxw=$l
+        for i in "${!_ILWL[@]}"; do
+            l=${_ILWL[$i]}
+            [ "$l" -gt "$maxw" ] && maxw=$l
+        done
+        L_BOXW=$((maxw + 8))
+        [ "$L_BOXW" -gt "$((L_W - 4))" ] && L_BOXW=$((L_W - 4))
+        L_INNER=$((L_BOXW - 4))
+        L_RULE=$(rule "$L_INNER")
+        if [ -n "$TITLE" ]; then
+            L_TFILL=$((L_INNER - $(vlen "$TITLE") - 4))
+        else
+            L_TFILL=$L_INNER
+        fi
+        [ "$L_TFILL" -lt 0 ] && L_TFILL=0
+        local H=$L_H
+        IL_PAGE=$((H - 6))
+        [ "$IL_PAGE" -lt 3 ] && IL_PAGE=3
+        IL_TOP=$(( (H - (IL_PAGE + 4)) / 2 ))
+        [ "$IL_TOP" -lt 1 ] && IL_TOP=1
+    }
+
+    # Geometry must exist before the first draw/hit-test.
+    info_layout
+    LAYOUT_OK=1
+
+    # Back button geometry (used by draw + hover hit-test).
+    # Must match the actual draw_info output:
+    #   row: IL_TOP + 1 (title) + IL_PAGE (content) + 1 (separator) = IL_TOP + IL_PAGE + 2
+    #   col: left+1 (CUP) + 2 ("│ ") + (L_INNER - BTN_W - 2) (pad) = left + L_INNER - BTN_W + 1
+    BTN_LABEL="[ ← Back ]"
+    BTN_W=11
+    BTN_ROW=$((IL_TOP + IL_PAGE + 2))
+    BTN_C0=$((L_LEFT + L_INNER - BTN_W + 1))
+    BTN_C1=$((BTN_C0 + BTN_W - 1))
+
+    draw_info() {
+        [ "$LAYOUT_OK" = "1" ] || { info_layout; LAYOUT_OK=1; }
+        if [ -z "$C_B" ]; then
+            C_B="38;2;$AC_RGB"; C_T="38;2;$AC_RGB"; C_I="38;2;$FG_RGB"
+            C_SF="30"; C_SB="48;2;$AC_RGB"; C_RST="0"
+        fi
+        local esc=$'\e' left=$L_LEFT r=$IL_TOP i n=${#IL_LINES[@]}
+        local out=""
+        out+="\e[2J\e[H"
+        out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m╭"
+        if [ -n "$TITLE" ]; then
+            out+="─ ${esc}[1;${C_T}m${TITLE}${esc}[${C_B}m ─"
+        fi
+        out+="$(rule "$L_TFILL")╮${esc}[${C_RST}m"
+        r=$((r + 1))
+        local end=$((IL_OFF + IL_PAGE))
+        for ((i = IL_OFF; i < end && i < n; i++)); do
+            local l=$((L_INNER - ${_ILWL[$i]} - 2))
+            [ "$l" -lt 0 ] && l=0
+            out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m│ ${esc}[${C_I}m${IL_LINES[$i]}$(spaces "$l") ${esc}[${C_B}m│${esc}[${C_RST}m"
+            r=$((r + 1))
+        done
+        out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m├${L_RULE}┤${esc}[${C_RST}m"
+        r=$((r + 1))
+        local fill="48;2;${AC_RGB}" txt="30"
+        [ "$IL_BTNHL" = "1" ] || { fill="0"; txt="${C_I}"; }
+        out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m│ ${esc}[${C_RST}m$(spaces $((L_INNER - BTN_W - 2)))${esc}[${txt};${fill}m ${BTN_LABEL} ${esc}[${C_RST}m${esc}[${C_B}m│${esc}[${C_RST}m"
+        r=$((r + 1))
+        out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m╰${L_RULE}╯${esc}[${C_RST}m"
+        printf '%b' "$out" > "$OUT"
+        # Scrollbar on the right border
+        local track0=$((IL_TOP + 1))
+        local max=$((n - IL_PAGE)); [ "$max" -lt 0 ] && max=0
+        local pos=0
+        [ "$max" -gt 0 ] && pos=$((IL_OFF * 100 / max))
+        local thumb=$((IL_PAGE * IL_PAGE / (n > 0 ? n : 1)))
+        [ "$thumb" -lt 1 ] && thumb=1
+        local t0=$((track0 + pos * (IL_PAGE - thumb) / 100))
+        for ((i = 0; i < IL_PAGE; i++)); do
+            local c=2
+            if [ $((t0 + thumb)) -gt $i ] && [ "$i" -ge "$t0" ]; then c=1; fi
+            printf '%s' "${esc}[$((track0 + i));$((left + L_INNER + 3))H${esc}[${c}m▏${esc}[${C_RST}m" > "$OUT"
+        done
+    }
+
+    info_scroll() { # delta (may be negative) or ABS:n
+        local n=${#IL_LINES[@]} max
+        max=$((n - IL_PAGE))
+        [ "$max" -lt 0 ] && max=0
+        if [[ "$1" == ABS:* ]]; then
+            IL_OFF=${1#ABS:}
+        else
+            IL_OFF=$((IL_OFF + $1))
+        fi
+        [ "$IL_OFF" -lt 0 ] && IL_OFF=0
+        [ "$IL_OFF" -gt "$max" ] && IL_OFF=$max
+        draw_info
+    }
+
+    printf '\e[2J\e[H' > "$OUT"
+    draw_info
     while true; do
         read_key
         case "$KEY" in
-            MOUSE*) set -- $KEY; [ "$5" = "m" ] || [ "$2" = 0 ] && exit 0 ;;
-            *) exit 0 ;;
+            UP) info_scroll -1 ;;
+            DOWN) info_scroll 1 ;;
+            PGUP) info_scroll -$IL_PAGE ;;
+            PGDN) info_scroll $IL_PAGE ;;
+            HOME) info_scroll ABS:0 ;;
+            END) info_scroll ABS:999999 ;;
+            "CHAR  ") info_scroll $IL_PAGE ;;
+            ENTER|ESC|Q) exit 0 ;;
+            MOUSE*)
+                _mb=$(echo "$KEY" | awk '{print $2}')
+                _mx=$(echo "$KEY" | awk '{print $3}')
+                _my=$(echo "$KEY" | awk '{print $4}')
+                _mfin=$(echo "$KEY" | awk '{print $5}')
+                [ -z "$_mb" ] && continue
+                if [ "$_mb" = "64" ]; then info_scroll -3
+                elif [ "$_mb" = "65" ]; then info_scroll 3
+                elif [ "$_mfin" = "M" ]; then
+                    # Hover on Back button: arm for click, highlight
+                    if [ "$_my" = "$BTN_ROW" ] && [ "$_mx" -ge "$BTN_C0" ] && [ "$_mx" -le "$BTN_C1" ]; then
+                        [ "$IL_BTNHL" = "0" ] && { IL_BTNHL=1; draw_info; }
+                        ARMED=1
+                    else
+                        [ "$IL_BTNHL" = "1" ] && { IL_BTNHL=0; draw_info; }
+                        ARMED=0
+                    fi
+                elif [ "$_mfin" = "m" ]; then
+                    # Release on Back button: exit
+                    if [ "$ARMED" = "1" ] && [ "$_my" = "$BTN_ROW" ] && [ "$_mx" -ge "$BTN_C0" ] && [ "$_mx" -le "$BTN_C1" ]; then
+                        exit 0
+                    fi
+                    ARMED=0; IL_BTNHL=0
+                fi
+                ;;
         esac
     done
 fi
@@ -355,21 +664,21 @@ draw
 while true; do
     read_key
     case "$KEY" in
-        UP) SEL=$(( (SEL - 1 + ${#LABELS[@]}) % ${#LABELS[@]} )); draw ;;
-        DOWN) SEL=$(( (SEL + 1) % ${#LABELS[@]} )); draw ;;
+        UP) move_to $(( (SEL - 1 + ${#LABELS[@]}) % ${#LABELS[@]} )) ;;
+        DOWN) move_to $(( (SEL + 1) % ${#LABELS[@]} )) ;;
         ENTER) echo "${TAGS[$SEL]}"; exit 0 ;;
         ESC|Q) exit 1 ;;
         MOUSE*)
             set -- $KEY  # MOUSE b x y fin (no `local`: top-level loop)
             _mb=$2; _mx=$3; _my=$4; _mfin=$5
-            if [ "$_mb" = "64" ]; then SEL=$(( (SEL - 1 + ${#LABELS[@]}) % ${#LABELS[@]} )); draw
-            elif [ "$_mb" = "65" ]; then SEL=$(( (SEL + 1) % ${#LABELS[@]} )); draw
+            if [ "$_mb" = "64" ]; then move_to $(( (SEL - 1 + ${#LABELS[@]}) % ${#LABELS[@]} ))
+            elif [ "$_mb" = "65" ]; then move_to $(( (SEL + 1) % ${#LABELS[@]} ))
             elif [ "$_mfin" = "M" ]; then
                 if [ "$_mb" = "35" ] || [ "$((_mb & 3))" = "0" ]; then
                     # motion (35) never arms: 35 & 3 == 3; drags/presses do.
                     [ "$((_mb & 3))" = "0" ] && ARMED=1
                     _midx=$(row_to_item "$_my")
-                    if [ "$_midx" -ge 0 ] && [ "$_midx" != "$SEL" ]; then SEL=$_midx; draw; fi
+                    [ "$_midx" -ge 0 ] && move_to "$_midx"
                 fi
             elif [ "$_mfin" = "m" ]; then
                 if [ "$ARMED" = "1" ]; then

@@ -361,6 +361,12 @@ show_one_commits() { # dir, label
         echo "(not a git repo)" > "$logfile"
     fi
     case "$UI" in
+        hover)
+            # Scrollable mouse viewer (wheel/arrows/PgUp/PgDn, click = back).
+            "$CFG_DIR/scripts/hover-menu.sh" --info \
+                --title "Commits: $label" --prompt "$(cat "$logfile")" \
+                --fg "$H_FG" --accent "$ACCENT" || true
+            ;;
         dialog)
             box_w
             local h=$((_H - 4))
@@ -438,8 +444,8 @@ export_noctalia() {
 
 ensure_bash_scripts || exit 1
 
-# Double-framed banner, adaptive width, centered. $1..$n = lines.
-dbox() {
+# Rounded startup banner in the same style as hover-menu.
+banner() {
     term_size
     local w=$((_W - 12))
     [ "$w" -gt 58 ] && w=58
@@ -450,24 +456,25 @@ dbox() {
     printf -v pad '%*s' "$left" ''
     local rule=""
     printf -v rule '%*s' "$w" ''
-    rule=${rule// /═}
-    echo "${pad}╔${rule}╗"
+    rule=${rule// /─}
+    echo "${pad}╭${rule}╮"
     local line l g
     for line in "$@"; do
         l=${#line}
         g=$((w - l - 2))
         [ "$g" -lt 0 ] && g=0
-        printf '%s║ %s%*s ║\n' "$pad" "$line" "$g" ''
+        printf '%s│ %s%*s │\n' "$pad" "$line" "$g" ''
     done
-    echo "${pad}╚${rule}╝"
+    echo "${pad}╰${rule}╯"
 }
 
 while true; do
     clear
-    dbox "Config Manager  ·  Niri + Noctalia" \
-         "ui: $UI${DIALOG_VER:+ ($DIALOG_VER)}  ·  ${_W:-?}x${_H:-?}" \
-         "" \
-         "… Checking upstream..."
+    term_size
+    banner "Config Manager  ·  Niri + Noctalia" \
+           "ui: $UI${DIALOG_VER:+ ($DIALOG_VER)}  ·  ${_W}x${_H}" \
+           "" \
+           "… Checking upstream..."
     build_status
 
     default_item="update"
