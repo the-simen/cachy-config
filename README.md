@@ -54,8 +54,9 @@ menu (`applications/config-manager.desktop`):
   local changes;
 - runs `cachyos/install.sh` (full install), `cachyos/update.sh`
   (repos + missing packages from `packages/`, live Noctalia settings
-  are never touched) or applies the repo Noctalia config explicitly
-  (with a timestamped backup of the live file) — all with live output;
+  are never touched), applies the repo Noctalia config explicitly
+  (with a timestamped backup of the live file) or exports the live
+  settings back into `noctalia/config.toml.full` — all with live output;
 - commit list shows subject + body snippet; full bodies (last 5 per repo)
   open in a scrollable viewer via the Commits item.
 

@@ -1106,7 +1106,8 @@ umbriel_overview_type_to_launch_enabled = false
         "google-photos",
         "onlyoffice-desktopeditors",
         "com.heroicgameslauncher.hgl",
-        "com.obsproject.Studio"
+        "com.obsproject.Studio",
+        "config-manager"
     ]
     provider_prefix = "/"
     show_app_actions = true

@@ -341,6 +341,39 @@ show_commits() {
     rm -f "$logfile"
 }
 
+# ---------------- export live config to repo ----------------
+
+# Snapshot ~/.local/state/noctalia/settings.toml into the tracked
+# noctalia/config.toml.full (the reverse of apply_noctalia).
+# Does not commit: review with git diff / Config Manager Commits, then
+# commit and push yourself.
+export_noctalia() {
+    local live="$HOME/.local/state/noctalia/settings.toml"
+    local repo="$CFG_DIR/noctalia/config.toml.full"
+    if [ ! -f "$live" ]; then
+        ui_msg "Note" "Live Noctalia settings not found:\n$live" 3
+        return 0
+    fi
+    if ! ui_yesno "Export Noctalia config" "Copy the LIVE Noctalia settings\ninto the repo snapshot?\n\nlive:  ~/.local/state/noctalia/settings.toml\nrepo:  noctalia/config.toml.full\n\nReview the result with git diff\nbefore committing." 8; then
+        return 0
+    fi
+    clear
+    hr "═"; center "◆ Export Noctalia config ◆"; hr "═"
+    cp -p "$live" "$repo" || {
+        ui_msg "Failed ✗" "Could not copy live settings to repo." 2
+        return 1
+    }
+    if ! python3 -c "import tomllib; tomllib.load(open('$repo','rb'))" 2>/dev/null; then
+        ui_msg "Failed ✗" "Exported file is not valid TOML.\nLive settings left untouched." 3
+        return 1
+    fi
+    local stat
+    stat=$(git -C "$CFG_DIR" diff --stat -- noctalia/config.toml.full 2>/dev/null | tail -2)
+    echo ""
+    hr "─"
+    ui_msg "Done ✓" "\\Z2Repo snapshot updated from live settings.\\Zn\n\n$stat\n\nReview, commit and push when ready." 7
+}
+
 # ---------------- main loop ----------------
 
 ensure_bash_scripts || exit 1
@@ -361,6 +394,7 @@ while true; do
         "install"  "Full install — setup from scratch" \
         "update"   "Update all — repos + missing packages" \
         "noctalia" "Apply repo Noctalia config" \
+        "export"   "Export live Noctalia config to repo" \
         "commits"  "Recent commits — subjects + bodies" \
         "quit"     "Quit") || { clear; exit 0; }
 
@@ -377,6 +411,9 @@ while true; do
             ;;
         noctalia)
             apply_noctalia
+            ;;
+        export)
+            export_noctalia
             ;;
         commits)
             show_commits
