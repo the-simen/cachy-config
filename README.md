@@ -60,11 +60,12 @@ menu (`applications/config-manager.desktop`):
 - commit list shows subject + body snippet; full bodies (last 5 per repo)
   open in a scrollable viewer via the Commits item.
 
-UI is `dialog` (mouse-clickable menus) with `gum` / plain-prompt
-fallbacks. Backend scripts: `scripts/config-manager.sh`,
-`scripts/open_config_manager.sh` (ghostty window, floating rule in
-`niri/cfg/rules.kdl` + `hypr/hyprland/rules.lua`, same size class as
-Web App Creator).
+UI is a native hover menu (`scripts/hover-menu.sh`: mouse hover
+highlights, click confirms instantly, vim keys, rounded truecolor
+box in the live Noctalia palette) with `dialog` (mouse-clickable),
+`gum` and plain-prompt fallbacks. Backend scripts: `scripts/config-manager.sh`,
+`scripts/open_config_manager.sh` (kitty window, own 800×600 floating
+rule in `niri/cfg/rules.kdl` + `hypr/hyprland/rules.lua`).
 
 ## Contents
 

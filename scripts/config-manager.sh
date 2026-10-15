@@ -15,6 +15,11 @@
 
 set -uo pipefail
 
+# Byte-exact UTF-8 output must not depend on the caller's locale.
+if [[ "${LC_ALL:-}" != *UTF-8 && "${LANG:-}" != *UTF-8 && "${LC_CTYPE:-}" != *UTF-8 ]]; then
+    export LC_ALL=C.UTF-8
+fi
+
 BS_DIR="$HOME/bash-scripts"
 CACHY_DIR="$BS_DIR/cachyos"
 CFG_DIR="$HOME/.config"
@@ -39,9 +44,11 @@ box_w() {
     [ "$BW" -lt 40 ] && BW=40
 }
 
-hr() { # full-width rule, $1 = char
+hr() { # full-width rule, $1 = char (pure bash: tr mangles multibyte under C locales)
     term_size
-    printf '%*s' "$_W" '' | tr ' ' "${1:-─}"
+    local c="${1:-─}" s
+    printf -v s '%*s' "$_W" ''
+    echo "${s// /$c}"
 }
 
 center() { # $1 = text -> centered line
@@ -56,17 +63,21 @@ center() { # $1 = text -> centered line
 
 UI="plain"
 DIALOG_VER=""
-if command -v dialog &>/dev/null; then
+if [[ -t 0 && -t 2 ]] && [ -x "$CFG_DIR/scripts/hover-menu.sh" ]; then
+    UI="hover"
+elif command -v dialog &>/dev/null; then
     UI="dialog"
     DIALOG_VER=$(dialog --version 2>&1 | head -1)
 elif command -v gum &>/dev/null; then
     UI="gum"
 fi
 
-# Theme accent for gum/plain fallback (live Noctalia primary or pink 212).
-ACCENT="212"
+# Theme colors for hover/gum UI (live Noctalia palette, pink fallback).
+ACCENT="#ebdbb2"
+H_FG="#ffffff"
 if [ -f "$CFG_DIR/noctalia/colors.json" ]; then
-    ACCENT=$(python3 -c "import json;print(json.load(open('$CFG_DIR/noctalia/colors.json')).get('mPrimary','#ff5faf'))" 2>/dev/null || echo "212")
+    ACCENT=$(python3 -c "import json;print(json.load(open('$CFG_DIR/noctalia/colors.json')).get('mPrimary','#ebdbb2'))" 2>/dev/null || echo "#ebdbb2")
+    H_FG=$(python3 -c "import json;print(json.load(open('$CFG_DIR/noctalia/colors.json')).get('mOnSurface','#ffffff'))" 2>/dev/null || echo "#ffffff")
 fi
 
 # dialog follows the Noctalia palette: regenerate DIALOGRC every launch,
@@ -84,6 +95,11 @@ fi
 # ui_msg "title" "text" lines — heights explicit, text kept short by callers.
 ui_msg() {
     case "$UI" in
+        hover)
+            "$CFG_DIR/scripts/hover-menu.sh" --info \
+                --title "$1" --prompt "$2" \
+                --fg "$H_FG" --accent "$ACCENT" || true
+            ;;
         dialog)
             box_w
             local h=$(($3 + 7))
@@ -118,6 +134,13 @@ ui_info() { # transient text
 
 ui_yesno() { # title, text, lines -> rc 0 = yes
     case "$UI" in
+        hover)
+            local yn
+            yn=$("$CFG_DIR/scripts/hover-menu.sh" --title "$1" --prompt "$2" \
+                --fg "$H_FG" --accent "$ACCENT" --hint "hover / ↑↓jk · click / Enter = Yes" \
+                yes "Yes" no "No") || return 1
+            [ "$yn" = "yes" ]
+            ;;
         dialog)
             box_w
             local h=$(($3 + 7))
@@ -142,6 +165,27 @@ ui_menu() {
     local prompt="$1" lines="$2" _default="$3"
     shift 3
     case "$UI" in
+        hover)
+            local tags=() labels=() pairs=() init=0 i
+            while [ $# -ge 2 ]; do
+                tags+=("$1"); labels+=("$2"); pairs+=("$1" "$2"); shift 2
+            done
+            for i in "${!tags[@]}"; do
+                [ "${tags[$i]}" = "$_default" ] && init=$i
+            done
+            local pick rc
+            pick=$("$CFG_DIR/scripts/hover-menu.sh" --title "Config Manager" \
+                --prompt "$prompt" --fg "$H_FG" --accent "$ACCENT" \
+                --select "$init" "${pairs[@]}")
+            rc=$?
+            if [ "$rc" -eq 2 ]; then
+                UI=dialog  # terminal unsuitable for hover: fall back once
+                ui_menu "$prompt" "$lines" "$_default" "${pairs[@]}"
+                return $?
+            fi
+            [ "$rc" -eq 0 ] && echo "$pick"
+            return "$rc"
+            ;;
         dialog)
             box_w
             local n=$(($# / 2))
@@ -149,7 +193,7 @@ ui_menu() {
             [ "$mh" -gt "$((_H - 2))" ] && mh=$((_H - 2))
             dialog --clear --backtitle "$BACKTITLE" --colors \
                 --title " Config Manager " \
-                --hline "↑↓ / click to choose, Enter to confirm" \
+                --hline "↑↓/jk move · Enter/C-j select · click works too" \
                 --ok-label "Select" --cancel-label "Quit" \
                 --default-item "$_default" \
                 --menu "$prompt" "$mh" "$BW" "$n" "$@" 3>&2 2>&1 1>&3
@@ -179,9 +223,9 @@ ui_menu() {
 
 # ---------------- git helpers ----------------
 
-repo_commit() { # dir maxlen -> "abc1234 2026-10-15 subject — body…" (one short line)
+repo_commit() { # dir maxlen -> "subject — body…" (one short line, no hash/date)
     local maxlen="${2:-60}" out
-    out=$(git -C "$1" log -1 --format="%h %ad %s%n%b" --date=short 2>/dev/null \
+    out=$(git -C "$1" log -1 --format="%s%n%b" 2>/dev/null \
         | awk 'NR==1{subj=$0;next} NF{body=(body ? body" " : "")$0} END{print subj (body ? " — "body : "")}') \
         || { echo "—"; return 0; }
     [ -z "$out" ] && { echo "—"; return 0; }
@@ -227,9 +271,10 @@ config_installed() {
 # Sets STATUS_LINES (count) and STATUS_TEXT. One fetch per call.
 build_status() {
     box_w
-    local subj=$((BW - 34))
-    [ "$subj" -lt 16 ] && subj=16
-    [ "$subj" -gt 60 ] && subj=60
+    # "config  " label is 8 wide + dialog prompt padding: use full width.
+    local subj=$((BW - 14))
+    [ "$subj" -lt 20 ] && subj=20
+    [ "$subj" -gt 70 ] && subj=70
 
     local online=1
     repo_fetch "$CFG_DIR" || online=0
@@ -254,9 +299,9 @@ build_status() {
         dirty_s="\\Z3● $dirty changed\\Zn"
     fi
 
-    STATUS_TEXT="config  $(repo_commit "$CFG_DIR" "$subj")
-nvim    $(repo_commit "$NVIM_DIR" "$subj")
-scripts $(repo_commit "$BS_DIR" "$subj")
+    STATUS_TEXT="\\Zb\\Z6config\\Zn  $(repo_commit "$CFG_DIR" "$subj")
+\\Zb\\Z6nvim\\Zn    $(repo_commit "$NVIM_DIR" "$subj")
+\\Zb\\Z6scripts\\Zn $(repo_commit "$BS_DIR" "$subj")
 
 $behind_s   $dirty_s"
     STATUS_LINES=5
@@ -303,33 +348,31 @@ apply_noctalia() {
 
 # ---------------- commit viewer ----------------
 
-# Scrollable viewer with full subjects + bodies (last 5 per repo).
-# dialog has no collapsible tree; this is the honest equivalent:
-# one-line summary in the menu, full text here.
-show_commits() {
-    local logfile pair d label
+# Submenu first (which repo?), then one scrollable window with full
+# subjects + bodies (last 5). dialog has no collapsible tree; this is
+# the honest equivalent: one-line summary in the main menu, full text
+# here, repo by repo.
+show_one_commits() { # dir, label
+    local d="$1" label="$2" logfile
     logfile=$(mktemp)
-    for pair in "$CFG_DIR|cachy-config" "$NVIM_DIR|nvim" "$BS_DIR|bash-scripts"; do
-        d="${pair%%|*}"
-        label="${pair##*|}"
-        echo "━━━ $label ━━━" >> "$logfile"
-        if [ -d "$d/.git" ]; then
-            git -C "$d" log -5 --format="● %h %ad%n  %s%n%b%n" --date=short >> "$logfile" 2>/dev/null
-        else
-            echo "(not a git repo)" >> "$logfile"
-        fi
-    done
+    if [ -d "$d/.git" ]; then
+        git -C "$d" log -5 --format="● %h %ad%n  %s%n%b%n" --date=short > "$logfile" 2>/dev/null
+    else
+        echo "(not a git repo)" > "$logfile"
+    fi
     case "$UI" in
         dialog)
             box_w
             local h=$((_H - 4))
             [ "$h" -lt 10 ] && h=10
-            dialog --backtitle "$BACKTITLE" --colors --title " Recent commits " \
+            dialog --backtitle "$BACKTITLE" --colors \
+                --title " Commits: $label " \
                 --ok-label "Back" --no-cancel \
                 --textbox "$logfile" "$h" "$BW"
             ;;
         *)
             term_size
+            echo "━━━ $label ━━━"
             if command -v less &>/dev/null; then
                 less -R -S "$logfile"
             else
@@ -339,6 +382,23 @@ show_commits() {
             ;;
     esac
     rm -f "$logfile"
+}
+
+show_commits() {
+    while true; do
+        local pick
+        pick=$(ui_menu "Whose commits?" 1 "config" \
+            "config"  "cachy-config" \
+            "nvim"    "nvim" \
+            "scripts" "bash-scripts" \
+            "back"    "Back") || return 0
+        case "$pick" in
+            config)  show_one_commits "$CFG_DIR" "cachy-config" ;;
+            nvim)    show_one_commits "$NVIM_DIR" "nvim" ;;
+            scripts) show_one_commits "$BS_DIR" "bash-scripts" ;;
+            *)       clear; return 0 ;;
+        esac
+    done
 }
 
 # ---------------- export live config to repo ----------------
@@ -378,14 +438,36 @@ export_noctalia() {
 
 ensure_bash_scripts || exit 1
 
+# Double-framed banner, adaptive width, centered. $1..$n = lines.
+dbox() {
+    term_size
+    local w=$((_W - 12))
+    [ "$w" -gt 58 ] && w=58
+    [ "$w" -lt 28 ] && w=28
+    local left=$(( (_W - w - 2) / 2 ))
+    [ "$left" -lt 0 ] && left=0
+    local pad=""
+    printf -v pad '%*s' "$left" ''
+    local rule=""
+    printf -v rule '%*s' "$w" ''
+    rule=${rule// /═}
+    echo "${pad}╔${rule}╗"
+    local line l g
+    for line in "$@"; do
+        l=${#line}
+        g=$((w - l - 2))
+        [ "$g" -lt 0 ] && g=0
+        printf '%s║ %s%*s ║\n' "$pad" "$line" "$g" ''
+    done
+    echo "${pad}╚${rule}╝"
+}
+
 while true; do
     clear
-    hr "═"
-    center "Config Manager  ·  Niri + Noctalia"
-    center "ui: $UI${DIALOG_VER:+ ($DIALOG_VER)}  ·  ${_W:-?}x${_H:-?}"
-    hr "═"
-    echo ""
-    ui_info "Checking upstream..."
+    dbox "Config Manager  ·  Niri + Noctalia" \
+         "ui: $UI${DIALOG_VER:+ ($DIALOG_VER)}  ·  ${_W:-?}x${_H:-?}" \
+         "" \
+         "… Checking upstream..."
     build_status
 
     default_item="update"
