@@ -20,6 +20,7 @@ pairs=(
   "niri/noctalia-default.kdl niri/noctalia.kdl"
   "btop/themes/noctalia-default.theme btop/themes/noctalia.theme"
   "umbriel/noctalia-default.toml umbriel/noctalia.toml"
+  "dialog/noctalia-default dialog/noctalia"
 )
 
 restored=0
