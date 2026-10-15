@@ -40,6 +40,31 @@ stack is the baseline: Niri as the compositor, Noctalia as the shell
 > "Symlinks" section — otherwise launchers / tmux will silently use
 > stale copies.
 
+## Config Manager (TUI)
+
+Prefer clicks over the terminal? Launch **Config Manager** from the app
+menu (`applications/config-manager.desktop`):
+
+- on start it clones `~/bash-scripts` if missing, otherwise pulls updates;
+- paints its own `dialog` UI in the live Noctalia palette
+  (`scripts/generate-dialogrc.py` quantizes `noctalia/colors.json`
+  into `dialog/noctalia` on every launch);
+- shows repo status right in the main menu: last commits of
+  `bash-scripts`, `cachy-config`, `nvim`, upstream behind/ahead,
+  local changes;
+- runs `cachyos/install.sh` (full install), `cachyos/update.sh`
+  (repos + missing packages from `packages/`, live Noctalia settings
+  are never touched) or applies the repo Noctalia config explicitly
+  (with a timestamped backup of the live file) — all with live output;
+- commit list shows subject + body snippet; full bodies (last 5 per repo)
+  open in a scrollable viewer via the Commits item.
+
+UI is `dialog` (mouse-clickable menus) with `gum` / plain-prompt
+fallbacks. Backend scripts: `scripts/config-manager.sh`,
+`scripts/open_config_manager.sh` (ghostty window, floating rule in
+`niri/cfg/rules.kdl` + `hypr/hyprland/rules.lua`, same size class as
+Web App Creator).
+
 ## Contents
 
 - `niri/` — Niri compositor config. `config.kdl` only `include`s
@@ -57,7 +82,11 @@ stack is the baseline: Niri as the compositor, Noctalia as the shell
 - `applications/` — custom `.desktop` launchers, tracked in git here
   but consumed from `~/.local/share/applications` **via symlink**.
   See "Symlinks" — this is the most commonly missed step.
+- `icons/` — custom launcher icons (Papirus-based SVGs):
+  `config-manager.svg`, `web-app-creator.svg`, referenced by absolute
+  path from the matching `.desktop` files.
 - `scripts/` — helper scripts (Noctalia install / palette restore,
+  `config-manager.sh` TUI, `generate-dialogrc.py`,
   `web_app_creator.sh`, `system_update.sh`, `gamemode.sh`,
   tmux resurrect save/pick, `systemd_autostart.sh`, etc.).
 - `systemd/user/` — user units: `ssh-agent`, `cliphist`,
@@ -101,7 +130,7 @@ Notes:
 
 - Only a curated subset of `applications/*.desktop` is tracked
   (see `.gitignore`: `AmneziaVPN`, `btop`, `discord`, `OpenRGB`,
-  `telegram`, `steam`, `web-app-creator`). Wine/Steam
+  `telegram`, `steam`, `web-app-creator`, `config-manager`). Wine/Steam
   auto-generated entries, `mimeinfo.cache` and `userapp-*` files are
   intentionally untracked machine noise.
 - Same symlink philosophy applies to `~/.gitconfig`:
@@ -119,9 +148,12 @@ To install the config from this repository:
 ./scripts/install_noctalia_conf.sh noctalia/config.toml.full
 ```
 
-The script removes the current `settings.toml` and copies the given file
-in its place. Then restart the Noctalia shell.
-(The install script runs this for you.)
+The script backs up the current `settings.toml` next to itself
+(`*.backup_*`) and copies the given file in its place.
+Then restart the Noctalia shell.
+(The install script runs this for you; `cachyos/update.sh`
+deliberately never touches the live settings — apply explicitly
+from Config Manager when you really want the repo snapshot.)
 
 ## Noctalia-generated palettes
 
@@ -130,7 +162,9 @@ in git (see `.gitignore`): `ghostty/themes/noctalia`,
 `hypr/noctalia.lua`, `kitty/themes/noctalia.conf`,
 `tmux/themes/noctalia-palette.conf`, `superfile/theme/noctalia.toml`,
 `mpv/script-opts/modernz.conf`, `niri/noctalia.kdl`,
-`btop/themes/noctalia.theme`, `umbriel/noctalia.toml`, etc.
+`btop/themes/noctalia.theme`, `umbriel/noctalia.toml`,
+`dialog/noctalia` (quantized to dialog's 16 named colors by
+`scripts/generate-dialogrc.py` on every Config Manager launch), etc.
 (`templates.toml` maps each `templates/*` input to its rendered
 output, including vesktop/Vencord CSS, the Telegram theme and
 `nvim/lua/themes/noctalia.lua`.)
