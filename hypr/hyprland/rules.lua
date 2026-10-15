@@ -42,6 +42,7 @@ local float_705_620_tag = "float_705_620"
 local float_675_430_tag = "float_675_430"
 local float_740_700_tag = "float_740_700"
 local float_647_700_tag = "float_647_700"
+local float_800_600_tag = "float_800_600"
 
 ----------------------
 ---- Window rules ----
@@ -179,7 +180,8 @@ tagged_rule(float_media_tag, { "io.github.celluloid_player.Celluloid|vlc" }, "cl
 tagged_rule(float_705_620_tag, { "org.gnome.Calculator" }, "class")
 tagged_rule(float_675_430_tag, { "org.gnome.Decibels" }, "class")
 tagged_rule(float_740_700_tag, { "karing" }, "class")
-tagged_rule(float_647_700_tag, { "Web App Creator|Config Manager" }, "title")
+tagged_rule(float_647_700_tag, { "Web App Creator" }, "title")
+tagged_rule(float_800_600_tag, { "Config Manager" }, "title")
 
 -----------------------
 ---- Per app rules ----
@@ -244,6 +246,7 @@ create_tag(float_705_620_tag, { float = true, size = "705 620", center = true })
 create_tag(float_675_430_tag, { float = true, size = "675 430", center = true })
 create_tag(float_740_700_tag, { float = true, size = "740 700", center = true })
 create_tag(float_647_700_tag, { float = true, size = "647 700", center = true })
+create_tag(float_800_600_tag, { float = true, size = "800 600", center = true })
 
 -------------------------
 ---- Workspace rules ----

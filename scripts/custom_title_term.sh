@@ -35,9 +35,9 @@ fi
 
 TITLE="$TITLE"
 
-# --- launch ghostty ---
+# --- launch kitty ---
 if [[ -n "$CMD" ]]; then
-  ghostty --title="$TITLE" -e bash -lc "$CMD; exec bash" &
+  kitty --title="$TITLE" bash -lc "$CMD; exec bash" &
 else
-  ghostty --title="$TITLE" &
+  kitty --title="$TITLE" &
 fi
