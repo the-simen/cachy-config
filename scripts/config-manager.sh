@@ -5,8 +5,8 @@
 #   1. Ensures ~/bash-scripts exists (clones it if missing, pulls if present).
 #   2. Applies the live Noctalia palette to dialog itself (DIALOGRC).
 #   3. Shows repo status inside the main menu (commits, upstream, changes).
-#   4. Runs cachyos/install.sh, cachyos/update.sh or applies the repo
-#      Noctalia config — with live output.
+#   4. Runs cachyos/update.sh, force-resets repos to upstream or applies
+#      the repo Noctalia config — with live output.
 #
 # UI backend: dialog (mouse-clickable) -> gum -> plain bash prompts.
 # All dialogs are sized from the current terminal (tput), so the UI
@@ -57,6 +57,36 @@ center() { # $1 = text -> centered line
     pad=$(( (_W - ${#text}) / 2 ))
     [ "$pad" -lt 0 ] && pad=0
     printf '%*s%s\n' "$pad" '' "$text"
+}
+
+# Rounded startup banner in the same style as hover-menu.
+# Vertically centered on screen, every line centered in the box.
+banner() {
+    term_size
+    local w=$((_W - 12))
+    [ "$w" -gt 58 ] && w=58
+    [ "$w" -lt 28 ] && w=28
+    local left=$(( (_W - w - 2) / 2 ))
+    [ "$left" -lt 0 ] && left=0
+    local pad=""
+    printf -v pad '%*s' "$left" ''
+    local rule=""
+    printf -v rule '%*s' "$w" ''
+    rule=${rule// /─}
+    local top=$(( (_H - ($# + 2)) / 2 ))
+    [ "$top" -lt 0 ] && top=0
+    local t
+    for ((t = 0; t < top; t++)); do echo; done
+    echo "${pad}╭${rule}╮"
+    local line l g li gr
+    for line in "$@"; do
+        l=${#line}
+        g=$((w - l - 2))
+        [ "$g" -lt 0 ] && g=0
+        li=$((g / 2)); gr=$((g - li))
+        printf '%s│ %*s%s%*s │\n' "$pad" "$li" '' "$line" "$gr" ''
+    done
+    echo "${pad}╰${rule}╯"
 }
 
 # ---------------- UI backend ----------------
@@ -126,6 +156,7 @@ ui_msg() {
 
 ui_info() { # transient text
     case "$UI" in
+        hover) banner "$1" ;;
         dialog) dialog --backtitle "$BACKTITLE" --infobox "$1" 3 50 ;;
         gum) gum style --foreground "$ACCENT" "$1" ;;
         *) echo "… $1" ;;
@@ -330,7 +361,8 @@ run_task() { # title, cmd...
 }
 
 apply_noctalia() {
-    if ! ui_yesno "Apply Noctalia config" "Replace the live Noctalia settings\nwith noctalia/config.toml.full?\n\nThe current live file is backed up\nnext to it (*.backup_*).\nThen \\Zbrestart the Noctalia shell\\Zn." 7; then
+    local live="$HOME/.local/state/noctalia/settings.toml" bk
+    if ! ui_yesno "Apply Noctalia config" "Replace the live Noctalia settings\nwith noctalia/config.toml.full?\n\nThe active theme is kept.\nThe current live file is backed up as\n$live.backup_<date>." 8; then
         return 0
     fi
     clear
@@ -340,7 +372,12 @@ apply_noctalia() {
     echo ""
     hr "─"
     if [ "$rc" -eq 0 ]; then
-        ui_msg "Done ✓" "\\Z2Live Noctalia config replaced.\\Zn\n\nRestart the Noctalia shell to apply it.\nTheme assets re-render on the next\ntheme switch." 6
+        bk=$(ls -t "$live".backup_* 2>/dev/null | head -1)
+        if [ -n "$bk" ]; then
+            ui_msg "Done ✓" "\\Z2Live Noctalia config replaced, active theme kept.\\Zn\n\nBackup:\n$bk\n\nThe shell config is reloaded automatically;\nif something looks off, restart Noctalia." 8
+        else
+            ui_msg "Done ✓" "\\Z2Live Noctalia config replaced, active theme kept.\\Zn\n\nThe shell config is reloaded automatically;\nif something looks off, restart Noctalia." 6
+        fi
     else
         ui_msg "Failed ✗" "install_noctalia_conf.sh failed (code $rc)." 2
     fi
@@ -440,33 +477,47 @@ export_noctalia() {
     ui_msg "Done ✓" "\\Z2Repo snapshot updated from live settings.\\Zn\n\n$stat\n\nReview, commit and push when ready." 7
 }
 
+# ---------------- reinstall (force-reset to upstream) ----------------
+
+# Hard-resets one repo to its upstream HEAD, discarding local changes.
+force_reset_repo() { # dir, label -> 0 ok
+    local d="$1" label="$2" up
+    if [ ! -d "$d/.git" ]; then
+        echo "⚠️ $label: $d is not a git repo, skipping."
+        return 0
+    fi
+    up=$(git -C "$d" rev-parse --abbrev-ref --symbolic-full-name '@{u}' 2>/dev/null) \
+        || { echo "⚠️ $label: no upstream branch, skipping."; return 0; }
+    echo "🔄 $label: fetching origin..."
+    timeout 60 git -C "$d" fetch --quiet origin 2>/dev/null \
+        || { echo "❌ $label: fetch failed (offline?). Skipping."; return 1; }
+    echo "⏪ $label: reset --hard $up + clean untracked..."
+    git -C "$d" reset --quiet --hard "$up" \
+        || { echo "❌ $label: reset failed."; return 1; }
+    git -C "$d" clean -fdq \
+        || echo "⚠️ $label: clean had issues, check 'git status'."
+    echo "✅ $label: now at $(git -C "$d" rev-parse --short HEAD)."
+    return 0
+}
+
+do_reinstall() {
+    local rc=0
+    force_reset_repo "$BS_DIR" "bash-scripts" || rc=1
+    force_reset_repo "$CFG_DIR" "cachy-config" || rc=1
+    force_reset_repo "$NVIM_DIR" "nvim" || rc=1
+    return "$rc"
+}
+
+reinstall_all() {
+    if ! ui_yesno "Reinstall" "Force-reset all repos to the latest\\nGitHub commits?\\n\\n\\Z1All local changes will be lost:\\Zn\\ntracked edits AND new files.\\nNo backup is made." 7; then
+        return 0
+    fi
+    run_task "Reinstall to upstream" do_reinstall
+}
+
 # ---------------- main loop ----------------
 
 ensure_bash_scripts || exit 1
-
-# Rounded startup banner in the same style as hover-menu.
-banner() {
-    term_size
-    local w=$((_W - 12))
-    [ "$w" -gt 58 ] && w=58
-    [ "$w" -lt 28 ] && w=28
-    local left=$(( (_W - w - 2) / 2 ))
-    [ "$left" -lt 0 ] && left=0
-    local pad=""
-    printf -v pad '%*s' "$left" ''
-    local rule=""
-    printf -v rule '%*s' "$w" ''
-    rule=${rule// /─}
-    echo "${pad}╭${rule}╮"
-    local line l g
-    for line in "$@"; do
-        l=${#line}
-        g=$((w - l - 2))
-        [ "$g" -lt 0 ] && g=0
-        printf '%s│ %s%*s │\n' "$pad" "$line" "$g" ''
-    done
-    echo "${pad}╰${rule}╯"
-}
 
 while true; do
     clear
@@ -474,13 +525,12 @@ while true; do
     banner "Config Manager  ·  Niri + Noctalia" \
            "ui: $UI${DIALOG_VER:+ ($DIALOG_VER)}  ·  ${_W}x${_H}" \
            "" \
-           "… Checking upstream..."
+           "Checking upstream…"
     build_status
 
     default_item="update"
-    config_installed || default_item="install"
     choice=$(ui_menu "$STATUS_TEXT" "$STATUS_LINES" "$default_item" \
-        "install"  "Full install — setup from scratch" \
+        "reinstall" "Reinstall — force-reset repos to GitHub" \
         "update"   "Update all — repos + missing packages" \
         "noctalia" "Apply repo Noctalia config" \
         "export"   "Export live Noctalia config to repo" \
@@ -488,12 +538,12 @@ while true; do
         "quit"     "Quit") || { clear; exit 0; }
 
     case "$choice" in
-        install)
-            run_task "Full install" "$CACHY_DIR/install.sh"
+        reinstall)
+            reinstall_all
             ;;
         update)
             if ! config_installed; then
-                ui_msg "Note" "No cachy-config install in ~/.config.\nRun \\ZbFull install\\Zn first." 3
+                ui_msg "Note" "No cachy-config install in ~/.config.\nRun \\ZbReinstall\\Zn first." 3
                 continue
             fi
             run_task "Update all" "$CACHY_DIR/update.sh"

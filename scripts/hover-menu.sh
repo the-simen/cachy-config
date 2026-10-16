@@ -41,6 +41,22 @@ while [ $# -gt 0 ]; do
     esac
 done
 
+# dialog/echo -e convention used by all callers: \n inside texts is a line
+# break (bash double quotes keep it a literal backslash-n). Expand those to
+# real newlines up front; \\ stays a literal backslash. Must run BEFORE
+# z2ansi (patterns don't overlap: \Zn is backslash-Z-n, not backslash-n).
+nl_conv() {
+    local s="$1"
+    s=${s//\\\\/$'\x01'}
+    s=${s//\\n/$'\n'}
+    s=${s//$'\x01'/\\}
+    printf '%s' "$s"
+}
+TITLE=$(nl_conv "$TITLE")
+PROMPT=$(nl_conv "$PROMPT")
+HINT=$(nl_conv "$HINT")
+for _i in "${!LABELS[@]}"; do LABELS[$_i]=$(nl_conv "${LABELS[$_i]}"); done
+
 # dialog-style \Z sequences (passed through from config-manager) -> ANSI.
 z2ansi() {
     sed -e 's/\\Z0/\x1b[30m/g' -e 's/\\Z1/\x1b[31m/g' \
@@ -158,6 +174,70 @@ _PWL=()
 _LWLABS=()
 _HW=0
 
+# ANSI-aware helpers (menu overflow): wrap stdin to $1 visible cells,
+# truncate $2 to $1 visible cells (appending … when cut).
+wrap_ansi() {
+    python3 -c '
+import sys, re, unicodedata as u
+wrapw = int(sys.argv[1])
+ansi = re.compile(r"(\x1b\[[0-9;]*m)")
+data = sys.stdin.read().split("\n")
+if data and data[-1] == "":
+    data = data[:-1]
+for line in data:
+    line = line.replace("\t", "  ")
+    toks = ansi.split(line)
+    cur = ""
+    curw = 0
+    active = ""
+    for t in toks:
+        if not t:
+            continue
+        if ansi.fullmatch(t):
+            cur += t
+            if t == "\x1b[0m":
+                active = ""
+            else:
+                active += t
+            continue
+        for ch in t:
+            cw = 2 if u.east_asian_width(ch) in "WF" else 1
+            if curw + cw > wrapw and curw > 0:
+                print(cur)
+                cur = active
+                curw = 0
+            cur += ch
+            curw += cw
+    print(cur)
+' "$1"
+}
+trunc_ansi() { # width, text...
+    python3 -c '
+import sys, re, unicodedata as u
+wmax = int(sys.argv[1])
+ansi = re.compile(r"\x1b\[[0-9;]*m")
+for s in sys.argv[2:]:
+    vis = ansi.sub("", s)
+    vw = sum(2 if u.east_asian_width(c) in "WF" else 1 for c in vis)
+    if vw <= wmax:
+        print(s)
+        continue
+    out = ""
+    curw = 0
+    for m in re.finditer(r"\x1b\[[0-9;]*m|.", s, re.S):
+        t = m.group(0)
+        if ansi.fullmatch(t):
+            out += t
+            continue
+        cw = 2 if u.east_asian_width(t) in "WF" else 1
+        if curw + cw > wmax - 1:
+            break
+        out += t
+        curw += cw
+    print(out + "…")
+' "$@"
+}
+
 layout() {
     local W H
     W=$(cols); H=$(rows)
@@ -232,6 +312,68 @@ PYEOF
     fi
     [ "$L_TFILL" -lt 0 ] && L_TFILL=0
 
+    # Fit content into the clamped box: a prompt line wider than the box
+    # overflows, the terminal wraps it and absolute positioning smears
+    # text around the window (e.g. long commit subjects in a narrow
+    # terminal). Wrap from the pristine copy so resize stays idempotent.
+    if [ "$INFO" -eq 0 ] && command -v python3 &>/dev/null; then
+        if [ -z "${_LAYOUT_RAW_SAVED:-}" ]; then
+            _PROMPT_RAW="$PROMPT"
+            _LABELS_RAW=("${LABELS[@]}")
+            _HINT_RAW="$HINT"
+            _TITLE_RAW="$TITLE"
+            _LAYOUT_RAW_SAVED=1
+        else
+            PROMPT="$_PROMPT_RAW"
+            LABELS=("${_LABELS_RAW[@]}")
+            HINT="$_HINT_RAW"
+            TITLE="$_TITLE_RAW"
+        fi
+        local _wrapw=$((L_INNER - 2))
+        [ "$_wrapw" -lt 10 ] && _wrapw=10
+        if [ -n "$PROMPT" ]; then
+            PROMPT=$(printf '%s' "$PROMPT" | wrap_ansi "$_wrapw")
+            mapfile -t _PWL < <(python3 - "$PROMPT" <<'PYEOF'
+import sys, re, unicodedata as u
+def w(s):
+    s = re.sub(r'\x1b\[[0-9;]*m', '', s)
+    return sum(2 if u.east_asian_width(c) in 'WF' else 1 for c in s)
+for line in sys.argv[1].split('\n'):
+    print(w(line))
+PYEOF
+            )
+        else
+            _PWL=()
+        fi
+        local _i _lw
+        for _i in "${!LABELS[@]}"; do
+            _lw=${_LWLABS[$_i]:-0}
+            if [ "$_lw" -gt "$((L_INNER - 4))" ] && [ "$L_INNER" -gt 14 ]; then
+                LABELS[$_i]=$(trunc_ansi "$((L_INNER - 4))" "${LABELS[$_i]}")
+            fi
+        done
+        if [ "${#LABELS[@]}" -gt 0 ]; then
+            mapfile -t _LWLABS < <(python3 - "${LABELS[@]}" <<'PYEOF'
+import sys, re, unicodedata as u
+def w(s):
+    s = re.sub(r'\x1b\[[0-9;]*m', '', s)
+    return sum(2 if u.east_asian_width(c) in 'WF' else 1 for c in s)
+for a in sys.argv[1:]:
+    print(w(a))
+PYEOF
+            )
+        fi
+        if [ "$(vlen "$HINT")" -gt "$((L_INNER - 2))" ] && [ "$L_INNER" -gt 12 ]; then
+            HINT=$(trunc_ansi "$((L_INNER - 2))" "$HINT")
+        fi
+        _HW=$(vlen "$HINT")
+        if [ -n "$TITLE" ] && [ "$(vlen "$TITLE")" -gt "$((L_INNER - 4))" ] && [ "$L_INNER" -gt 14 ]; then
+            TITLE=$(trunc_ansi "$((L_INNER - 4))" "$TITLE")
+            L_TFILL=$((L_INNER - $(vlen "$TITLE") - 4))
+            [ "$L_TFILL" -lt 0 ] && L_TFILL=0
+        fi
+    fi
+
     L_PPADS=()
     if [ -n "$PROMPT" ]; then
         if [ "$_pyok" -eq 1 ]; then
@@ -292,13 +434,16 @@ PYEOF
 # rows that change — no clear, no flicker under motion floods.
 C_B="" C_T="" C_I="" C_SF="30" C_SB="" C_RST="0"
 
+# Rendered with %b below: content backslashes must be doubled or they
+# become control codes (\n -> newline, \c -> output truncation) and shred
+# the box. Real ESC bytes (ANSI colors) pass through untouched.
 row_str() { # i -> positioned row escape string on stdout
     local i=$1 esc=$'\e'
     local r=$((L_ITEMR + i)) left=$L_LEFT
     if [ "$i" -eq "$SEL" ]; then
-        printf '%s' "${esc}[${r};$((left + 1))H${esc}[${C_B}m│${esc}[${C_SF};${C_SB}m ➤ ${LABELS[$i]}$(spaces "${L_LPADS[$i]}") ${esc}[${C_RST}m${esc}[${C_B}m│${esc}[${C_RST}m"
+        printf '%s' "${esc}[${r};$((left + 1))H${esc}[${C_B}m│${esc}[${C_SF};${C_SB}m ➤ ${LABELS[$i]//\\/\\\\}$(spaces "${L_LPADS[$i]}") ${esc}[${C_RST}m${esc}[${C_B}m│${esc}[${C_RST}m"
     else
-        printf '%s' "${esc}[${r};$((left + 1))H${esc}[${C_B}m│${esc}[${C_I}m   ${LABELS[$i]}$(spaces "${L_LPADS[$i]}") ${esc}[${C_RST}m${esc}[${C_B}m│${esc}[${C_RST}m"
+        printf '%s' "${esc}[${r};$((left + 1))H${esc}[${C_B}m│${esc}[${C_I}m   ${LABELS[$i]//\\/\\\\}$(spaces "${L_LPADS[$i]}") ${esc}[${C_RST}m${esc}[${C_B}m│${esc}[${C_RST}m"
     fi
 }
 
@@ -323,7 +468,7 @@ draw() {
     out+="\e[2J\e[H"               # clear + home (stable coords)
     out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m╭"
     if [ -n "$TITLE" ]; then
-        out+="─ ${esc}[1;${C_T}m${TITLE}${esc}[${C_B}m ─"
+        out+="─ ${esc}[1;${C_T}m${TITLE//\\/\\\\}${esc}[${C_B}m ─"
     fi
     out+="$(rule "$L_TFILL")╮${esc}[${C_RST}m"
     r=$((r + 1))
@@ -331,7 +476,7 @@ draw() {
     if [ -n "$PROMPT" ]; then
         i=0
         while IFS= read -r line; do
-            out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m│ ${esc}[${C_RST}m${line}$(spaces "${L_PPADS[$i]}") ${esc}[${C_B}m│${esc}[${C_RST}m"
+            out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m│ ${esc}[${C_RST}m${line//\\/\\\\}$(spaces "${L_PPADS[$i]}") ${esc}[${C_B}m│${esc}[${C_RST}m"
             r=$((r + 1)); i=$((i + 1))
         done <<<"$(printf '%s\n' "$PROMPT")"
         out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m├${L_RULE}┤${esc}[${C_RST}m"
@@ -346,7 +491,7 @@ draw() {
     if [ "$INFO" -eq 0 ] && [ "$L_HIDEHINT" -eq 0 ]; then
         out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m├${L_RULE}┤${esc}[${C_RST}m"
         r=$((r + 1))
-        out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m│ ${esc}[2m${HINT}$(spaces "$L_HPAD") ${esc}[${C_RST}m${esc}[${C_B}m│${esc}[${C_RST}m"
+        out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m│ ${esc}[2m${HINT//\\/\\\\}$(spaces "$L_HPAD") ${esc}[${C_RST}m${esc}[${C_B}m│${esc}[${C_RST}m"
         r=$((r + 1))
     fi
     out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m╰${L_RULE}╯${esc}[${C_RST}m"
@@ -460,7 +605,7 @@ PYEOF
     out+="\e[2J\e[H"
     out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m╭"
     if [ -n "$TITLE" ]; then
-        out+="─ ${esc}[1;${C_T}m${TITLE}${esc}[${C_B}m ─"
+        out+="─ ${esc}[1;${C_T}m${TITLE//\\/\\\\}${esc}[${C_B}m ─"
     fi
     out+="$(rule "$L_TFILL")╮${esc}[${C_RST}m"
     r=$((r + 1))
@@ -473,7 +618,7 @@ PYEOF
         if [ -z "$i" ]; then
             out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m│$(spaces "$l") ${esc}[${C_B}m│${esc}[${C_RST}m"
         else
-            out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m│ ${esc}[${C_RST}m${i}$(spaces "$l") ${esc}[${C_B}m│${esc}[${C_RST}m"
+            out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m│ ${esc}[${C_RST}m${i//\\/\\\\}$(spaces "$l") ${esc}[${C_B}m│${esc}[${C_RST}m"
         fi
         r=$((r + 1)); bi=$((bi + 1))
     done
@@ -514,6 +659,9 @@ PYEOF
         for _li in "${IL_LINES[@]}"; do _ILWL+=("${#_li}"); done
     fi
 
+    IL_RAW=("${IL_LINES[@]}")
+    _ILRAW_WL=("${_ILWL[@]}")
+
     info_layout() {
         layout
         # Recompute inner width from pager lines too — layout() only sees
@@ -522,13 +670,16 @@ PYEOF
         if [ -n "$TITLE" ]; then maxw=$(vlen "$TITLE"); fi
         l=$(vlen "$HINT")
         [ "$l" -gt "$maxw" ] && maxw=$l
-        for i in "${!_ILWL[@]}"; do
-            l=${_ILWL[$i]}
+        for i in "${!_ILRAW_WL[@]}"; do
+            l=${_ILRAW_WL[$i]}
             [ "$l" -gt "$maxw" ] && maxw=$l
         done
         L_BOXW=$((maxw + 8))
         [ "$L_BOXW" -gt "$((L_W - 4))" ] && L_BOXW=$((L_W - 4))
+        [ "$L_BOXW" -lt 20 ] && L_BOXW=20
         L_INNER=$((L_BOXW - 4))
+        L_LEFT=$(( (L_W - L_BOXW) / 2 ))
+        [ "$L_LEFT" -lt 0 ] && L_LEFT=0
         L_RULE=$(rule "$L_INNER")
         if [ -n "$TITLE" ]; then
             L_TFILL=$((L_INNER - $(vlen "$TITLE") - 4))
@@ -536,26 +687,92 @@ PYEOF
             L_TFILL=$L_INNER
         fi
         [ "$L_TFILL" -lt 0 ] && L_TFILL=0
-        local H=$L_H
-        IL_PAGE=$((H - 6))
-        [ "$IL_PAGE" -lt 3 ] && IL_PAGE=3
+
+        # Wrap long lines to the visible box (L_INNER-2): without this a
+        # single long line overflows the box, terminal wraps it and the
+        # absolute cursor positioning smears text around the window.
+        local wrapw=$((L_INNER - 2))
+        [ "$wrapw" -lt 10 ] && wrapw=10
+        if command -v python3 &>/dev/null; then
+            mapfile -t IL_LINES < <(printf '%s\n' "${IL_RAW[@]}" | python3 -c '
+import sys, re, unicodedata as u
+wrapw = int(sys.argv[1])
+ansi = re.compile(r"(\x1b\[[0-9;]*m)")
+data = sys.stdin.read().split("\n")
+if data and data[-1] == "":
+    data = data[:-1]
+for line in data:
+    line = line.replace("\t", "  ")
+    toks = ansi.split(line)
+    cur = ""
+    curw = 0
+    active = ""
+    for t in toks:
+        if not t:
+            continue
+        if ansi.fullmatch(t):
+            cur += t
+            if t == "\x1b[0m":
+                active = ""
+            else:
+                active += t
+            continue
+        for ch in t:
+            cw = 2 if u.east_asian_width(ch) in "WF" else 1
+            if curw + cw > wrapw and curw > 0:
+                print(cur)
+                cur = active
+                curw = 0
+            cur += ch
+            curw += cw
+    print(cur)
+' "$wrapw")
+            mapfile -t _ILWL < <(python3 - "${IL_LINES[@]}" <<'PYEOF'
+import sys, re, unicodedata as u
+def w(s):
+    s = re.sub(r'\x1b\[[0-9;]*m', '', s)
+    return sum(2 if u.east_asian_width(c) in 'WF' else 1 for c in s)
+for a in sys.argv[1:]:
+    print(w(a))
+PYEOF
+            )
+            [ "${#_ILWL[@]}" -ne "${#IL_LINES[@]}" ] && {
+                _ILWL=()
+                for _li in "${IL_LINES[@]}"; do _ILWL+=("${#_li}"); done
+            }
+        else
+            IL_LINES=("${IL_RAW[@]}")
+            _ILWL=("${_ILRAW_WL[@]}")
+        fi
+
+        # Shrink the window to the content: a full-height page when the
+        # text is short leaves a stray scrollbar below the box and puts
+        # the Back button hit-test below the drawn button.
+        local H=$L_H n=${#IL_LINES[@]}
+        local avail=$((H - 6))
+        [ "$avail" -lt 3 ] && avail=3
+        IL_PAGE=$avail
+        [ "$n" -lt "$IL_PAGE" ] && IL_PAGE=$n
+        [ "$IL_PAGE" -lt 1 ] && IL_PAGE=1
         IL_TOP=$(( (H - (IL_PAGE + 4)) / 2 ))
         [ "$IL_TOP" -lt 1 ] && IL_TOP=1
+        local max=$((n - IL_PAGE))
+        [ "$max" -lt 0 ] && max=0
+        [ "$IL_OFF" -gt "$max" ] && IL_OFF=$max
+        # Back button geometry (used by draw + hover hit-test).
+        # Must match the actual draw_info output:
+        #   row: IL_TOP + 1 (title) + IL_PAGE (content) + 1 (separator) = IL_TOP + IL_PAGE + 2
+        #   col: left+1 (CUP) + 2 ("│ ") + (L_INNER - BTN_W - 2) (pad) = left + L_INNER - BTN_W + 1
+        BTN_LABEL="[ ← Back ]"
+        BTN_W=11
+        BTN_ROW=$((IL_TOP + IL_PAGE + 2))
+        BTN_C0=$((L_LEFT + L_INNER - BTN_W + 1))
+        BTN_C1=$((BTN_C0 + BTN_W))
     }
 
     # Geometry must exist before the first draw/hit-test.
     info_layout
     LAYOUT_OK=1
-
-    # Back button geometry (used by draw + hover hit-test).
-    # Must match the actual draw_info output:
-    #   row: IL_TOP + 1 (title) + IL_PAGE (content) + 1 (separator) = IL_TOP + IL_PAGE + 2
-    #   col: left+1 (CUP) + 2 ("│ ") + (L_INNER - BTN_W - 2) (pad) = left + L_INNER - BTN_W + 1
-    BTN_LABEL="[ ← Back ]"
-    BTN_W=11
-    BTN_ROW=$((IL_TOP + IL_PAGE + 2))
-    BTN_C0=$((L_LEFT + L_INNER - BTN_W + 1))
-    BTN_C1=$((BTN_C0 + BTN_W - 1))
 
     draw_info() {
         [ "$LAYOUT_OK" = "1" ] || { info_layout; LAYOUT_OK=1; }
@@ -568,7 +785,7 @@ PYEOF
         out+="\e[2J\e[H"
         out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m╭"
         if [ -n "$TITLE" ]; then
-            out+="─ ${esc}[1;${C_T}m${TITLE}${esc}[${C_B}m ─"
+            out+="─ ${esc}[1;${C_T}m${TITLE//\\/\\\\}${esc}[${C_B}m ─"
         fi
         out+="$(rule "$L_TFILL")╮${esc}[${C_RST}m"
         r=$((r + 1))
@@ -576,30 +793,35 @@ PYEOF
         for ((i = IL_OFF; i < end && i < n; i++)); do
             local l=$((L_INNER - ${_ILWL[$i]} - 2))
             [ "$l" -lt 0 ] && l=0
-            out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m│ ${esc}[${C_I}m${IL_LINES[$i]}$(spaces "$l") ${esc}[${C_B}m│${esc}[${C_RST}m"
+            out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m│ ${esc}[${C_I}m${IL_LINES[$i]//\\/\\\\}$(spaces "$l") ${esc}[${C_B}m│${esc}[${C_RST}m"
             r=$((r + 1))
         done
         out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m├${L_RULE}┤${esc}[${C_RST}m"
         r=$((r + 1))
         local fill="48;2;${AC_RGB}" txt="30"
         [ "$IL_BTNHL" = "1" ] || { fill="0"; txt="${C_I}"; }
-        out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m│ ${esc}[${C_RST}m$(spaces $((L_INNER - BTN_W - 2)))${esc}[${txt};${fill}m ${BTN_LABEL} ${esc}[${C_RST}m${esc}[${C_B}m│${esc}[${C_RST}m"
+        local btnpad=$((L_INNER - BTN_W - 2))
+        [ "$btnpad" -lt 0 ] && btnpad=0
+        out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m│ ${esc}[${C_RST}m$(spaces "$btnpad")${esc}[${txt};${fill}m ${BTN_LABEL} ${esc}[${C_RST}m${esc}[${C_B}m│${esc}[${C_RST}m"
         r=$((r + 1))
         out+="${esc}[${r};$((left + 1))H${esc}[${C_B}m╰${L_RULE}╯${esc}[${C_RST}m"
         printf '%b' "$out" > "$OUT"
-        # Scrollbar on the right border
+        # Scrollbar only when there is something to scroll; otherwise its
+        # track hangs below the (shrunk) box and looks like garbage.
         local track0=$((IL_TOP + 1))
         local max=$((n - IL_PAGE)); [ "$max" -lt 0 ] && max=0
-        local pos=0
-        [ "$max" -gt 0 ] && pos=$((IL_OFF * 100 / max))
-        local thumb=$((IL_PAGE * IL_PAGE / (n > 0 ? n : 1)))
-        [ "$thumb" -lt 1 ] && thumb=1
-        local t0=$((track0 + pos * (IL_PAGE - thumb) / 100))
-        for ((i = 0; i < IL_PAGE; i++)); do
-            local c=2
-            if [ $((t0 + thumb)) -gt $i ] && [ "$i" -ge "$t0" ]; then c=1; fi
-            printf '%s' "${esc}[$((track0 + i));$((left + L_INNER + 3))H${esc}[${c}m▏${esc}[${C_RST}m" > "$OUT"
-        done
+        if [ "$max" -gt 0 ]; then
+            local pos=$((IL_OFF * 100 / max))
+            local thumb=$((IL_PAGE * IL_PAGE / (n > 0 ? n : 1)))
+            [ "$thumb" -lt 1 ] && thumb=1
+            [ "$thumb" -gt "$IL_PAGE" ] && thumb=$IL_PAGE
+            local off=$((pos * (IL_PAGE - thumb) / 100))
+            for ((i = 0; i < IL_PAGE; i++)); do
+                local c=2
+                if [ "$i" -ge "$off" ] && [ "$i" -lt "$((off + thumb))" ]; then c=1; fi
+                printf '%s' "${esc}[$((track0 + i));$((left + L_INNER + 3))H${esc}[${c}m▏${esc}[${C_RST}m" > "$OUT"
+            done
+        fi
     }
 
     info_scroll() { # delta (may be negative) or ABS:n

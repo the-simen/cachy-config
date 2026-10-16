@@ -43,7 +43,8 @@ stack is the baseline: Niri as the compositor, Noctalia as the shell
 ## Config Manager (TUI)
 
 Prefer clicks over the terminal? Launch **Config Manager** from the app
-menu (`applications/config-manager.desktop`):
+menu (`applications/config-manager.desktop`, opens in its own kitty
+window with an 800×600 floating rule):
 
 - on start it clones `~/bash-scripts` if missing, otherwise pulls updates;
 - paints its own `dialog` UI in the live Noctalia palette
@@ -52,13 +53,27 @@ menu (`applications/config-manager.desktop`):
 - shows repo status right in the main menu: last commits of
   `bash-scripts`, `cachy-config`, `nvim`, upstream behind/ahead,
   local changes;
-- runs `cachyos/install.sh` (full install), `cachyos/update.sh`
-  (repos + missing packages from `packages/`, live Noctalia settings
-  are never touched), applies the repo Noctalia config explicitly
-  (with a timestamped backup of the live file) or exports the live
-  settings back into `noctalia/config.toml.full` — all with live output;
-- commit list shows subject + body snippet; full bodies (last 5 per repo)
-  open in a scrollable viewer via the Commits item.
+- menu items:
+  - **Reinstall** — force-resets `bash-scripts`, `cachy-config` and
+    `nvim` to the latest GitHub commits (`fetch` + `reset --hard` +
+    `clean -fd`). Warns first: all local changes and new files are
+    lost, no backup is made;
+  - **Update all** — runs `cachyos/update.sh` (pulls the repos,
+    stashing local changes instead of dropping them, + installs
+    missing packages from `packages/`; live Noctalia settings are
+    never touched);
+  - **Apply repo Noctalia config** — copies
+    `noctalia/config.toml.full` over the live
+    `~/.local/state/noctalia/settings.toml`, keeping the currently
+    active theme (restored via `noctalia msg`, with a TOML-level
+    fallback). The previous live file is kept as a timestamped backup
+    next to it, and its full path is shown after applying;
+  - **Export live Noctalia config to repo** — snapshots the live
+    settings back into `noctalia/config.toml.full` for review/commit;
+  - **Recent commits** — full subjects + bodies (last 5 per repo) in
+    a scrollable mouse viewer;
+- commit list shows subject + body snippet; full bodies open via
+  the Commits item.
 
 UI is a native hover menu (`scripts/hover-menu.sh`: mouse hover
 highlights, click confirms instantly, vim keys, rounded truecolor
