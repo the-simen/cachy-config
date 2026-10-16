@@ -1,9 +1,29 @@
 # cachy-config
 
+![CachyOS](https://img.shields.io/badge/CachyOS-rolling-ebdbb2?style=flat-square)
+![Niri](https://img.shields.io/badge/compositor-niri-98971a?style=flat-square)
+![Noctalia](https://img.shields.io/badge/shell-noctalia-d3869b?style=flat-square)
+![fish](https://img.shields.io/badge/shell-fish-83a598?style=flat-square)
+
 These configs primarily target the **CachyOS + Niri + Noctalia** setup.
 Some files (fish, tmux, mpv, ghostty/kitty, etc.) are portable, but this
 stack is the baseline: Niri as the compositor, Noctalia as the shell
 (bar, dock, notifications, theming).
+
+> 📸 **Showcase:** [screenshots & what-where → SHOWCASE.md](SHOWCASE.md)
+
+[![Desktop](showcase/empty_desktop.png)](SHOWCASE.md)
+
+| Layer      | What              | Config            |
+| ---------- | ----------------- | ----------------- |
+| Compositor | Niri (scrollable) | `niri/`           |
+| Shell      | Noctalia          | `noctalia/`       |
+| Terminal   | kitty + fish/tide | `kitty/`, `fish/` |
+| Multiplexer| tmux + TPM        | `tmux/`           |
+| Editor     | NvChad Neovim     | `nvim/`¹          |
+| Theming    | Noctalia templates| `noctalia/templates/` |
+
+¹ installed separately, see below.
 
 > **Strong recommendation: use the install script.**
 > This repo is not "just copy `~/.config` and done" — several paths

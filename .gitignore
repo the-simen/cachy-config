@@ -61,6 +61,9 @@
 !mpv/
 !mpv/**
 !README.md
+!SHOWCASE.md
+!showcase/
+!showcase/**
 
 # excluded files
 # ----------------------------
