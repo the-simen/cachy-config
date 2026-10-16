@@ -7,8 +7,8 @@ CachyOS + Niri + Noctalia, live Noctalia palette everywhere
 
 ## Desktop
 
-Noctalia top bar, calendar + analog clock widgets, weather card,
-icon dock. Wallpaper: painted clouds.
+Noctalia desktop. Current theme is `gruvbox-material` from 
+community palettes.
 
 ![Empty desktop](showcase/empty_desktop.png)
 
@@ -18,20 +18,20 @@ icon dock. Wallpaper: painted clouds.
 
 ![fastfetch](showcase/fastfetch.png)
 
-`tmux` session with a matching status line and the same prompt.
+`tmux` session with a matching status line and the same prompt 
+with separated `fastfetch` output.
 
 ![tmux](showcase/tmux.png)
 
 ## Editor
 
-`NvChad` Neovim inside `tmux` — same palette, rounded borders.
+Custom `NvChad` Neovim inside `tmux` — same palette, rounded borders.
 
 ![neovim](showcase/neovim.png)
 
 ## Keybindings
 
-Built-in Niri keymap cheatsheet — 108 bindings, searchable
-(`APPLICATIONS`, `COLUMN NAVIGATION`, `WINDOW FOCUS`, workspaces…).
+Built-in Niri keymap cheatsheet (noctalia plugin).
 
 ![Niri keymap cheatsheet](showcase/keymap_cheatsheet.png)
 
