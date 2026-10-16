@@ -14,8 +14,10 @@ does not flicker on plain wallpaper switches.
 import hashlib
 import re
 import shutil
+import struct
 import sys
 import tempfile
+import zlib
 from pathlib import Path
 from zipfile import ZipFile, ZIP_DEFLATED
 
@@ -27,9 +29,41 @@ CACHE_ZIP = CACHE_DIR / "telegram-contrast.last.tdesktop-theme"
 
 try:
     from PIL import Image
+
+    _HAS_PIL = True
 except ImportError:
-    print("telegram-pack: PIL missing, skipping zip pack", file=sys.stderr)
-    sys.exit(0)
+    Image = None  # type: ignore
+    _HAS_PIL = False
+
+
+def _write_solid_png(path: Path, hex_color: str, size: int = 512) -> None:
+    """Stdlib fallback: write a solid-color RGB PNG without Pillow."""
+    hex_color = hex_color.strip().lstrip("#")
+    r, g, b = int(hex_color[0:2], 16), int(hex_color[2:4], 16), int(hex_color[4:6], 16)
+    row = b"\x00" + bytes((r, g, b)) * size
+    raw = row * size
+
+    def chunk(ctype: bytes, data: bytes) -> bytes:
+        return (
+            struct.pack(">I", len(data))
+            + ctype
+            + data
+            + struct.pack(">I", zlib.crc32(ctype + data) & 0xFFFFFFFF)
+        )
+
+    png = b"\x89PNG\r\n\x1a\n"
+    png += chunk(b"IHDR", struct.pack(">IIBBBBB", size, size, 8, 2, 0, 0, 0))
+    png += chunk(b"IDAT", zlib.compress(raw, 6))
+    png += chunk(b"IEND", b"")
+    path.write_bytes(png)
+
+
+def _write_background(path: Path, hex_color: str) -> None:
+    if _HAS_PIL:
+        Image.new("RGB", (512, 512), hex_color).save(path / "background.png")
+    else:
+        _write_solid_png(path / "background.png", hex_color)
+        print("telegram-pack: PIL not found, used stdlib PNG writer", file=sys.stderr)
 
 
 def sha256(p: Path) -> str:
@@ -46,6 +80,7 @@ def main() -> int:
         if FINAL.is_file() and sha256(FINAL) == sha256(CACHE_ZIP):
             print("telegram-pack: palette unchanged, final theme untouched")
             return 0
+        FINAL.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(CACHE_ZIP, FINAL)
         print("telegram-pack: palette unchanged, final theme restored from cache")
         return 0
@@ -57,12 +92,13 @@ def main() -> int:
     bg = m.group(1)
 
     tmp = Path(tempfile.mkdtemp())
-    Image.new("RGB", (512, 512), bg).save(tmp / "background.png")
+    _write_background(tmp, bg)
     (tmp / "colors.tdesktop-theme").write_text(text)
     packed = tmp / "noctalia-contrast.tdesktop-theme"
     with ZipFile(packed, "w", ZIP_DEFLATED) as zf:
         zf.write(tmp / "colors.tdesktop-theme", "colors.tdesktop-theme")
         zf.write(tmp / "background.png", "background.png")
+    FINAL.parent.mkdir(parents=True, exist_ok=True)
     shutil.move(packed, FINAL)
     shutil.rmtree(tmp, ignore_errors=True)
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
