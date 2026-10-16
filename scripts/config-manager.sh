@@ -374,7 +374,7 @@ apply_noctalia() {
     if [ "$rc" -eq 0 ]; then
         bk=$(ls -t "$live".backup_* 2>/dev/null | head -1)
         if [ -n "$bk" ]; then
-            ui_msg "Done ✓" "\\Z2Live Noctalia config replaced, active theme kept.\\Zn\n\nBackup:\n$bk\n\nThe shell config is reloaded automatically;\nif something looks off, restart Noctalia." 8
+            ui_msg "Done ✓" "\\Z2Live Noctalia config replaced, active theme kept.\\Zn\n\nBackup:\n$bk\n\nThe shell config is reloaded automatically;\nif something looks off, restart Noctalia.\nIn Telegram, select the noctalia-contrast theme." 9
         else
             ui_msg "Done ✓" "\\Z2Live Noctalia config replaced, active theme kept.\\Zn\n\nThe shell config is reloaded automatically;\nif something looks off, restart Noctalia." 6
         fi

@@ -80,6 +80,23 @@ if [ "$HAVE_IPC" -eq 1 ]; then
     fi
     [ -n "$THEME_MODE" ] && msg theme-mode-set "$THEME_MODE" >/dev/null
     msg templates-apply >/dev/null || true
+    # The repo's telegram-contrast user template renders async — give the
+    # engine a moment, then make sure its outputs actually landed.
+    TG_STAGE="$HOME/.cache/noctalia/telegram-contrast.rendered.tdesktop-theme"
+    TG_FINAL="$HOME/.config/telegram-desktop/themes/noctalia-contrast.tdesktop-theme"
+    for _w in $(seq 1 10); do
+        [ -f "$TG_STAGE" ] && break
+        sleep 2
+    done
+    if [ ! -f "$TG_STAGE" ]; then
+        echo "WARNING: telegram staging missing ($TG_STAGE)." \
+            "Is the telegram_contrast template enabled? See journalctl --user -u noctalia." >&2
+    elif [ -d "$HOME/.config/telegram-desktop" ] && [ ! -f "$TG_FINAL" ]; then
+        echo "WARNING: telegram theme not packed ($TG_FINAL missing)." \
+            "See journalctl --user -u noctalia." >&2
+    else
+        echo "Telegram theme outputs present."
+    fi
 elif [ -n "$THEME_BACKUP" ] && [ -s "$THEME_BACKUP" ]; then
     python3 - "$CONFIG" "$THEME_BACKUP" <<'PYEOF'
 import re, sys
