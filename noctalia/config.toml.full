@@ -122,7 +122,7 @@ order = [ "top", "default" ]
         accordion = false
         accordion_direction = "end"
         border = "outline"
-        border_width = 1.0
+        border_width = 0.5
         enabled = true
         fill = "tertiary"
         id = "g3"
@@ -134,7 +134,7 @@ order = [ "top", "default" ]
         accordion = false
         accordion_direction = "end"
         border = "outline"
-        border_width = 1.0
+        border_width = 0.5
         enabled = true
         fill = "error"
         id = "g1"
@@ -146,7 +146,7 @@ order = [ "top", "default" ]
         accordion = true
         accordion_direction = "start"
         border = ""
-        border_width = 1.0
+        border_width = 0.5
         enabled = true
         fill = "secondary"
         id = "g5"
@@ -170,7 +170,7 @@ order = [ "top", "default" ]
         accordion = false
         accordion_direction = "end"
         border = "outline"
-        border_width = 1.0
+        border_width = 0.5
         enabled = true
         fill = "surface_variant"
         id = "g7"
@@ -1410,16 +1410,202 @@ transition_on_startup = true
     recursive = false
 
     [wallpaper.default]
-    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/grub-tree.jpg"
+    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/nyc.jpg"
 
     [wallpaper.last]
-    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/grub-tree.jpg"
+    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/nyc.jpg"
 
     [wallpaper.monitors.DP-2]
-    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/grub-tree.jpg"
+    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/nyc.jpg"
 
     [wallpaper.monitors.DP-3]
-    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/grub-tree.jpg"
+    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/nyc.jpg"
+
+    [[wallpaper.favorite]]
+    community_palette = "Gruvbox Material"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/nyc.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Gruvbox Material"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/bay.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Gruvbox Material"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/kamanza.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Gruvbox Material"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/neir.png"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Gruvbox Material"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/midsword.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Catppuccin Macchiato Pink"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Catppuccin/catp-pacman.png"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Catppuccin Macchiato Pink"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Catppuccin/Evening_sky.png"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Catppuccin Macchiato Pink"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Catppuccin/sh2-p.png"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Catppuccin Macchiato Pink"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Catppuccin/irlinazuma.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Catppuccin Macchiato Pink"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Catppuccin/windows-error2.png"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Everforest"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Everforest/forest_road.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Everforest"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Everforest/jpstreed.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Everforest"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Everforest/street.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Everforest"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Everforest/stairs.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Everforest"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Everforest/forest.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Everforest"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Everforest/cloudy-valley.png"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Everforest"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Everforest/dvd.png"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Everforest"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Everforest/forestpath.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Everforest"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Everforest/plane-crash.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Everforest"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Everforest/train-bridge.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Oxocarbon"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Oxocarbon/jelly.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Oxocarbon"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Oxocarbon/ms.png"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Oxocarbon"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Oxocarbon/neonskull.png"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Oxocarbon"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Oxocarbon/skeleton.png"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Oxocarbon"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Oxocarbon/skele.png"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    builtin_palette = "Rosé Pine"
+    palette_source = "builtin"
+    path = "/home/thesimen/Pictures/Wallpapers/Rosepine/buildingsjp.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    builtin_palette = "Rosé Pine"
+    palette_source = "builtin"
+    path = "/home/thesimen/Pictures/Wallpapers/Rosepine/catto.png"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    builtin_palette = "Rosé Pine"
+    palette_source = "builtin"
+    path = "/home/thesimen/Pictures/Wallpapers/Rosepine/purple-road.png"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    builtin_palette = "Rosé Pine"
+    palette_source = "builtin"
+    path = "/home/thesimen/Pictures/Wallpapers/Rosepine/mnts.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    builtin_palette = "Rosé Pine"
+    palette_source = "builtin"
+    path = "/home/thesimen/Pictures/Wallpapers/Rosepine/windows-error.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    builtin_palette = "Rosé Pine"
+    palette_source = "builtin"
+    path = "/home/thesimen/Pictures/Wallpapers/Rosepine/telefpMd.jpg"
+    theme_mode = "dark"
 
 [weather]
 effects = true
@@ -1516,6 +1702,7 @@ type = "lock_keys"
 art_size = 16.0
 artist_first = true
 capsule = true
+capsule_border_width = 0.5
 capsule_fill = "primary"
 capsule_opacity = 0.14999999999999999
 capsule_radius = "auto"
@@ -1563,6 +1750,7 @@ type = "noctalia/screen_recorder:recorder"
 
 [widget.session]
 capsule = true
+capsule_border_width = 0.5
 capsule_fill = "error"
 capsule_foreground = "error"
 capsule_opacity = 0.10000000000000001
@@ -1610,6 +1798,7 @@ type = "custom_button"
 
 [widget.tray]
 capsule = true
+capsule_border_width = 0.5
 detached_panel = true
 drawer = true
 pinned = [
