@@ -118,14 +118,14 @@ order = [ "top", "default" ]
         [bar.top.dead_zone]
 
         [[bar.top.capsule_group]]
-        accordion = true
+        accordion = false
         accordion_direction = "end"
         border = "outline"
         border_width = 1.0
         enabled = true
         fill = "tertiary"
         id = "g3"
-        members = [ "network", "bluetooth", "volume", "battery" ]
+        members = [ "network", "bluetooth", "volume", "battery", "status" ]
         opacity = 0.34999999403953552
         padding = 8.0
 
@@ -149,7 +149,7 @@ order = [ "top", "default" ]
         enabled = true
         fill = "secondary"
         id = "g5"
-        members = [ "cat", "keybinds", "status", "ocr", "widget_4", "toggle_onlyoffice_vim" ]
+        members = [ "cat", "keybinds", "ocr", "widget_4", "toggle_onlyoffice_vim" ]
         opacity = 0.25
         padding = 8.0
 
