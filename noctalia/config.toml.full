@@ -76,7 +76,7 @@ order = [ "top", "default" ]
 
     [bar.top]
     auto_hide = false
-    background_opacity = 0.84999998100101948
+    background_opacity = 0.89999997988343239
     border = "outline"
     border_width = 0.0
     capsule = false
