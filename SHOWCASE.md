@@ -46,4 +46,5 @@ Shot on:
 | Shell     | Noctalia             |
 | Terminal  | kitty 0.49.2         |
 | Shell prompt | fish 4.9.3 + tide |
-| Font      | JetBrainsMono Nerd Font |
+| Terminal Font      | JetBrainsMono Nerd Font |
+| Font      | Hasklug Nerd Font |
