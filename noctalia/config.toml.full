@@ -1,4 +1,4 @@
-config_version = 14
+config_version = 15
 
 [accessibility]
 high_contrast = false
@@ -90,7 +90,7 @@ order = [ "top", "default" ]
     concave_edge_corners = true
     contact_shadow = false
     enabled = true
-    end = [ "caffeine", "privacy", "tray", "group:g3", "session", "group:g5" ]
+    end = [ "caffeine", "indicator", "privacy", "tray", "group:g3", "session", "group:g5" ]
     font_scale = 1.0
     font_weight = 500
     hover_highlight = true
@@ -118,7 +118,7 @@ order = [ "top", "default" ]
         [bar.top.dead_zone]
 
         [[bar.top.capsule_group]]
-        accordion = false
+        accordion = true
         accordion_direction = "end"
         border = "outline"
         border_width = 1.0
@@ -149,7 +149,7 @@ order = [ "top", "default" ]
         enabled = true
         fill = "secondary"
         id = "g5"
-        members = [ "cat", "keybinds", "status", "ocr", "widget_4", "toggle_onlyoffice_vim", "Gamemode" ]
+        members = [ "cat", "keybinds", "status", "ocr", "widget_4", "toggle_onlyoffice_vim" ]
         opacity = 0.25
         padding = 8.0
 
@@ -267,7 +267,6 @@ widget_order = [
     box_width = 176.0
     cx = 1800.0
     cy = 156.0
-    enabled = true
     output = "DP-2"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -293,7 +292,6 @@ widget_order = [
     box_width = 240.0
     cx = 160.0
     cy = 940.0
-    enabled = true
     output = "DP-2"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -311,7 +309,6 @@ widget_order = [
     box_width = 511.19921875
     cx = 270.798828125
     cy = 33.599586486816406
-    enabled = true
     output = "DP-2"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -332,7 +329,6 @@ widget_order = [
     box_width = 511.19921875
     cx = 268.400390625
     cy = 33.599586486816406
-    enabled = true
     output = "DP-3"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -353,7 +349,6 @@ widget_order = [
     box_width = 288.0
     cx = 184.0
     cy = 204.0
-    enabled = true
     output = "DP-2"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -369,7 +364,6 @@ widget_order = [
         show_week_numbers = true
 
 [dock]
-active_monitor_only = false
 active_opacity = 1.0
 active_scale = 1.2000000476837158
 auto_hide = false
@@ -392,7 +386,6 @@ magnification_scale = 1.6000000238418579
 main_axis_padding = 8
 margin_edge = 8
 margin_ends = 0
-monitors = []
 pinned = [
     "org.gnome.Nautilus",
     "com.shellyorg.shelly",
@@ -501,7 +494,6 @@ save = [ "Ctrl+s" ]
 tab_next = [ "Tab" ]
 tab_previous = [ "Shift+ISO_Left_Tab" ]
 up = [ "Up" ]
-validate = [ "Return", "KP_Enter", "space" ]
 
 [location]
 address = "Molzhaninovka"
@@ -969,6 +961,13 @@ selected-ocr-lang = "eng+rus"
 [plugin_settings."aristides/udiskie"]
 manager_open_near_click = true
 
+[plugin_settings."detluck/performance-plus"]
+disable_animations = false
+disable_shadows = false
+disable_wallpaper = false
+hook_on_enter = "$HOME/.config/scripts/gamemode.sh --on"
+hook_on_exit = "$HOME/.config/scripts/gamemode.sh --off"
+
 [plugin_settings."imjustdoingmypart/niri-animations"]
 docked_open_near_click = true
 docked_placement = "floating"
@@ -1014,11 +1013,12 @@ enabled = [
     "kenn/keybind-cheatsheet",
     "noctalia/timer",
     "aristides/udiskie",
-    "yugaaank/better-clock",
     "oldirtty/color_picker",
     "fel/ocr",
     "noctalia/screen_recorder",
-    "imjustdoingmypart/niri-animations"
+    "imjustdoingmypart/niri-animations",
+    "detluck/performance-plus",
+    "noctalia/wallpaper_depth"
 ]
 
     [[plugins.source]]
@@ -1036,7 +1036,7 @@ enabled = [
 [shell]
 app_icon_color = "on_surface_variant"
 app_icon_colorize = false
-avatar_path = "/home/thesimen/Pictures/Avatars/telepuzik.jpg"
+avatar_path = "/home/thesimen/Pictures/Avatars/photo_2026-10-11_20-10-41.jpg"
 button_borders = false
 card_borders = false
 clipboard_auto_paste = "off"
@@ -1084,7 +1084,8 @@ umbriel_overview_type_to_launch_enabled = false
     app_grid = true
     auto_paste = "auto"
     categories = true
-    compact = false
+    category_icons_only = true
+    default_view = "pinned"
     fetch_exchange_rates = true
     pinned = [
         "heroic",
@@ -1102,13 +1103,13 @@ umbriel_overview_type_to_launch_enabled = false
         "onlyoffice-desktopeditors",
         "com.heroicgameslauncher.hgl",
         "com.obsproject.Studio",
-        "config-manager"
+        "config-manager",
+        "com.zapret.gui"
     ]
     provider_prefix = "/"
     show_app_actions = true
     show_app_origin_indicator = true
     show_icons = true
-    sort_by_usage = true
 
         [shell.launcher.dmenu]
 
@@ -1287,7 +1288,7 @@ swap_pct_activity_threshold = 20.0
 swap_pct_critical_threshold = 80.0
 
 [theme]
-builtin = "Gruvbox"
+builtin = "Rosé Pine"
 community_palette = "Gruvbox Material"
 custom_palette = ""
 pure_black_dark = false
@@ -1421,14 +1422,6 @@ enabled = true
 refresh_minutes = 30
 unit = "metric"
 
-[widget.Gamemode]
-glyph = "bluetooth-device-gamepad"
-tooltip = "Toggle game mode"
-type = "custom_button"
-
-    [widget.Gamemode.actions]
-    left = "exec $HOME/.config/scripts/gamemode.sh"
-
 [widget.active_window]
 capsule_padding = 8
 enabled = false
@@ -1481,6 +1474,9 @@ type = "sysmon"
 format = "{:%a %d %b}"
 type = "clock"
 
+[widget.indicator]
+type = "detluck/performance-plus:indicator"
+
 [widget.input_volume]
 device = "input"
 type = "volume"
@@ -1520,6 +1516,9 @@ type = "media"
 [widget.network]
 show_label = false
 type = "network"
+
+    [widget.network.actions]
+    right = "none"
 
 [widget.network_rx]
 stat = "net_rx"
@@ -1600,7 +1599,15 @@ type = "custom_button"
 capsule = true
 detached_panel = true
 drawer = true
-pinned = [ "Karing", "easyeffects", "spotify-client", "Happ", "AmneziaVPN" ]
+pinned = [
+    "Karing",
+    "easyeffects",
+    "spotify-client",
+    "Happ",
+    "AmneziaVPN",
+    "Zapret GUI — Stopped · general (EXP) | TG: Stopped",
+    "Zapret GUI — Running · general (EXP) | TG: Stopped"
+]
 type = "tray"
 
 [widget.volume]

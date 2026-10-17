@@ -7,7 +7,10 @@ include "./cfg/display.kdl"
 include "./cfg/layout.kdl"
 include "./cfg/rules.kdl"
 include "./cfg/misc.kdl"
-include "./game-mode.kdl"
 include "./noctalia.kdl"
 
 include "./animations.kdl"
+
+// Must stay last: overrides background-effect, shadow and animations
+// from every other file above. Written by scripts/gamemode.sh.
+include "./game-mode.kdl"
