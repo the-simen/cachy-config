@@ -35,6 +35,14 @@ Built-in Niri keymap cheatsheet (noctalia plugin).
 
 ![Niri keymap cheatsheet](showcase/keymap_cheatsheet.png)
 
+## Config manager
+
+`config-manager` TUI: repo status for every config repo, update all,
+apply/export the Noctalia config, browse recent commits and reinstall
+back from GitHub.
+
+![Config manager](showcase/config_manager.png)
+
 ---
 
 Shot on:
