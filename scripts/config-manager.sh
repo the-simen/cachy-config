@@ -2,7 +2,7 @@
 # config-manager — TUI installer/updater for cachy-config (Niri + Noctalia).
 #
 # Launched from the app menu via open_config_manager.sh.
-#   1. Ensures ~/bash-scripts exists (clones it if missing, pulls if present).
+#   1. Ensures ~/install-scripts exists (clones it if missing, pulls if present).
 #   2. Applies the live Noctalia palette to dialog itself (DIALOGRC).
 #   3. Shows repo status inside the main menu (commits, upstream, changes).
 #   4. Runs cachyos/update.sh, force-resets repos to upstream or applies
@@ -20,7 +20,7 @@ if [[ "${LC_ALL:-}" != *UTF-8 && "${LANG:-}" != *UTF-8 && "${LC_CTYPE:-}" != *UT
     export LC_ALL=C.UTF-8
 fi
 
-BS_DIR="$HOME/bash-scripts"
+BS_DIR="$HOME/install-scripts"
 CACHY_DIR="$BS_DIR/cachyos"
 CFG_DIR="$HOME/.config"
 NVIM_DIR="$HOME/.config/nvim"
@@ -276,18 +276,18 @@ repo_behind() { # dir (after fetch) -> "N", "?" or "offline-was"
     git -C "$1" rev-list --count 'HEAD..@{u}' 2>/dev/null || echo "?"
 }
 
-ensure_bash_scripts() {
+ensure_install_scripts() {
     if [ ! -d "$BS_DIR/.git" ]; then
-        ui_info "Cloning bash-scripts..."
-        if ! git clone https://github.com/the-simen/bash-scripts.git "$BS_DIR"; then
+        ui_info "Cloning install-scripts..."
+        if ! git clone https://github.com/the-simen/install-scripts.git "$BS_DIR"; then
             ui_msg "Error" "\\Z1Clone failed.\\Zn\nCheck your network and restart." 3
             return 1
         fi
         chmod +x "$CACHY_DIR/install.sh" "$CACHY_DIR/update.sh"
     else
-        ui_info "Pulling bash-scripts..."
+        ui_info "Pulling install-scripts..."
         if ! timeout 60 git -C "$BS_DIR" pull --ff-only --quiet 2>/dev/null; then
-            ui_msg "Warning" "\\Z3Could not update ~/bash-scripts\\Zn (offline or changes?).\nContinuing with the local copy." 3
+            ui_msg "Warning" "\\Z3Could not update ~/install-scripts\\Zn (offline or changes?).\nContinuing with the local copy." 3
         fi
     fi
     return 0
@@ -433,12 +433,12 @@ show_commits() {
         pick=$(ui_menu "Whose commits?" 1 "config" \
             "config"  "cachy-config" \
             "nvim"    "nvim" \
-            "scripts" "bash-scripts" \
+            "scripts" "install-scripts" \
             "back"    "Back") || return 0
         case "$pick" in
             config)  show_one_commits "$CFG_DIR" "cachy-config" ;;
             nvim)    show_one_commits "$NVIM_DIR" "nvim" ;;
-            scripts) show_one_commits "$BS_DIR" "bash-scripts" ;;
+            scripts) show_one_commits "$BS_DIR" "install-scripts" ;;
             *)       clear; return 0 ;;
         esac
     done
@@ -502,7 +502,7 @@ force_reset_repo() { # dir, label -> 0 ok
 
 do_reinstall() {
     local rc=0
-    force_reset_repo "$BS_DIR" "bash-scripts" || rc=1
+    force_reset_repo "$BS_DIR" "install-scripts" || rc=1
     force_reset_repo "$CFG_DIR" "cachy-config" || rc=1
     force_reset_repo "$NVIM_DIR" "nvim" || rc=1
     return "$rc"
@@ -517,7 +517,7 @@ reinstall_all() {
 
 # ---------------- main loop ----------------
 
-ensure_bash_scripts || exit 1
+ensure_install_scripts || exit 1
 
 while true; do
     clear
