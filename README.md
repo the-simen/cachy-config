@@ -31,13 +31,13 @@ stack is the baseline: Niri as the compositor, Noctalia as the shell
 > The install script does all of it, in the right order:
 >
 > ```sh
-> git clone https://github.com/the-simen/bash-scripts/ ~/bash-scripts/ \
->   && sudo chmod +x ~/bash-scripts/cachyos/install.sh \
->   && ~/bash-scripts/cachyos/install.sh
+> git clone https://github.com/the-simen/install-scripts/ ~/install-scripts/ \
+>   && sudo chmod +x ~/install-scripts/cachyos/install.sh \
+>   && ~/install-scripts/cachyos/install.sh
 > ```
 >
-> Source: https://github.com/the-simen/bash-scripts (`cachyos/install.sh`).
-> Update later with `cd ~/bash-scripts && git pull` + `cachyos/update.sh`
+> Source: https://github.com/the-simen/install-scripts (`cachyos/install.sh`).
+> Update later with `cd ~/install-scripts && git pull` + `cachyos/update.sh`
 > (pulls `~/.config` and `~/.config/nvim`, stashing local changes first).
 >
 > What `install.sh` does for this repo:
@@ -66,15 +66,15 @@ Prefer clicks over the terminal? Launch **Config Manager** from the app
 menu (`applications/config-manager.desktop`, opens in its own kitty
 window with an 800×600 floating rule):
 
-- on start it clones `~/bash-scripts` if missing, otherwise pulls updates;
+- on start it clones `~/install-scripts` if missing, otherwise pulls updates;
 - paints its own `dialog` UI in the live Noctalia palette
   (`scripts/generate-dialogrc.py` quantizes `noctalia/colors.json`
   into `dialog/noctalia` on every launch);
 - shows repo status right in the main menu: last commits of
-  `bash-scripts`, `cachy-config`, `nvim`, upstream behind/ahead,
+  `install-scripts`, `cachy-config`, `nvim`, upstream behind/ahead,
   local changes;
 - menu items:
-  - **Reinstall** — force-resets `bash-scripts`, `cachy-config` and
+  - **Reinstall** — force-resets `install-scripts`, `cachy-config` and
     `nvim` to the latest GitHub commits (`fetch` + `reset --hard` +
     `clean -fd`). Warns first: all local changes and new files are
     lost, no backup is made;
@@ -249,4 +249,4 @@ re-includes only curated paths. Consequences worth knowing:
 ## Related repositories
 
 - Neovim (kept separately): https://github.com/the-simen/nvchad-configs
-- Install-everything script: https://github.com/the-simen/bash-scripts
+- Install-everything script: https://github.com/the-simen/install-scripts
