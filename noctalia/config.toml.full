@@ -150,7 +150,7 @@ order = [ "top", "default" ]
         enabled = true
         fill = "secondary"
         id = "g5"
-        members = [ "cat", "keybinds", "ocr", "widget_4", "toggle_onlyoffice_vim" ]
+        members = [ "cat", "keybinds", "ocr", "widget_4", "toggle_onlyoffice_vim", "config_manager" ]
         opacity = 0.25
         padding = 8.0
 
@@ -1466,6 +1466,14 @@ capsule_padding = 8
 format = "{:%a} {:%H:%M}"
 tooltip_format = "{:%A, %d %B}"
 type = "clock"
+
+[widget.config_manager]
+glyph = "brand-github-filled"
+tooltip = "Open config manager"
+type = "custom_button"
+
+    [widget.config_manager.actions]
+    left = "exec ~/.config/scripts/open_config_manager.sh"
 
 [widget.control-center]
 anchor = true
