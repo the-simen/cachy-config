@@ -76,6 +76,7 @@ order = [ "top", "default" ]
 
     [bar.top]
     auto_hide = false
+    background_opacity = 0.84999998100101948
     border = "outline"
     border_width = 0.0
     capsule = false
@@ -808,6 +809,7 @@ temperature_day = 7000
 temperature_night = 5000
 
 [notification]
+background_opacity = 0.4999999888241291
 border = true
 border_color = "outline"
 border_width = 1.0
@@ -918,11 +920,12 @@ width = 360
     show_toast = true
 
 [osd]
+background_opacity = 0.4999999888241291
 border = true
 border_color = "outline"
 border_width = 1.0
 enabled = true
-follow_focused_output = false
+follow_focused_output = true
 hide_delay_ms = 1400
 monitors = []
 offset_x = 20
@@ -1148,6 +1151,7 @@ umbriel_overview_type_to_launch_enabled = false
     session_placement = "floating"
     session_position = "auto"
     shadow = true
+    transparency_mode = "glass"
     wallpaper_placement = "floating"
     wallpaper_position = "auto"
 
@@ -1291,6 +1295,7 @@ swap_pct_critical_threshold = 80.0
 builtin = "Rosé Pine"
 community_palette = "Gruvbox Material"
 custom_palette = ""
+mode = "dark"
 pure_black_dark = false
 source = "community"
 wallpaper_scheme = "m3-content"
@@ -1405,16 +1410,16 @@ transition_on_startup = true
     recursive = false
 
     [wallpaper.default]
-    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/clouds.png"
+    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/grub-tree.jpg"
 
     [wallpaper.last]
-    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/clouds.png"
+    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/grub-tree.jpg"
 
     [wallpaper.monitors.DP-2]
-    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/clouds.png"
+    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/grub-tree.jpg"
 
     [wallpaper.monitors.DP-3]
-    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/clouds.png"
+    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/grub-tree.jpg"
 
 [weather]
 effects = true
