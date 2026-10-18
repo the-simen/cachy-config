@@ -414,7 +414,7 @@ radius_top_right = 24
 reserve_space = false
 shadow = true
 show_dots = true
-show_instance_count = true
+show_instance_count = false
 show_running = true
 smart_auto_hide = true
 
@@ -1029,8 +1029,7 @@ enabled = [
     "fel/ocr",
     "noctalia/screen_recorder",
     "imjustdoingmypart/niri-animations",
-    "detluck/performance-plus",
-    "noctalia/wallpaper_depth"
+    "detluck/performance-plus"
 ]
 
     [[plugins.source]]
