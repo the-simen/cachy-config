@@ -91,7 +91,7 @@ order = [ "top", "default" ]
     concave_edge_corners = true
     contact_shadow = false
     enabled = true
-    end = [ "caffeine", "indicator", "privacy", "tray", "group:g3", "session", "group:g5" ]
+    end = [ "caffeine", "indicator", "privacy", "status", "tray", "group:g3", "session", "group:g5" ]
     font_scale = 1.0
     font_weight = 500
     hover_highlight = true
@@ -125,9 +125,10 @@ order = [ "top", "default" ]
         border_width = 0.5
         enabled = true
         fill = "tertiary"
+        foreground = "on_secondary"
         id = "g3"
-        members = [ "network", "bluetooth", "volume", "battery", "status" ]
-        opacity = 0.34999999403953552
+        members = [ "network", "bluetooth", "volume", "battery" ]
+        opacity = 0.69999998807907104
         padding = 8.0
 
         [[bar.top.capsule_group]]
@@ -149,9 +150,10 @@ order = [ "top", "default" ]
         border_width = 0.5
         enabled = true
         fill = "secondary"
+        foreground = "on_secondary"
         id = "g5"
         members = [ "cat", "keybinds", "ocr", "widget_4", "toggle_onlyoffice_vim", "config_manager" ]
-        opacity = 0.25
+        opacity = 0.69999998807907104
         padding = 8.0
 
         [[bar.top.capsule_group]]
@@ -266,7 +268,7 @@ widget_order = [
     [desktop_widgets.widget.desktop-widget-0000000000000001]
     box_height = 176.0
     box_width = 176.0
-    cx = 1800.0
+    cx = 1792.0
     cy = 156.0
     output = "DP-2"
     placement_height = 1080.0
@@ -992,6 +994,13 @@ run_as_systemd = true
 [plugin_settings."noctalia/timer"]
 panel_placement = "floating"
 
+[plugin_settings."noctalia/wallpaper_depth"]
+auto_generate = false
+feather = 0
+manager_open_near_click = true
+manager_placement = "floating"
+threshold = 20
+
 [plugin_settings."nomadcxx/gamer-mode"]
 main_open_near_click = true
 profile = "heavy"
@@ -1404,9 +1413,6 @@ transition_duration = 3100.0
 transition_on_startup = true
 
     [wallpaper.automation]
-    enabled = false
-    interval_seconds = 1800
-    order = "random"
     recursive = false
 
     [wallpaper.default]
@@ -1706,6 +1712,7 @@ capsule_border_width = 0.5
 capsule_fill = "primary"
 capsule_opacity = 0.14999999999999999
 capsule_radius = "auto"
+color = "primary"
 hide_when_no_media = true
 max_length = 200
 min_length = 80.0
@@ -1767,6 +1774,8 @@ length = 12
 type = "spacer"
 
 [widget.status]
+hide_when_empty = true
+show_count = false
 type = "aristides/udiskie:status"
 
 [widget.sysmon]
