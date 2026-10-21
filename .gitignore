@@ -60,10 +60,11 @@
 !xremap/**
 !mpv/
 !mpv/**
-!README.md
-!SHOWCASE.md
 !showcase/
 !showcase/**
+!README.md
+!SHOWCASE.md
+!TEMPLATES.md
 
 # excluded files
 # ----------------------------
