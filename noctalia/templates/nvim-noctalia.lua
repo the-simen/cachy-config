@@ -71,7 +71,7 @@ M.polish_hl = {
     ["@uri"] = { fg = M.base_30.blue },
     ["@tag.delimiter"] = { fg = M.base_30.red },
     ["@variable.member.key"] = { fg = M.base_30.white },
-    ["@punctuation.bracket"] = { fg = M.base_30.pmenu_bg },
+    ["@punctuation.bracket"] = { fg = M.base_30.grey }, // less bright than pmenu_bg (primary), doesn't cover AI suggestions
     ["@punctuation.delimiter"] = { fg = M.base_30.white },
   },
 
