@@ -1303,7 +1303,6 @@ swap_pct_critical_threshold = 80.0
 builtin = "Rosé Pine"
 community_palette = "Gruvbox Material"
 custom_palette = ""
-mode = "dark"
 pure_black_dark = false
 source = "community"
 wallpaper_scheme = "m3-content"
@@ -1487,66 +1486,6 @@ transition_on_startup = true
     theme_mode = "dark"
 
     [[wallpaper.favorite]]
-    community_palette = "Everforest"
-    palette_source = "community"
-    path = "/home/thesimen/Pictures/Wallpapers/Everforest/forest_road.jpg"
-    theme_mode = "dark"
-
-    [[wallpaper.favorite]]
-    community_palette = "Everforest"
-    palette_source = "community"
-    path = "/home/thesimen/Pictures/Wallpapers/Everforest/jpstreed.jpg"
-    theme_mode = "dark"
-
-    [[wallpaper.favorite]]
-    community_palette = "Everforest"
-    palette_source = "community"
-    path = "/home/thesimen/Pictures/Wallpapers/Everforest/street.jpg"
-    theme_mode = "dark"
-
-    [[wallpaper.favorite]]
-    community_palette = "Everforest"
-    palette_source = "community"
-    path = "/home/thesimen/Pictures/Wallpapers/Everforest/stairs.jpg"
-    theme_mode = "dark"
-
-    [[wallpaper.favorite]]
-    community_palette = "Everforest"
-    palette_source = "community"
-    path = "/home/thesimen/Pictures/Wallpapers/Everforest/forest.jpg"
-    theme_mode = "dark"
-
-    [[wallpaper.favorite]]
-    community_palette = "Everforest"
-    palette_source = "community"
-    path = "/home/thesimen/Pictures/Wallpapers/Everforest/cloudy-valley.png"
-    theme_mode = "dark"
-
-    [[wallpaper.favorite]]
-    community_palette = "Everforest"
-    palette_source = "community"
-    path = "/home/thesimen/Pictures/Wallpapers/Everforest/dvd.png"
-    theme_mode = "dark"
-
-    [[wallpaper.favorite]]
-    community_palette = "Everforest"
-    palette_source = "community"
-    path = "/home/thesimen/Pictures/Wallpapers/Everforest/forestpath.jpg"
-    theme_mode = "dark"
-
-    [[wallpaper.favorite]]
-    community_palette = "Everforest"
-    palette_source = "community"
-    path = "/home/thesimen/Pictures/Wallpapers/Everforest/plane-crash.jpg"
-    theme_mode = "dark"
-
-    [[wallpaper.favorite]]
-    community_palette = "Everforest"
-    palette_source = "community"
-    path = "/home/thesimen/Pictures/Wallpapers/Everforest/train-bridge.jpg"
-    theme_mode = "dark"
-
-    [[wallpaper.favorite]]
     community_palette = "Oxocarbon"
     palette_source = "community"
     path = "/home/thesimen/Pictures/Wallpapers/Oxocarbon/jelly.jpg"
@@ -1610,6 +1549,48 @@ transition_on_startup = true
     builtin_palette = "Rosé Pine"
     palette_source = "builtin"
     path = "/home/thesimen/Pictures/Wallpapers/Rosepine/telefpMd.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Everforest Material"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Everforest/forest_road.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Everforest Material"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Everforest/cloudy-valley.png"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Everforest Material"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Everforest/dvd.png"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Everforest Material"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Everforest/plane-crash.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Everforest Material"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Everforest/jpstreed.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Everforest Material"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Everforest/stairs.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Everforest Material"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Everforest/forestpath.jpg"
     theme_mode = "dark"
 
 [weather]
@@ -1815,8 +1796,8 @@ pinned = [
     "spotify-client",
     "Happ",
     "AmneziaVPN",
-    "Zapret GUI — Stopped · general (EXP) | TG: Stopped",
-    "Zapret GUI — Running · general (EXP) | TG: Stopped"
+    "Zapret GUI — Running · general (ALT6) | TG: Stopped",
+    "Zapret GUI — Stopped · general (ALT6) | TG: Stopped"
 ]
 type = "tray"
 
