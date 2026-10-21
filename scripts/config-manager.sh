@@ -515,6 +515,34 @@ reinstall_all() {
     run_task "Reinstall to upstream" do_reinstall
 }
 
+# ---------------- install/update wallpapers ----------------
+
+install_wallpapers() {
+    local wall_dir="$HOME/Pictures/Wallpapers"
+    # Make sure $HOME/Pictures/Wallpapers exists.
+    mkdir -p "$wall_dir" || {
+        ui_msg "Error" "\\Z1Could not create\\Zn\n$wall_dir\n\nCheck permissions and try again." 3
+        return 1
+    }
+    if [ -d "$wall_dir/.git" ]; then
+        ui_info "Updating wallpapers..."
+        if timeout 60 git -C "$wall_dir" pull --ff-only --quiet 2>/dev/null; then
+            ui_msg "Done ✓" "\\Z2Wallpapers updated in\\Zn\n$wall_dir." 3
+        else
+            ui_msg "Warning" "\\Z3Could not update wallpapers\\Zn\n(offline or local changes?).\nKeeping the local copy." 3
+        fi
+    else
+        ui_info "Cloning wallpapers..."
+        if git clone https://github.com/the-simen/Wallpapers.git "$wall_dir"; then
+            ui_msg "Done ✓" "\\Z2Wallpapers cloned into\\Zn\n$wall_dir." 3
+        else
+            ui_msg "Error" "\\Z1Clone failed.\\Zn\nCheck your network and try again." 3
+            return 1
+        fi
+    fi
+    return 0
+}
+
 # ---------------- main loop ----------------
 
 ensure_install_scripts || exit 1
@@ -532,6 +560,7 @@ while true; do
     choice=$(ui_menu "$STATUS_TEXT" "$STATUS_LINES" "$default_item" \
         "reinstall" "Reinstall — force-reset repos to GitHub" \
         "update"   "Update all — repos + missing packages" \
+        "wallpapers" "Install/update fancy wallpapers" \
         "noctalia" "Apply repo Noctalia config" \
         "export"   "Export live Noctalia config to repo" \
         "commits"  "Recent commits — subjects + bodies" \
@@ -547,6 +576,9 @@ while true; do
                 continue
             fi
             run_task "Update all" "$CACHY_DIR/update.sh"
+            ;;
+        wallpapers)
+            install_wallpapers
             ;;
         noctalia)
             apply_noctalia
