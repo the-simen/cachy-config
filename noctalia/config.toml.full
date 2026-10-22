@@ -968,7 +968,6 @@ manager_open_near_click = true
 
 [plugin_settings."detluck/performance-plus"]
 disable_animations = false
-disable_shadows = false
 disable_wallpaper = false
 hook_on_enter = "$HOME/.config/scripts/gamemode.sh --on"
 hook_on_exit = "$HOME/.config/scripts/gamemode.sh --off"
@@ -1303,6 +1302,7 @@ swap_pct_critical_threshold = 80.0
 builtin = "Rosé Pine"
 community_palette = "Gruvbox Material"
 custom_palette = ""
+mode = "dark"
 pure_black_dark = false
 source = "community"
 wallpaper_scheme = "m3-content"
