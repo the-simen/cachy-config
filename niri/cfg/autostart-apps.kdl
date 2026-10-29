@@ -3,4 +3,4 @@ spawn-sh-at-startup "fish -c 'wait-noctalia steam -silent 10'"
 spawn-sh-at-startup "fish -c 'wait-noctalia karing 10'"
 spawn-sh-at-startup "fish -c 'wait-noctalia Telegram 10'"
 spawn-sh-at-startup "fish -c 'wait-noctalia vesktop 10'"
-
+spawn-sh-at-startup "fish -c 'wait-noctalia openrgb -p main 10'"

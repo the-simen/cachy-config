@@ -9,4 +9,3 @@ spawn-sh-at-startup "fish -c 'wait-noctalia noctalia msg caffeine-enable 10'"
 // ─── Copy to clipboard notification ───
 spawn-sh-at-startup "$HOME/.config/scripts/copy-notify.sh"
 
-spawn-sh-at-startup "fish -c 'wait-noctalia openrgb -p main 10'"
