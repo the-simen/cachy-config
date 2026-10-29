@@ -11,7 +11,7 @@ binds {
     Mod+Return                          hotkey-overlay-title="Terminal" { spawn ".config/niri/applications/terminal.sh"; }
     Mod+ALT+Return                      hotkey-overlay-title="Terminal Multiplexer" { spawn ".config/niri/applications/tmux.sh"; }
     Mod+B                               hotkey-overlay-title="Browser" { spawn ".config/niri/applications/browser.sh"; }
-    Mod+Shift+B                         hotkey-overlay-title="Browser" { spawn-sh ".config/niri/applications/browser.sh --private-window"; }
+    Mod+Shift+B                         hotkey-overlay-title="Browser private" { spawn-sh ".config/niri/applications/browser.sh --private-window"; }
     Mod+E                               hotkey-overlay-title="File Manager" { spawn ".config/niri/applications/files.sh"; }
     Mod+M                               hotkey-overlay-title="Music" { spawn ".config/niri/applications/music.sh"; }
 
