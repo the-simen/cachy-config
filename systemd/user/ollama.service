@@ -1,0 +1,11 @@
+[Unit]
+Description=Local Ollama server for Neovim code completion
+
+[Service]
+ExecStart=/usr/bin/ollama serve
+Restart=on-failure
+Environment=OLLAMA_HOST=127.0.0.1:11434
+Environment=OLLAMA_KEEP_ALIVE=-1
+
+[Install]
+WantedBy=default.target
