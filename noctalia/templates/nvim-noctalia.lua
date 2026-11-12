@@ -74,7 +74,10 @@ M.polish_hl = {
 		["@keyword.import"] = { fg = M.base_30.purple },
 		["@uri"] = { fg = M.base_30.blue },
 		["@tag.delimiter"] = { fg = M.base_30.red },
+		["@variable.c"] = { fg = M.base_30.teal },
 		["@variable.member.key"] = { fg = M.base_30.white },
+		-- Noice highlights :commands as Vim; user commands are captured as macros.
+		["@function.macro.vim"] = { fg = M.base_30.blue },
 		["@punctuation.bracket"] = { fg = M.base_30.grey }, -- less bright than pmenu_bg (primary), doesn't cover AI suggestions
 		["@punctuation.delimiter"] = { fg = M.base_30.white },
 	},
