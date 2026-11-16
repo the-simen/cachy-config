@@ -1,7 +1,6 @@
-config_version = 15
+config_version = 16
 
 [accessibility]
-high_contrast = false
 ui_scale = 1.0
 
 [audio]
@@ -21,11 +20,11 @@ order = [ "top", "default" ]
     [bar.default]
     auto_hide = false
     background_opacity = 1.0
-    border = "outline"
+    border = "outline_variant"
     border_width = 0.0
     capsule = false
     capsule_border_width = 1.0
-    capsule_fill = "surface_variant"
+    capsule_fill = "surface_container"
     capsule_group = []
     capsule_opacity = 1.0
     capsule_padding = 6.0
@@ -77,12 +76,12 @@ order = [ "top", "default" ]
     [bar.top]
     auto_hide = false
     background_opacity = 0.89999997988343239
-    border = "outline"
+    border = "outline_variant"
     border_width = 0.0
     capsule = false
-    capsule_border = "outline"
+    capsule_border = "outline_variant"
     capsule_border_width = 1.0
-    capsule_fill = "surface_variant"
+    capsule_fill = "surface_container"
     capsule_opacity = 1.0
     capsule_padding = 6.0
     capsule_thickness = 0.80000001192092896
@@ -91,7 +90,7 @@ order = [ "top", "default" ]
     concave_edge_corners = true
     contact_shadow = false
     enabled = true
-    end = [ "caffeine", "indicator", "privacy", "status", "tray", "group:g3", "session", "group:g5" ]
+    end = [ "lyrics", "caffeine", "indicator", "privacy", "status", "tray", "group:g3", "session", "group:g5" ]
     font_scale = 1.0
     font_weight = 500
     hover_highlight = true
@@ -121,7 +120,7 @@ order = [ "top", "default" ]
         [[bar.top.capsule_group]]
         accordion = false
         accordion_direction = "end"
-        border = "outline"
+        border = "outline_variant"
         border_width = 0.5
         enabled = true
         fill = "tertiary"
@@ -134,7 +133,7 @@ order = [ "top", "default" ]
         [[bar.top.capsule_group]]
         accordion = false
         accordion_direction = "end"
-        border = "outline"
+        border = "outline_variant"
         border_width = 0.5
         enabled = true
         fill = "error"
@@ -162,7 +161,7 @@ order = [ "top", "default" ]
         border = ""
         border_width = 1.0
         enabled = true
-        fill = "surface_variant"
+        fill = "surface_container"
         id = "g6"
         members = [ "keyboard_layout", "notifications" ]
         opacity = 0.0
@@ -171,10 +170,10 @@ order = [ "top", "default" ]
         [[bar.top.capsule_group]]
         accordion = false
         accordion_direction = "end"
-        border = "outline"
+        border = "outline_variant"
         border_width = 0.5
         enabled = true
-        fill = "surface_variant"
+        fill = "surface_container"
         id = "g7"
         members = [ "clock", "weather" ]
         opacity = 1.0
@@ -186,7 +185,7 @@ order = [ "top", "default" ]
         border = ""
         border_width = 1.0
         enabled = true
-        fill = "surface_variant"
+        fill = "surface_container"
         id = "g4"
         members = [ "recorder", "bar", "clipboard" ]
         opacity = 0.0
@@ -257,7 +256,8 @@ widget_order = [
     "desktop-widget-0000000000000002",
     "desktop-widget-0000000000000003",
     "desktop-widget-0000000000000004",
-    "desktop-widget-0000000000000005"
+    "desktop-widget-0000000000000005",
+    "desktop-widget-0000000000000006"
 ]
 
     [desktop_widgets.grid]
@@ -325,6 +325,7 @@ widget_order = [
         centered = true
         mirrored = true
         reversed = false
+        show_wave = false
         show_when_idle = false
 
     [desktop_widgets.widget.desktop-widget-0000000000000004]
@@ -370,7 +371,7 @@ widget_order = [
 active_opacity = 1.0
 active_scale = 1.2000000476837158
 auto_hide = false
-border = "outline"
+border = "outline_variant"
 border_width = 1.0
 concave_edge_corners = false
 cross_axis_padding = 4
@@ -402,6 +403,7 @@ pinned = [
     "org.telegram.desktop",
     "discord",
     "vesktop",
+    "youtube",
     "chromium",
     "zen"
 ]
@@ -544,10 +546,9 @@ widget_order = [
 
     [lockscreen_widgets.widget."lockscreen-login-box@DP-2"]
     box_height = 128.0
-    box_width = 720.0
+    box_width = 810.0
     cx = 960.0
     cy = 869.0
-    enabled = true
     output = "DP-2"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -555,7 +556,7 @@ widget_order = [
     type = "login_box"
 
         [lockscreen_widgets.widget."lockscreen-login-box@DP-2".settings]
-        background_color = "surface_variant"
+        background_color = "surface_container"
         background_opacity = 0.80000000000000004
         background_radius = 14.0
         center_password_text = true
@@ -566,6 +567,7 @@ widget_order = [
         show_keyboard_layout = true
         show_login_button = true
         show_media = false
+        show_password_reveal = true
         show_session_buttons = true
         show_unlock_hint = true
         show_weather = false
@@ -583,7 +585,7 @@ widget_order = [
     type = "login_box"
 
         [lockscreen_widgets.widget."lockscreen-login-box@DP-3".settings]
-        background_color = "surface_variant"
+        background_color = "surface_container"
         background_opacity = 0.80000000000000004
         background_radius = 32.0
         center_password_text = false
@@ -594,6 +596,7 @@ widget_order = [
         show_keyboard_layout = true
         show_login_button = true
         show_media = true
+        show_password_reveal = true
         show_session_buttons = true
         show_unlock_hint = true
         show_weather = true
@@ -603,7 +606,6 @@ widget_order = [
     box_width = 420.0
     cx = 960.0
     cy = 220.0
-    enabled = true
     output = "DP-2"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -621,7 +623,6 @@ widget_order = [
     box_width = 464.0
     cx = 816.0
     cy = 416.0
-    enabled = true
     output = "DP-2"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -648,7 +649,6 @@ widget_order = [
     box_width = 256.0
     cx = 816.0
     cy = 472.0
-    enabled = true
     output = "DP-2"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -668,7 +668,6 @@ widget_order = [
     box_width = 2208.0
     cx = 960.0
     cy = 540.0
-    enabled = true
     flip_x = true
     output = "DP-3"
     placement_height = 1080.0
@@ -689,7 +688,6 @@ widget_order = [
     box_width = 608.0
     cx = 960.0
     cy = 396.0
-    enabled = true
     output = "DP-2"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -707,7 +705,6 @@ widget_order = [
     box_width = 608.0
     cx = 960.0
     cy = 396.00390625
-    enabled = true
     output = "DP-2"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -715,7 +712,7 @@ widget_order = [
     type = "label"
 
         [lockscreen_widgets.widget.lockscreen-widget-0000000000000006.settings]
-        background_color = "outline"
+        background_color = "outline_variant"
         background_opacity = 0.5
         background_radius = 32
         title = ""
@@ -725,7 +722,6 @@ widget_order = [
     box_width = 256.0
     cx = 1104.0
     cy = 564.0
-    enabled = true
     output = "DP-2"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -748,7 +744,6 @@ widget_order = [
     box_width = 256.0
     cx = 1104.0
     cy = 396.0
-    enabled = true
     output = "DP-2"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -765,7 +760,6 @@ widget_order = [
     box_width = 272.0
     cx = 380.0
     cy = 845.0
-    enabled = true
     output = "DP-2"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -774,7 +768,7 @@ widget_order = [
 
         [lockscreen_widgets.widget.lockscreen-widget-000000000000000b.settings]
         background = false
-        background_color = "surface_variant"
+        background_color = "surface_container"
         background_padding = 0
         background_radius = 32
         device = "input"
@@ -786,7 +780,6 @@ widget_order = [
     box_width = 272.0
     cx = 1544.0
     cy = 845.0
-    enabled = true
     output = "DP-2"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -795,7 +788,7 @@ widget_order = [
 
         [lockscreen_widgets.widget.lockscreen-widget-000000000000000c.settings]
         background = false
-        background_color = "surface_variant"
+        background_color = "surface_container"
         background_opacity = 0.69000000000000006
         background_padding = 0
         background_radius = 32
@@ -813,7 +806,7 @@ temperature_night = 5000
 [notification]
 background_opacity = 0.4999999888241291
 border = true
-border_color = "outline"
+border_color = "outline_variant"
 border_width = 1.0
 collapse_on_dismiss = true
 enable_daemon = true
@@ -924,7 +917,7 @@ width = 360
 [osd]
 background_opacity = 0.4999999888241291
 border = true
-border_color = "outline"
+border_color = "outline_variant"
 border_width = 1.0
 enabled = true
 follow_focused_output = true
@@ -967,10 +960,14 @@ selected-ocr-lang = "eng+rus"
 manager_open_near_click = true
 
 [plugin_settings."detluck/performance-plus"]
-disable_animations = false
 disable_wallpaper = false
 hook_on_enter = "$HOME/.config/scripts/gamemode.sh --on"
 hook_on_exit = "$HOME/.config/scripts/gamemode.sh --off"
+
+[plugin_settings."h465855hgg/lyrics"]
+lyrics_source = "lrclib"
+selector_placement = "floating"
+translation_language = "en"
 
 [plugin_settings."imjustdoingmypart/niri-animations"]
 docked_open_near_click = true
@@ -1009,6 +1006,10 @@ hyprpicker-lowercase = true
 panel_open_near_click = true
 panel_position = "auto"
 
+[plugin_settings."vn1k/cursor"]
+manager_open_near_click = true
+manager_placement = "floating"
+
 [plugin_settings."yocraft/custom-shortcut"]
 icon = "bluetooth-device-gamepad"
 label = "Gamemode"
@@ -1044,8 +1045,6 @@ enabled = [
     name = "community"
 
 [shell]
-app_icon_color = "on_surface_variant"
-app_icon_colorize = false
 avatar_path = "/home/thesimen/Pictures/Avatars/photo_2026-10-11_20-10-41.jpg"
 button_borders = false
 card_borders = false
@@ -1068,7 +1067,6 @@ niri_overview_type_to_launch_enabled = false
 offline_mode = false
 password_style = "random"
 polkit_agent = true
-popup_borders = true
 popup_shadows = true
 readline_shortcuts = false
 screen_time_enabled = true
@@ -1305,7 +1303,7 @@ custom_palette = ""
 mode = "dark"
 pure_black_dark = false
 source = "community"
-wallpaper_scheme = "m3-content"
+wallpaper_scheme = "soft"
 
     [theme.templates]
     builtin_ids = [ "btop", "gtk3", "gtk4", "ghostty", "hyprland", "kcolorscheme", "kitty", "qt", "umbriel" ]
@@ -1414,16 +1412,16 @@ transition_on_startup = true
     recursive = false
 
     [wallpaper.default]
-    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/nyc.jpg"
+    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/camera-ol.jpg"
 
     [wallpaper.last]
-    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/nyc.jpg"
+    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/camera-ol.jpg"
 
     [wallpaper.monitors.DP-2]
-    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/nyc.jpg"
+    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/camera-ol.jpg"
 
     [wallpaper.monitors.DP-3]
-    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/nyc.jpg"
+    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/camera-ol.jpg"
 
     [[wallpaper.favorite]]
     community_palette = "Gruvbox Material"
@@ -1593,6 +1591,18 @@ transition_on_startup = true
     path = "/home/thesimen/Pictures/Wallpapers/Everforest/forestpath.jpg"
     theme_mode = "dark"
 
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/thesimen/Pictures/Wallpapers/Slatemist/a_bouquet_of_flowers_with_green_leaves.jpg"
+    theme_mode = "dark"
+    wallpaper_scheme = "soft"
+
+    [[wallpaper.favorite]]
+    community_palette = "Gruvbox Material"
+    palette_source = "community"
+    path = "/home/thesimen/Pictures/Wallpapers/Gruvbox/camera-ol.jpg"
+    theme_mode = "dark"
+
 [weather]
 effects = true
 enabled = true
@@ -1629,7 +1639,10 @@ type = "caffeine"
 capsule = true
 capsule_fill = "on_surface"
 capsule_opacity = 0.23000000000000001
-input_devices = [ "/dev/input/by-id/usb-Hangsheng_Akko_2.4G_VIA_KB_23-if02-event-kbd" ]
+input_devices = [
+    "/dev/input/by-id/usb-Hangsheng_Akko_2.4G_VIA_KB_23-if02-event-kbd",
+    "/dev/input/by-id/usb-Hangsheng_Akko_2.4G_VIA_KB_23-event-if03"
+]
 scale = 1.6000000000000001
 type = "noctalia/bongocat:cat"
 
@@ -1683,6 +1696,11 @@ show_caps_lock = true
 show_num_lock = true
 show_scroll_lock = false
 type = "lock_keys"
+
+[widget.lyrics]
+display_mode = "lyrics"
+show_glyph = false
+type = "h465855hgg/lyrics:lyrics"
 
 [widget.media]
 art_size = 16.0
