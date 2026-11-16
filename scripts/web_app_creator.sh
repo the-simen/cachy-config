@@ -152,7 +152,7 @@ case "$BROWSER" in
     EXEC="chromium --app=$URL"
     ;;
   brave)
-    EXEC="brave-browser --app=$URL"
+    EXEC="brave --app=$URL"
     ;;
   zen)
     EXEC="zen --new-window $URL"
