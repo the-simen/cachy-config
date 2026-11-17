@@ -45,6 +45,7 @@ window-rule {
 
     default-column-width { proportion 0.6; }
     default-window-height { fixed 800; }
+    max-height 800
 }
 
 // ────────────── Google Apps ──────────────
@@ -62,6 +63,9 @@ window-rule {
 
     default-column-width { fixed 1240; }
     default-window-height { fixed 800; }
+}
+window-rule {
+    match app-id="brave-www.youtube.com__-Default"
 }
 
 // ────────────── Floating centered with auto size ──────────────
