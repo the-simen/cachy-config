@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=YouTube
-Exec=brave --app=https://www.youtube.com/
-Icon=/home/thesimen/.local/share/icons/webapps/youtube.png
-Type=Application
-Categories=Network;
-StartupNotify=true
