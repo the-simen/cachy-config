@@ -253,6 +253,7 @@ menuBgOver: {{colors.surface_variant.default.hex}};
 menuBgRipple: {{colors.primary.default.hex}};
 menuIconFg: {{colors.on_surface.default.hex}};
 menuIconFgOver: {{colors.on_surface_variant.default.hex}};
+mediaviewMenuFg: {{colors.on_surface.default.hex}}; // Photo viewer menu icons use a separate palette color
 menuSubmenuArrowFg: {{colors.outline.default.hex}};
 menuFgDisabled: {{colors.outline.default.hex}};
 menuSeparatorFg: {{colors.outline.default.hex}};
