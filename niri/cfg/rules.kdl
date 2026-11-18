@@ -3,6 +3,7 @@ window-rule {
     // maximized apps 
     match app-id="zen"
     match app-id="firefox"
+    match app-id="brave"
     match app-id="chromium"
     match app-id="TuxGuitar"
     match app-id="libreoffice-writer"
