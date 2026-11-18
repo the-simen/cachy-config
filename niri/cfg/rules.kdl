@@ -66,6 +66,8 @@ window-rule {
 }
 window-rule {
     match app-id="brave-www.youtube.com__-Default"
+
+    open-maximized true     
 }
 
 // ────────────── Floating centered with auto size ──────────────
